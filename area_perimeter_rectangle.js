@@ -1,5 +1,5 @@
 /* 
-chp1- F)b)   The length & breadth of a rectangle and radius of a circle are input through the keyboard. Write a program to calculate the area & perimeter of the rectangle, and the area & circumference of the circle.
+chp1- H)e)   The length & breadth of a rectangle and radius of a circle are input through the keyboard. Write a program to calculate the area & perimeter of the rectangle, and the area & circumference of the circle.
 */
 
 let length = Number(prompt("Please enter length of the rectangle :"));
