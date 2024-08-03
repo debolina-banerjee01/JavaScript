@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checking an input's presence in fibonacci series</title>
+    <script>
+        function main()
+        {
+            let n=34;
+            let a=0, b=1, c=0;
+            for(; ;){
+                c=a+b;
+                if(c==n ||n==0)
+                {
+                    console.log(`${n} belongs to fibonacci series`);
+                    break;
+                }
+                if(c>n)
+                {
+                    console.log(`${n} doesn't belong to fibonacci series`);
+                    break;
+                }
+                a=b;
+                b=c;
+            }
+        }
+        main();
+    </script>
+</head>
+<body>
+    <h2>fibonacci series question 7</h2>
+</body>
+</html>
