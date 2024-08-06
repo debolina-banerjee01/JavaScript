@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reverse of a number</title>
+    <script>
+        main();
+        function main()
+        {
+            let number=4351;
+            let revNumer=0;
+            while(number>0)
+            {
+                lastDigit=number%10;
+                revNumer=(revNumer*10)+lastDigit;
+                number=Math.trunc(number/10);
+            }
+            console.log(revNumer);
+        }
+    </script>
+</head>
+<body>
+    <h2>reverse of a number</h2>
+</body>
+</html>

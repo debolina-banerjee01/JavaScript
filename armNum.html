@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armstrong number</title>
+    <script>
+        main();
+        function main()
+        {
+            let num=Number(prompt('please enter a number:'));
+            let temp=num;
+            let length=0;
+            while(num>0)
+            {
+                num=Math.trunc(num/10);
+                length=length+1;
+            }
+            console.log(length);
+            console.log("------------");
+            num=temp;
+            let sum=0;
+            
+            while(num>0)
+            {
+                let rem=num%10;
+                let fact=1;
+                for(let i=1;i<=length; i++)
+                {
+                    fact=fact*rem;
+                }
+                sum=sum+fact;
+                num=Math.trunc(num/10);
+            }
+            if(sum==temp)
+                console.log('arm it is');
+            else
+                console.log('Not arm number');
+        }
+    </script>
+</head>
+<body>
+    <h2>Armstrong number</h2>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>count of digits of a number</title>
+    <script>
+        main();
+        function main()
+        {
+            let number=1054681;
+            let count=0;
+            while(number>0)
+            {
+                count=count+1;
+                number=Math.trunc(number/10);
+            }
+            console.log(count);
+        }
+    </script>
+</head>
+<body>
+    <h2>count of digits of a number</h2>
+</body>
+</html>
