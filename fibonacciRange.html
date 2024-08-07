@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci no within a range</title>
+    <script>
+        function main()
+        {
+            let m=20, n=50,a=0,b=1,c=0;
+            if(n==1)
+            {
+                console.log(a);
+                return;
+            }
+            console.log(a,b);
+            for(; ;){
+                c=a+b;
+                if(c>n) break;
+                if(c>m) 
+                {
+                    console.log(c);
+                }
+                a=b;
+                b=c;
+            }
+        }
+        main();
+    </script>
+</head>
+<body>
+    <h2>fobo</h2>
+</body>
+</html>

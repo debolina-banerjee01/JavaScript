@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci till a specific number</title>
+    <script>
+        main();
+        function main()
+        {
+            let n=Number(prompt('enter a limit till which you want to get all the fibonacci numbers: '));
+            let a=0,b=1,c=0;
+            if(n==1){
+                console.log(a);
+                return;
+            }
+            console.log(a,b);
+            for(; ;){
+                c=a+b;
+                if(c>n)
+                    break;
+                console.log(c);
+                a=b;
+                b=c;
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Fibonacci till a specific number</h2>
+</body>
+</html>
