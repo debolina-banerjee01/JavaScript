@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum of even digits</title>
+    <script>
+        main();
+        function main()
+        {
+            let num=Number(prompt('please enter a number: '));
+            let sum=0;
+            while(num>0)
+            {
+                rem=num%10;
+                if(rem%2==0)
+                {
+                    sum=sum+rem;
+                }
+                num=Math.trunc(num/10);
+            }
+            console.log(sum);
+        }
+    </script>
+</head>
+<body>
+    <h2>Sum of even digits</h2>
+</body>
+</html>

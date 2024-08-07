@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smallest digit in a given no</title>
+    <script>
+        main();
+        function main()
+        {
+            let num=56358476;
+            let a=Number.MIN_SAFE_INTEGER,b;
+            while(num>0){
+                let b=num%10;
+                if(a<b){
+                    a=b;
+                }
+                num=Math.trunc(num/10);
+            }
+            console.log(a);
+        }
+    </script>
+</head>
+<body>
+    <h2>Highest digit in a given no</h2>
+</body>
+</html>
