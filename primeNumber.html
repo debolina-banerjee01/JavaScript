@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prime number check</title>
+    <script>
+        function main()
+        {
+            let n=4;
+            for(i=2; i<=Math.trunc(n/2);i++)
+            {
+                if(n%i==0)
+                {
+                    console.log(`${n} is not prime`);
+                    return;
+                }
+                
+            
+            else
+                 console.log(`${n} is prime`);
+            }
+                
+        }
+        main();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

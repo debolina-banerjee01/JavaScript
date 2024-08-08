@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alternate Fibonacci series</title>
+    <script>
+        function main()
+        {
+            let n=5,a=0,b=1;
+            console.log(b);
+
+            for(let i=1; i<=n*2;i++)
+            {
+                c=a+b;
+                if(i%2 ==0){
+                console.log(c);
+                }
+                a=b;
+                b=c;
+            }
+
+        }
+        main();
+    </script>
+</head>
+<body>
+    <h2> print alternate Fibonacci series</h2>
+</body>
+</html>
