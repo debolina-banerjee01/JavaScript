@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon number</title>
+    <script>
+        function main()
+        {
+            let num=Number(prompt('Please enter a number: '));
+            let temp=num;
+            let sum=0;
+             num=num*num;
+            while(num>0){
+                let rem=num%10;
+                console.log(`rem=${rem}`);
+                sum=sum+rem;
+                console.log(`sum=${sum}`);
+                num=Math.trunc(num/10);
+            }
+            if(sum==temp){
+                console.log(`${temp} is a neon number`);
+            }
+            else
+                console.log(`${temp} is not a neon number`);
+
+        }
+        main();
+    </script>
+</head>
+<body>
+    <h2>Neon number</h2>
+</body>
+</html>
