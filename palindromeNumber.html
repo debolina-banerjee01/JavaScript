@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome number</title>
+    <script>
+        main();
+        function main()
+        {
+            let num=Number(prompt('enter a number'));
+            let temp=num;
+            let revNum=0;
+            while(num>0)
+            {
+                let rem=num%10;
+                revNum=(revNum* 10)+rem;
+                num=Math.trunc(num/10);
+            }
+            console.log(revNum);
+            if(revNum==temp)
+            {
+                console.log('palndrome it is');
+            }
+            else
+                console.log('not a palindrome number');
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
