@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automorphic number</title>
+    <script>
+        main();
+        function main()
+        {
+            let num=6;
+            let sq= num*num;
+            let i=1;
+            while(num>0)
+            {
+                i=i*10;
+                num=Math.trunc(num/10);
+            }
+            if(sq%i==num)
+                console.log(`${num} is an automorphic number`);
+            else
+                console.log('it is not');
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
