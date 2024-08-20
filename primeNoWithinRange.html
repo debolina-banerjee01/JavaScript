@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        main();
+        function main()
+        {
+            for(let i=1; i<=20; i++)
+            {
+                if(i<=1)
+                    continue;
+                if(isPrime(i))
+                    console.log(i);
+            }
+        }
+        function isPrime(n)
+        {
+            if(n<=1)
+            {
+                console.log('it is not a prime')
+                return;
+            }
+            let flag=true;
+            for( let i=2; i<=Math.trunc(n/2); i++)
+            {
+                if(n%i==0)
+                {
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag)
+                return true;
+            else
+                return false;
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
