@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>second highest prime</title>
+    <script>
+        main();
+        function main()
+        {
+         secondHPrime();
+        }
+        function isPrime(n)
+        {
+            if(n<=1)
+            {
+                console.log('it is not a prime no');
+                return;
+            }
+            let flag=true;
+            for(let i=2; i<=Math.trunc(n/2); i++)
+            {
+                if(n%i==0)
+                 {
+                    flag=false;
+                    break;
+                 }
+            }
+                 if(flag)
+                    return true;
+                else
+                    return false;
+            
+        }
+        function secondHPrime()
+        {
+            let start=Number(prompt('enter a start value'));
+            let end=Number(prompt('enter a end value'));
+            let highP=null;
+            let secondHP=null;
+
+            if(end<=start)
+            {
+                console.log('invalid inputs');
+                return;
+            }
+
+            for(let i=end; i>=start; i--)
+            {
+                isPrime(i)
+                if(highP == null)
+                    highP=i;
+                else if(secondHP == null)
+                    secondHP=i;
+
+            
+            }
+            if(highP==null && secondHP==null)
+                console.log('there is no prime number');
+            else if(highP!=null && secondHP ==null)
+                console.log('there is only one prime number');
+            else 
+                console.log(`second highest prime=${secondHP}`);
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
