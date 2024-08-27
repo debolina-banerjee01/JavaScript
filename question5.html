@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Q5.</title>
 </head>
 <body>
     <script>
-        let n=5, res='';
-        for (let i=1; i<=5; i++)
+        let res='';
+        for(let i=5; i>=1; i--)
         {
-            for(let j=1; j<=5; j++)
+            for(let j=i; j<=5; j++)
             {
-                if(i==1|| j==1||i==5||j==5)
-                {
-                    res=res+'*'+' ';
-                }
-                else
-                    res=res+' ';
+                res=res+j+' ';
             }
-            res +='\n';
+            res= res+'\n';
         }
         console.log(res);
     </script>

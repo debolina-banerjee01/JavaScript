@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Questin 2</title>
 </head>
 <body>
     <script>
-        let res='';
+        let res= " ";
         for(let i=1; i<=5; i++)
         {
-            for(let j=1; j<=5; j++)
+            for(let j=i;j>=1; j--)
             {
-                    res =res + j+' ';
-                
+                res=res+j+" ";
             }
-            res += '\n';
+            res +="\n";
         }
         console.log(res);
     </script>
