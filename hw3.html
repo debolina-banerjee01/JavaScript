@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let res='';
+        for(let i=1; i<=5; i++)
+        {
+            let delta=i-1;
+            for(let j=1;j<=5; j++)
+            {
+                let deltaj=j-delta;
+                if (j<i)
+                {
+                    res = res + ' ';
+                }
+                else
+                {
+                    res = res + deltaj;
+                }
+            }
+            res+='\n';
+        }
+        console.log(res);
+    </script>
+</body>
+</html>
