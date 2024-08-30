@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alternative perfect number</title>
+</head>
+<body>
+    <script>
+        main();
+        function main()
+        {
+             isAlternative();
+        }
+        function isAlternative()
+        {
+            let start=Number(prompt('eneter a start value'));
+            let end=Number(prompt('enter an end value'));
+            let pos=0;
+            for(let i=start; i<=end; i++)
+            {
+                if(isPerfect(i))
+                {
+                    pos=pos+1;
+                    if(pos%2 !=0)
+                    {
+                        console.log(`position of ${i} is ${pos}`);
+                    }
+                
+                    
+                }
+            }
+            
+        }
+        function isPerfect(n)
+        {
+            let sum=0;
+            for(let i=1; i<n; i++)
+            {
+                if(n%i ==0)
+                {
+                    sum=sum+i;
+                }
+            }
+            if(sum==n)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
