@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>second highest armstrong no</title>
+</head>
+<body>
+    <script>
+        main();
+        function main()
+        {
+         secondHArmstrong();
+        }
+        function secondHArmstrong()
+        {
+            let start=Number(prompt('enter a start value'));
+            let end=Number(prompt('enter a end value'));
+            let highA=null;
+            let secondHA=null;
+
+            if(end<=start)
+            {
+                console.log('invalid inputs');
+                return;
+            }
+
+            for(let i=end; i>=start; i--)
+            {
+                if(isArmstrong(i))
+                {
+                    if(highA === null)
+                    {
+                        highA=i;
+                    }   
+                    else if(secondHA === null)
+                    {   
+                        secondHA=i;
+                        break;
+                    }
+                }
+            
+            }
+            console.log(secondHA);
+
+        }
+        function isArmstrong(num)
+        {
+            
+            let temp=num;
+            let length=0;
+            while(num>0)
+            {
+                num=Math.trunc(num/10);
+                length=length+1;
+            }
+            //console.log(length);
+            //console.log("------------");
+            num=temp;
+            let sum=0;
+            
+            while(num>0)
+            {
+                let rem=num%10;
+                let fact=1;
+                for(let i=1;i<=length; i++)
+                {
+                    fact=fact*rem;
+                }
+                sum=sum+fact;
+                num=Math.trunc(num/10);
+            }
+            if(sum==temp)
+                return true;
+            else
+                return false;
+        }
+    </script>
+</body>
+</html>
