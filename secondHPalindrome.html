@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second highest palindrome no</title>
+</head>
+<body>
+    <script>
+        main();
+        function main()
+        {
+         secondHPalindrome();
+        }
+        function secondHPalindrome()
+        {
+            let start=Number(prompt('enter a start value'));
+            let end=Number(prompt('enter a end value'));
+            let highP=null;
+            let secondHP=null;
+
+            if(end<=start)
+            {
+                console.log('invalid inputs');
+                return;
+            }
+
+            for(let i=end; i>=start; i--)
+            {
+                if(isPalindrome(i))
+                {
+                    if(highP == null)
+                    {
+                        highP=i;
+                    }   
+                    else if(secondHP == null)
+                    {   
+                        secondHP=i;
+                        break;
+                    }
+                }
+            
+            }
+            console.log(secondHP);
+
+        }
+        function isPalindrome(num)
+        {
+            let temp=num;
+            let revNum=0;
+            while(num>0)
+            {
+                let rem=num%10;
+                revNum=(revNum* 10)+rem;
+                num=Math.trunc(num/10);
+            }
+            //console.log(revNum);
+            if(revNum==temp)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+    </script>
+</body>
+</html>
