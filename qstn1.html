@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question1 </title>
+</head>
+<body>
+    <script>
+        let n=Number(prompt('please enter no of rows as n'));
+        let spaces=n-1;
+        let stars=1;
+        let res='';
+
+        for(let i=1; i<=5; i++)
+        {
+            for(let j=1;j<=spaces;j++)
+            {
+                res=res +' ';
+            }
+            for(let j=1; j<=stars; j++)
+            {
+                res=res+'*'
+            }
+            res +='\n';
+            spaces--;
+            stars=stars+2;
+        }
+        console.log(res);
+    </script>
+</body>
+</html>
