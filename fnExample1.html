@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document 1</title>
+    <script>
+        main();
+        function main()
+        {
+            let op1=calc(1,11,'mul');
+            console.log(op1);
+        }
+        function calc (n1, n2,type)
+        {
+            let res=0, add, mul;
+            if(type=='add')
+            {
+                res=sum(n1,n2);
+            }
+            else if(type=='mul')
+            {
+                res=mult(n1,n2);
+            }
+            
+            return res;
+            
+        }
+        function sum(a,b)
+        {
+            return a+b;
+        }
+        function mult(a,b)
+        {
+            return a*b;
+        }
+
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
