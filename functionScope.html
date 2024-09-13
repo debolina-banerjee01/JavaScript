@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function calc()
+        {
+            var a=20;
+            let b=30;
+            const c=40;
+            console.log(a,b,c);
+            calc();
+        }
+            console.log(a);
+            console.log(b);
+            console.log(c);
+
+        //from line no 10 to 16, they are within the function scope. the rest of the three lines are in global scope. in console notthing is
+        //being showed but reference error because JS reads the code line by line. since there is mistake from line 18 to 20, nothing is 
+         // being executed
+        
+    </script>
+</body>
+</html>
