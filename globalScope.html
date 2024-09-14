@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content=""width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a=20;//since a is in global scope, it is getting printed as 20 every time; be it a normal console log, be it a function call or be
+        //it a condition statement.
+        console.log(a);
+        function main()
+        {
+            console.log(a);
+        }
+        main();
+        if(5<10)
+            console.log(a);
+    </script>
+</body>
+</html>
