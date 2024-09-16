@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>creating object</title>
+</head>
+<body>
+    <script>
+        let fiction={
+            id:101,
+            firstName:'Stefan',
+            lastName:'Salvatore',
+            birthYear:1864,
+            gender:'Male',
+            age:160
+        };
+        console.log(fiction);
+        //accessng properties using dot method
+        let charName=fiction.firstName;
+        console.log('Name of the character is '+ charName);
+        //accessing properties using brackets method
+        let charYear=fiction["birthYear"];
+        console.log('Birth year of the character is '+ charYear);
+    </script>
+</body>
+</html>
