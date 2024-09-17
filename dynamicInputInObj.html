@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access dynamic input by using brackets method</title>
+</head>
+<body>
+   <script>
+    let students={
+        id:101,
+        firstName:'Abhi',
+        lastName:'Banerjee',
+        birthYear:1987,
+        age:36,
+        gender:'Male'
+    };
+    let info=prompt('What information do you want from the object?');
+    console.log(info, typeof info);
+
+    if(students[info])
+    {
+        console.log(`The searched data = ${students[info]}`);
+    }
+    else{
+        console.log('invalid input');
+    }
+   </script> 
+</body>
+</html>
