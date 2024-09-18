@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non existing property from object</title>
+</head>
+<body>
+    <script>
+        let fiction={
+            id:101,
+            firstName:'Stefan',
+            lastName:'Salvatore',
+            birthYear:1864,
+            gender:'Male',
+            age:160
+        };
+        console.log(fiction);
+        console.log(fiction.email);
+        console.log(fiction["marks"]);
+    </script>
+</body>
+</html>
