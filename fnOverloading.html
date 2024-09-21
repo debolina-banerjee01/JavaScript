@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>function overloading</title>
+</head>
+<body>
+    <script>
+        main();
+        function main()
+        {
+            let res=mul(1,2,3);
+            console.log(res);
+        }
+        function mul(a,b)
+        {
+            return a*b;
+        }
+        function mul(a,b,c)
+        {
+            return a*b*c;
+        }
+        function mul(a,b,c,d)
+        {
+            return a*b*c*d;
+        }
+        //whatever value you pass in line no 13(be it one number, 3 numbers or 10 numbers), always the last function will be executed(i.e. the 
+        //function in line 24).the formal parameters those are passed in line 24 are higher than the arguments no(i.e. 3)in line no 13.so 
+        //there no no value stored in d, which means d is undefined. so you do any operation with a value that is undefined, you will
+        //get not a number(NaN) as output.
+    </script>
+</body>
+</html>
