@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call method</title>
+</head>
+<body>
+    <script>
+        let travels_1={
+            busId:101,
+            travelsName:'orange',
+            bookings:[]
+        };
+        let travels_2={
+            busId:102,
+            travelsName:'VLR',
+            bookings:[]
+        };
+        let main=function()
+        {
+            console.log(this);
+        }
+        //main();
+        main.call(travels_2);
+    </script>
+</body>
+</html>
