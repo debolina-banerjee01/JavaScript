@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+       main();
+       function main()
+       {
+            if(prime(691))
+            {
+                console.log('Prime number');
+            }
+            else{
+                console.log('Not Prime');
+            }
+       }
+       function prime(n, i=2)
+       {
+            if(n%i ==0)
+            {
+                return false;
+            }
+            if(n<=2)
+            {
+                if(n==2){
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            if(i> Math.trunc(n/2))
+            {
+                return true;
+            }
+            return prime(n, i+1);
+       }
+          
+    </script>
+</body>
+</html>
