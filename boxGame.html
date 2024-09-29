@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dom box color</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 90vh;
+      }
+      button {
+        margin: 0 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+      }
+      .one {
+        background-color: red;
+        color: white;
+      }
+      .two {
+        background-color: orange;
+        color: white;
+      }
+      .three {
+        background-color: green;
+        color: white;
+      }
+      .display {
+        margin-bottom: 20px;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-gap: 10px;
+        width: 80%;
+        max-width: 800px;
+      }
+      .box {
+        width: 100%;
+        padding-bottom: 100%;
+        border: 1px solid;
+        box-sizing: border-box;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="display">
+      <button class="one" id="play">Play</button>
+      <button class="two" id="stop">Stop</button>
+      <button class="three" id="reset">Reset</button>
+    </div>
+    <div class="container">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+
+    <script>
+      let playBtn = document.getElementById("play");
+      let stopBtn = document.getElementById("stop");
+      let resetBtn = document.getElementById("reset");
+      let boxes = document.querySelectorAll(".box");
+
+      let startPoint;
+      let startIndex = 0;
+      let isPlaying = false;
+
+      function randomColor() {
+        let red = Math.trunc(Math.random() * 255);
+        let green = Math.trunc(Math.random() * 255);
+        let blue = Math.trunc(Math.random() * 255);
+        return `rgb(${red},${green},${blue})`;
+      }
+
+      function startPlaying() {
+        if (!isPlaying) {
+            isPlaying = true;
+          startPoint = setInterval(() => {
+            if (startIndex < boxes.length) {
+              boxes[startIndex].style.backgroundColor = randomColor();
+              startIndex++;
+            } else {
+              boxes.forEach((box) => (box.style.backgroundColor = "white"));
+              startIndex = 0;
+            }
+          }, 500);
+        }
+      }
+
+      function stopPlaying() {
+        clearInterval(startPoint);
+        isPlaying = false;
+      }
+
+      function resetPlaying() {
+        stopPlaying();
+        boxes.forEach((box) => (box.style.backgroundColor = "white"));
+        startIndex = 0;
+      }
+      playBtn.addEventListener("click", startPlaying);
+      stopBtn.addEventListener("click", stopPlaying);
+      resetBtn.addEventListener("click", resetPlaying);
+    </script>
+  </body>
+</html>
