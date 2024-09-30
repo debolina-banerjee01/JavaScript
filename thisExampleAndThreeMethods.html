@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this keyword and three methods</title>
+</head>
+<body>
+    <script>
+        let travels_1={
+            busId:101,
+            travelsName:'orange',
+            bookings:[]
+        };
+        let travels_2={
+            busId:102,
+            travelsName:'VLR',
+            bookings:[]
+        };
+         let book=function(name, seatNo){
+            console.log(`${name} has booked seat in ${this.travelsName} travels, with seat no ${seatNo}`);
+         
+         let obj={passenger:`${name}, ${seatNo}, ${this.travelsName}`};
+         this.bookings.push(obj);
+         }
+         //call method
+         //book.call(travels_1,'jhorna',67);
+         //book.call(travels_2,'raja', 76);
+         //apply method
+         //book.apply(travels_1,['bibhu', 22]);
+         //bind method
+         let val=book.bind(travels_2,'ramiya',54);
+         console.log(val);
+         val();
+         val();
+         //another bind method
+         /*
+         let val=book.bind(travels_2,'ramiya');
+         console.log(val);
+         val(58);
+         val(23);
+         */
+    </script>
+</body>
+</html>
