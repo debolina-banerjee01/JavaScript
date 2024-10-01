@@ -3,34 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPy number</title>
-    <script>
-        main();
-        function main()
-        {
-            let num=Number(prompt('please enter a number'));
-            let sum=0, pdt=1,i=1;
-            for( i=1;i<num;i++)
-            {
-                if(num%i==0)
-                {
-                    sum=sum+i;
-                    pdt=pdt*i;
-                }
-                
-                
-            }
-            
-            if(sum==pdt)
-            {
-                console.log('spy no');
-            }
-            else
-                console.log('not a spy number');
-        }
-    </script>
+    <title>Spy number</title>
 </head>
 <body>
-    
+    <script>
+        let num=Number(prompt('enter a number'));
+        let pdt=1, sum=0;
+        while(num>0){
+            let rem=num%10;
+            sum=sum+rem;
+            pdt=pdt*rem;
+            num=Math.trunc(num/10);
+        }
+        if(sum==pdt)
+        {
+            console.log('Spy number');
+        }
+        else{
+            console.log('not a spy number');
+        }
+    </script>
 </body>
 </html>
