@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this keyword example 2</title>
+</head>
+<body>
+    <script>
+        let travels_1={
+            busId:101,
+            travelsName:'orange',
+            bookings:[],
+            book:function(name, seatNo){
+            console.log(`${name} has booked seat in ${this.travelsName} travels, with seat no ${seatNo}`);
+         
+         let obj={passenger:`${name}, ${seatNo}, ${this.travelsName}`};
+         this.bookings.push(obj);
+            }
+        };
+        console.log(travels_1.bookings);
+        travels_1.book('Ajay', 29);
+        console.log(travels_1.bookings);
+        
+    </script>
+</body>
+</html>

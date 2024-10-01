@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this keyword-method </title>
+</head>
+<body>
+    <script>
+        let student={
+            id:101,
+            firstName:'A',
+            birthYear:1993,
+            calcAge:function(){
+                //console.log(this);
+                let d1=new Date();
+                let currYear=d1.getFullYear();
+                let age=currYear-this.birthYear;
+                console.log(age);
+            }
+        };
+        student.calcAge();
+        //this keyword is needed to refer the object i.e. student object.even if you dont write line no 15, there wont be any problem. but 
+        //in line no 18 this.birthYear is must. if you write only birthyear, you will get reference error.this keyword is helping in identifying 
+        //the student object, from which birthYear proerty can be accessed.
+    </script>
+</body>
+</html>
