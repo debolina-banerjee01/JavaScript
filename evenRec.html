@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        main();
+        function main()
+        {
+            m1(1);
+        }
+        function m1(n)
+        {
+            if(n==11)
+            {
+                return;
+            }
+            if(n%2==0)
+            {
+                console.log(n);
+            }
+            m1(n+1);
+        }
+
+    </script>
+</body>
+</html>
