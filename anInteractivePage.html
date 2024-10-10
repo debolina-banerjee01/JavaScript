@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+        }
+
+        div{
+            background-color: yellowgreen;
+            padding: 20px;
+            text-align: center;
+        }
+
+        div>button{
+            background-color: plum;
+            margin-top: 20px;
+        }
+        div>button:hover{
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2 id="display">Welcome</h2>
+        <button onclick="welcomeMsg()">click here</button>
+    </div>
+    <!--script code-->
+    <script>
+    let displayTag=document.getElementById("display");
+    function welcomeMsg(){
+        displayTag.textContent="You are included now";
+        displayTag.style.color="blue";
+    }
+    //welcomeMsg();
+    //for listening purpose, we use on before click in line no 30
+</script>
+</body>
+</html>
+
