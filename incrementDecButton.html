@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+        }
+
+        div{
+            background-color: yellowgreen;
+            padding: 20px;
+            text-align: center;
+        }
+
+        div>button{
+            background-color: plum;
+            margin-top: 20px;
+        }
+        div>button:hover{
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2 id="display">0</h2>
+        <button id="inc-btn">increment</button>
+        <button id="dec-btn">decrement</button>
+    </div>
+    <!--script code-->
+    <script>
+        let displayTag=document.getElementById('display');
+        let incBtn=document.getElementById('inc-btn');
+        let decBtn=document.getElementById('dec-btn');
+
+        let qty=0;
+        displayTag.textContent=qty;
+
+        function incQty(){
+            console.log(`before increase incQty, qty=${qty}`);
+            qty++;
+            console.log(`after increase incQty, qty=${qty}`);
+            displayTag.textContent=qty;
+            console.log('dispaly tag textcontent set');
+        }
+        incBtn.addEventListener("click", incQty);
+        function decQty(){
+            if(qty>1){
+                qty--;
+                displayTag.textContent=qty;
+            }
+            else{
+                displayTag.textContent=1;
+            }
+        }
+        
+        decBtn.addEventListener('click', decQty);
+        </script>
+    </body>
+</html>
