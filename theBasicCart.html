@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../fontawesome-free-6.6.0-web/css/all.css">
+    <title>Document</title>
+    <style>
+        .two{
+            padding: 20px; 
+            background-color: aqua; 
+        }
+       a{
+        text-decoration: none;
+        color:black;
+       }
+       button
+       {
+        margin-bottom: 20px;
+       }
+       .one
+       {
+        text-align: center;
+       }
+        div
+        { 
+            text-align: center;
+        }
+        button
+        {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <fieldset class="two">
+    <nav>
+        <a href=""><i class="fa-regular fa-star"></i>JS DOM</a>
+    </nav>
+    </fieldset>
+    <fieldset>
+        <table>
+            <th>Cart Module</th>
+        </table>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore animi, magnam sequi fugit facilis laudantium quod ratione sunt rerum ullam veritatis expedita voluptas possimus at alias, repudiandae asperiores, libero dignissimos.
+        Aliquam unde iste qui obcaecati iusto tempora! Minima veritatis nobis doloribus fugiat ea veniam ipsum, voluptatibus aspernatur sequi, officiis optio, dolores doloremque magni cupiditate eligendi molestias impedit aut recusandae qui?
+        Odit aliquam doloribus reprehenderit itaque expedita, corrupti laudantium consequuntur minima est deleniti asperiores. Dolorum facere, nihil iure necessitatibus maiores tenetur, voluptate ullam repellat quod ad temporibus illo voluptatem corrupti veniam!
+        Iure ea error quisquam quas vitae hic, ipsum vero laborum sequi unde! Sit adipisci omnis voluptas, dolore totam a modi fugiat corporis, provident dolorum, quibusdam voluptatibus alias explicabo reprehenderit ipsum?</p>
+        <button>Check Out</button>
+        <table border="2px" height="100px" width="100%">
+            <thead>
+                <tr>
+                    <th>PID</th>
+                    <th>PIMG</th>
+                    <th>PNAME</th>
+                    <th>PRICE</th>
+                    <th>QTY</th>
+                    <th>TPRICE</th>
+                </tr>
+                <tr class="one">
+                    <td>101</td>
+                    <td>
+                        <a href=""><i class="fa-regular fa-star"></i></a>
+                    </td>
+                    <td>IWATCH</td>
+                    <td>40000</td>
+                    <td>
+                        <div>
+                            <h2 id="display"></h2>
+                            <button id="dec-btn">-</button>
+                            <button id="inc-btn">+</button>
+                        </div>
+                        <script>
+                            let displayTag=document.getElementById('display');
+                            let decBtn=document.getElementById('dec-btn');
+                            let incBtn=document.getElementById('inc-btn');
+                    
+                            let qty=0;
+                            displayTag.textContent=qty;
+                            function incqty(){
+                                qty++;
+                                displayTag.textContent=qty;
+                            }
+                            incBtn.addEventListener('click',incqty);
+                            function decqty(){
+                                if(qty>1){
+                                qty--;
+                                displayTag.textContent=qty;
+                            }
+                            else
+                            {
+                                  displayTag.textContent=1;
+                            }
+                        }
+                        decBtn.addEventListener('click',decqty);
+                    
+                        </script>
+                    </td>
+                    <td>40000</td>
+                </tr>
+            </thead>
+        </table>
+    </fieldset>
+</body>
+</html>
