@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Task</title>
+    <style>
+        *{
+            margin: 0px;
+        }
+
+        div{
+            background-color: yellowgreen;
+            padding: 20px;
+            text-align: center;
+        }
+        div>button{
+            background-color: plum;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2 id="dispalay">message</h2>
+        <button id="click-btn-1">click here</button>
+        <button id="click-btn-2">click here</button>
+        <button id="click-btn-3">click here</button>
+
+        
+    </div>
+    <!--script code-->
+    <script>
+        let displayTag=document.getElementById('dispalay')
+        let clickBtn_1=document.getElementById('click-btn-1');
+        let clickBtn_2=document.getElementById('click-btn-2');
+        let clickBtn_3=document.getElementById('click-btn-3');
+
+        clickBtn_1.addEventListener('click',function(){
+            printMsg('Hi','red');
+        })
+        clickBtn_2.addEventListener('click',function(){
+            printMsg('Hello','red');
+        })
+        clickBtn_3.addEventListener('click',function(){
+            printMsg('Bye','red');
+        })
+
+        function printMsg(msg, clr){
+            displayTag.textContent=msg;
+            displayTag.style.color=clr;
+        }
+    </script>
+</body>
+</html>
