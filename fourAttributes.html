@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .one{
+            background-color: blue;
+        }
+        .two{
+            color: white;
+        }
+        #abc{
+            padding: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="one">
+        <h2>attribute methods</h2>
+
+    </div>
+    <!--script code-->
+    <script>
+        let divTag=document.querySelector('div');
+
+        console.log(divTag.hasAttribute('id'));
+
+        console.log(divTag.getAttribute('class'));
+
+        console.log(divTag.setAttribute('id', 'abc'));
+
+        console.log(divTag.removeAttribute('class'));
+    </script>
+</body>
+</html>
