@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="display"></div>
+    <script>
+        let user={
+            name:'Stefan',
+            age: 164,
+            address: 'Mystic Falls'
+        };
+        let display=document.getElementById('display');
+        // let msg="hello world";
+        // display.innerHTML="<li>" + msg +"</li>";
+        // display.innerHTML=`<li>${msg}</li>`;
+
+        // display.innerHTML=`<li>${user.name}</li>`;
+        // display.innerHTML=`<li>${user.age}</li>`;
+        // display.innerHTML=`<li>${user.address}</li>`;
+
+        // let str=" ";
+        // str=str+ `<li>${user.name}</li>`;
+        // str=str + `<li>${user.age}</li>`;
+        // str=str+ `<li>${user.address}</li>`;
+
+        // display.innerHTML=str;
+        //how many keys are there, that much time the loop will work
+        /*
+        for(let k in user){
+            console.log(k, user[k]);
+        }
+            */
+        let str=" ";
+        for(let key in user){
+            str=str+ `<li>${key}=${user[key]}</li>`;
+        }
+        display.innerHTML=str;
+    </script>
+</body>
+</html>
