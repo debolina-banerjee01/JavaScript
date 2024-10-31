@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obj methods</title>
+</head>
+<body>
+    <script>
+        // let student={name:"Virat", age: 35, address: 'Delhi'};
+        // const result=Object.keys(student);
+        // console.log(result); //['name', 'age', 'address']
+
+        // const result2=Object.values(student);
+        // console.log(result2); //['Virat', 35, 'Delhi']
+
+        let student={name:"Virat", age: 35, address: 'Delhi'};
+        Object.freeze(student);//freeze means the obj cant be modified. it freezes the obj.if some sensitive data is there, that content 
+        //needs to be freezed
+         student.name='Rohit';
+         console.log(student);
+
+        // let student={name:"Virat", age: 35, address: 'Delhi'};
+        // let result=Object.entries(student);
+        // console.log(student); //[['name','Virat'],['age', 35], ['address', 'Delhi']]
+
+       </script>
+</body>
+</html>
