@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bg {
+            background-color: yellow;
+        }
+
+        .text {
+            color: red;
+        }
+
+        .p-4 {
+            padding: 40px;
+        }
+
+        .m-4 {
+            margin: 40px;
+        }
+
+        .bg-green {
+            background-color: green;
+        }
+
+        .light {
+            background-color: white;
+            height: 200px;
+            width: 400px;
+            border: 1px solid black;
+        }
+
+        .dark {
+            background-color: black;
+            border: 1px solid rgb(228, 50, 50);
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="heading">HELLO WORLD</h1>
+    <div class="mytag">
+        javascript is the best programming language
+    </div>
+    <section class="bg text p-4">
+        WORKING ON CLASSLISTS
+    </section>
+    <div class="light" id="box">
+        <button id="mode">Dark</button>
+    </div>
+    <script>
+        // let heading = document.getElementById("heading")
+        // let myTag = document.querySelector(".mytag")
+        // heading.style.backgroundColor = "rgb(0,0,255)"
+
+        // // myTag.innerHTML = "React is the best frontend library"
+        // // myTag.innerText = "React is the best frontend library"
+        // // myTag.textContent = "React is the best frontend library"
+
+        // let reactText = document.createElement("h4")
+        // reactText.innerHTML = "React is the best frontend library"
+        // console.log(reactText);
+        // myTag.appendChild(reactText)
+
+        let sectionTag = document.querySelector("section")
+        let classes = sectionTag.classList
+
+        sectionTag.classList.add("m-4")
+
+        sectionTag.classList.remove("text")
+
+        sectionTag.classList.replace("bg", "bg-green")
+
+        // sectionTag.classList.toggle("p-4")
+        // sectionTag.classList.toggle("p-4")
+        let box = document.getElementById("box")
+        let modeBtn = document.getElementById("mode")
+        modeBtn.addEventListener("click", () => {
+            box.classList.toggle("dark")
+        })
+    </script>
+</body>
+
+</html>
