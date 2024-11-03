@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <Style>
+        .parent{
+            background-color: yellowgreen;
+            padding: 30px;
+        }
+        .child{
+            background-color: blue;
+            padding: 30px;
+        }
+    </Style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child">
+            <button id="btn">CLICK HERE</button>
+
+        </div>
+
+    </div>
+    <script>
+        const parent=document.querySelector('.parent');
+        const child=document.querySelector('.child');
+        let btn=document.getElementById('btn');
+
+        parent.addEventListener('click', ()=> {
+            console.log('parent is cicked');
+        }, true)
+        child.addEventListener('click', ()=> {
+            console.log('child is cicked');
+        },{capture: true})
+        btn.addEventListener('click', ()=> {
+            console.log('button is cicked');
+        }, true)
+    </script>
+</body>
+</html>
