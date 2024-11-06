@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let arr=['x', 10, 'abc', true, null, 22];
+        // console.log(arr[2]);
+        // console.log(arr[9]);
+
+        // arr[1]=76;
+        // console.log(arr);
+
+        // arr[6]='newData';
+        // console.log(arr);
+
+        // arr[10]=999;
+        // console.log(arr);
+
+        // console.log(arr[8]);
+        // console.log(arr[10]);
+
+        // //below not used now
+        // delete arr[4];
+        // console.log(arr);
+
+        //iterating an array
+        //for loop
+        let arr=[10, 20, 'apple', 'biryani', 600, 40];
+        for(let i=0; i<arr.length; i++){
+            console.log(arr[i]);
+        }
+
+        //while loop
+        let i=0;
+        while(i< arr.length){
+            console.log(arr[i]);
+            i++;
+        }
+
+        //for in loop-only index numbers will be shown
+        //if you write i within console
+        for(let i in arr){
+            console.log(i, arr[i]);
+        }
+
+        //for of-values of array from start to end
+        for(let v of arr){
+            console.log(v);
+        }
+
+        let student={name: 'Abhay', age: 14, address:'abc'};
+        for(let i of student){
+            console.log(i);
+        }
+
+    </script>
+</body>
+</html>
