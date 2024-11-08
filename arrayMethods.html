@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // let numbers=[10, 20, 30, 40];
+    // numbers.push(70, 80);
+    // console.log(numbers);
+
+    //pop method
+    // let num=[1, 2, 3, 4, 5];
+    // let result=num.pop;
+    // console.log(num);
+    // console.log(result);
+
+    //unshift method
+    // let numbers=[10, 20, 30, 40];
+    // numbers.unshift(70, 80);
+    // console.log(numbers);
+
+    //shift method
+
+    // let num=[1, 2, 3, 4, 5];
+    // let result=num.shift();
+    // console.log(num);
+    // console.log(result);
+
+    //toString
+    // let arr=[1, 'b', 5, 'z', true];
+    // let result=arr.toString();
+    // console.log(result);
+
+    //join method
+    // let arr=['a', 'p', 'p', 'l', 'e'];
+    // let result=arr.join();
+    // console.log(result);
+
+    // let result1=arr.join(' @ ');
+    // console.log(result1);
+
+    // let result2=arr.join('');
+    // console.log(result2);
+
+    
+
+    //slice method
+    // let num=[1, 2, 3, 4, 5];
+    // let result=num.slice(1, 3);
+    // console.log(result);//[2,3]
+    
+    // let result1=num.slice(2);
+    // console.log(result1);
+
+    // let result2=num.slice();
+    // console.log(result2);
+
+    // console.log(num==result2);//new rference created, it is call by refernce method. both are not same
+
+    //splice method
+    // let num=[10, 20, 30, 40, 50];
+    // let result=num.splice(3, 0, 'a', 'b', 'c');
+    // console.log(num);
+    // console.log(result);
+
+    // let arr=['a', 'b', 'c', 'd'];
+    // let result1=arr.splice(1, 2);
+    // console.log(arr);//['a','d']
+    // console.log(result1);//['b', 'c']
+
+    //indexOf method
+    // let arr=[10, 20, 30, 40, 50];
+    // let result=arr.indexOf(20);
+    // console.log(result);//1
+
+    // let result2=arr.indexOf(70);
+    // console.log(result2);//-1
+
+    // let num=[1, 2, 0, 2, 4, 2];
+    // let result3=num.indexOf(2);
+    // console.log(result3);//1
+
+    //lastIndexOf method
+    // let arr=[10, 20, 30, 40, 50];
+    // let result=arr.lastIndexOf(20);
+    // console.log(result);//1
+
+    // let result2=arr.lastIndexOf(70);
+    // console.log(result2);//-1
+
+    // let num=[1, 2, 0, 2, 4, 2];
+    // let result3=num.lastIndexOf(2);
+    // console.log(result3);//5
+
+    //includes method
+    // let arr=[1, 'a', 2, 'b'];
+    // let result=arr.includes('a');
+    // console.log(result);//true
+
+    // let result1=arr.includes('c');
+    // console.log(result1);//false
+
+    //find()
+    //let num=[1, 2, 3, 4, 5];
+    // let result=num.find((ele, i,arrRef)=>{
+    //     console.log(ele, i, arrRef);
+    //     return ele% 3==0;
+    //})
+    // let result=num.find(ele => ele %5==0)
+    // console.log(result);
+    //if there was no return statement the console in line 112 will print as undefined. when in line no 110 the condition is true, 
+    //the value will be stored inside result, that will be printed in line no 112. no matter how many times he condition is true, only 
+    //the first atchd element will be printed
+
+        //use of find method
+    // let students=[
+    //     {name:'A', age: 20},
+    //     {name:'B', age: 25},
+    //     {name:'C', age: 18},
+    //     {name:'D', age: 22},
+    //     {name:'E', age: 15},
+    //]
+    // let result=students.find((ele)=>{
+    //     if(ele.age< 18){
+    //         return ele;
+    //         }
+    // })
+    // console.log(result);
+
+    // let result=students.find((ele)=>ele.name=='C')
+    // console.log(result);
+
+    //filter method
+    // let numbers=[1, 7, 2, 5, 4, 6];
+    // let evenNumbers=numbers.filter((ele)=>{
+    //     if(ele % 2==0){
+    //         return ele;
+    //     }
+    // })
+    // //either the upper one or the latter one
+    // let oddNumbers=numbers.filter(ele => ele %2 !=0)
+    // console.log(evenNumbers);
+    // console.log(oddNumbers);
+
+    //who are eligible for vote from student array using filter method
+    // let students=[
+    //     {name:'A', age: 20},
+    //     {name:'B', age: 25},
+    //     {name:'C', age: 18},
+    //     {name:'D', age: 22},
+    //     {name:'E', age: 15},
+    // ]
+    // let isEligible=students.filter(ele => ele.age >=18)
+    // console.log(isEligible);
+    //if you write isEligible.length you will get number of student who are eligible to give vote
+
+    //forEach method
+    // let numbers=[1, 2, 3, 4];
+    // let sum=0;
+    // let result=numbers.forEach((ele, i, arr)=>{
+    //     console.log(ele, i, arr);
+    //     sum=sum+ ele;
+    // })
+    // console.log(sum);
+    // console.log(result);
+
+     //map method
+    //  let numbers=[1, 2, 3, 4];
+    //     let result=numbers.map(ele=>{
+    //         return ele+10;
+    //     })
+    //     console.log(result);
+    //     console.log(numbers);
+
+    //ading a new element address to the existing elements of an object
+    //     let students=[
+    //     {name:'A', age: 20},
+    //     {name:'B', age: 25},
+    //     {name:'C', age: 18},
+    //     {name:'D', age: 22},
+    //     {name:'E', age: 15},
+    // ]
+    // let newStudents=students.map(ele=>{
+        //console.log(ele);
+        //ele.address='Marathahalli';
+    //     if(ele.name=='A' || ele.name=='D')
+    //     {
+    //         ele.address='Whitefield';
+    //     }
+    //     else{
+    //         ele.address='Electronic City';
+    //     }
+    //     return ele;
+    // })
+    // console.log(students);
+
+    //method chaining
+    //  let arr=[2, 4, 3, 7, 8, 9];
+    // let result=arr.filter(ele => ele % 2==0);
+    // console.log(result);[2, 4, 8]
+    // let finalResult=result.map(ele=> ele* 5);
+    // console.log(finalResult);[10, 20 40]
+
+    // let result=arr.filter(ele => ele%2 ==0).map(ele => ele *5).reverse().join("");//what filter result we are getting that is goin inside the map method. 
+    //if you want to get the rverse of the resuting array, write .reverse. then we are converting it into a string using join method
+    // console.log(result);//402010
+
+    //reduce method
+    // let num=[1, 2, 3, 4, 5];
+    // let sum=num.reduce((acc, ele)=>{
+    //     console.log(acc, ele);
+    //     return acc+ele;
+    // }, 10);
+    // console.log(sum);
+
+    //largest number using reduce method
+    // let largest=num.reduce((acc, ele)=>{
+    //     if(acc>ele){
+    //         return acc;
+    //     }
+    //     else{
+    //         return ele;
+    //         }
+    //     }, num[0])
+    //     console.log(largest);
+
+    // let a=[10, 20, 30, 40];
+    // let result=a.reduce((acc, ele)=>{
+    //     console.log(acc, ele);
+    // })
+    
+    //sort method
+    // let fruits=['apple', 'melon', 'mango', 'grapes', 'banana'];
+    // let result=fruits.sort();
+    // console.log(result);
+
+    let numbers=[12, 7, 30, 56, 47];
+    // let result=numbers.sort();
+    // console.log(result);
+    let result=numbers.sort((start, end)=> start-end);
+    console.log(result);
+    let result2=numbers.sort((start, end)=> end-start);
+    console.log(result2);
+
+
+
+    
+
+
+
+</script>
+</body>
+</html>
