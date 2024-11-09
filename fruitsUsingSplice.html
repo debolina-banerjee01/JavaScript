@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="display"></div>
+    <div class="buttons">
+        <button id="rmvF">Remove first fruit</button>
+        <button id="rmvL">Remove last fruit</button>
+    </div>
+    <div>
+        <input type="text" placeholder="write a fruit name" id="input">
+        <button id="addTop">Add on the top</button>
+        <button id="addLast">Add at bottom</button>
+    </div>
+    <script>
+        let fruits = ['grape', 'apple', 'kiwi', 'mango'];
+        let display = document.getElementById("display");
+
+        function displayFruits(arr) {
+            let str = " ";
+            for (let i = 0; i < arr.length; i++) {
+                str += `<li>${arr[i]}</li>`;
+            }
+            display.innerHTML = str;
+        }
+
+        displayFruits(fruits);
+
+        let rmvF = document.getElementById("rmvF");
+        let rmvL = document.getElementById("rmvL");
+
+        // Remove first fruit using splice
+        rmvF.addEventListener("click", () => {
+            fruits.splice(0, 1); // Removes the first element
+            displayFruits(fruits);
+        });
+
+        // Remove last fruit using splice
+        rmvL.addEventListener("click", () => {
+            fruits.splice(fruits.length - 1, 1); // Removes the last element
+            displayFruits(fruits);
+        });
+
+        let addF = document.querySelector("#addTop");
+        let addL = document.querySelector("#addLast");
+        let input = document.querySelector("#input");
+
+        // Add fruit to the top using splice
+        addF.addEventListener("click", () => {
+            let fruit = input.value;
+            if (fruit) {
+                fruits.splice(0, 0, fruit); // Adds a new element at the beginning
+                displayFruits(fruits);
+                input.value = " ";
+            } else {
+                alert("Provide the fruit name first");
+            }
+        });
+
+        // Add fruit to the bottom using splice
+        addL.addEventListener("click", () => {
+            let fruit = input.value;
+            if (fruit) {
+                fruits.splice(fruits.length, 0, fruit); // Adds a new element at the end
+                displayFruits(fruits);
+                input.value = " ";
+            } else {
+                alert("Provide the fruit name first");
+            }
+        });
+    </script>
+</body>
+</html>
