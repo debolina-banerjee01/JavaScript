@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using Shift, unshift, push and pop</title>
+</head>
+<body>
+    <div id="display"></div>
+    <div class="buttons">
+        <button id="rmvF">Remove first fruit</button>
+        <button id="rmvL">Remove last fruit</button>
+    </div>
+    <div>
+        <input type="text" placeholder="write a fruit name" id="input">
+        <button id="addTop">Add on the top</button>
+        <button id="addLast">Add at bottom</button>
+    </div>
+    <script>
+        let fruits=['grape', 'apple', 'kiwi', 'mango'];
+        let display=document.getElementById("display");
+        
+
+        function displayFruits(arr){
+            let str=" ";
+            for(let i=0; i<arr.length; i++)
+        {
+            // console.log(fruits[i]);
+            // display.innerHTML="<li>" +fruits[i] + "</li>";
+            //display.innerHTML=`<li>${fruits[i]}</li>`;
+            str += `<li>${arr[i]}</li>`;
+        }
+        display.innerHTML=str;
+        }
+
+        displayFruits(fruits);
+        
+
+        // for(let fruit of fruits){
+        //     let li=document.createElement("li");
+        //     li.innerHTML= `${fruit}`;
+
+        //     display.appendChild(li);
+        // }
+
+        let rmvF=document.getElementById("rmvF");
+        let rmvL=document.getElementById("rmvL");
+
+        rmvF.addEventListener("click", ()=> {
+            fruits.shift();
+            displayFruits(fruits);
+        });
+
+        rmvL.addEventListener("click", ()=> {
+            fruits.pop();
+            displayFruits(fruits);
+        });
+
+        let addF=document.querySelector("#addTop");
+        let addL=document.querySelector("#addLast");
+        let input=document.querySelector("#input");
+
+        addF.addEventListener("click", () =>{
+            let fruit=input.value;
+            if(fruit){
+                fruits.unshift(fruit);
+                displayFruits(fruits);
+                input.value=" "
+            }
+            else{
+                alert("provide the fruit name first");
+            }
+        })
+        addL.addEventListener("click", ()=>{
+           let fruit=input.value;
+           if(fruit)
+           {
+            fruits.push(fruit);
+            displayFruits(fruits);
+            input.value=" ";
+           }
+           else{
+                alert("provide the fruit name first");
+            }
+
+           
+        }
+    )
+    </script>
+</body>
+</html>
