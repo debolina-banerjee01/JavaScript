@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button id="maleBtn">MALE</button>
+        <button id="fmlBtn">FEMALE</button>
+        <button id="allBtn">ALL</button>
+    </div>
+    <table border="1" style="border-collapse: collapse;" cellpadding="20">
+        <thead>
+            <tr bgcolor="yellow">
+                <th>ID</th>
+                <th>NAME</th>
+                <th>GENDER</th>
+                <th>ADDRESS</th>
+                
+            </tr>
+        </thead>
+        <tbody id="display">
+        
+        </tbody> 
+    </table>
+    <div id="showDetails">
+
+    </div>
+    <script>
+        let students=[
+            {id: 10, name:'A', age: 25, gender: "Male", email:'abc@123', address:"Hyd"},
+            {id: 11, name:'B', age: 25, gender: "Male", email:'abr@153', address:"Kol"},
+            {id: 12, name:'C', age: 25, gender: "Female", email:'vbf@923', address:"BLR"},
+            {id: 13, name:'D', age: 25, gender: "Female", email:'agc@623', address:"Pune"},
+            {id: 14, name:'E', age: 25, gender: "Male", email:'asc@523', address:"Odisa"},
+            {id: 15, name:'F', age: 25, gender: "Male", email:'acc@183', address:"hyd"},
+            {id: 16, name:'G', age: 25, gender: "Male", email:'auc@103', address:"Odisa"},
+            {id: 17, name:'H', age: 25, gender: "Female", email:'abc@129', address:"Kol"},
+            {id: 18, name:'I', age: 25, gender: "Male", email:'abc@823', address:"Pune"},
+            {id: 19, name:'J', age: 25, gender: "Female", email:'abc@143', address:"BLR"},
+        ]
+        let display=document.getElementById('display');
+        //inside table body 10 rows, one row for each student
+        function displayStudents(students){
+            let str='';
+            students.forEach(ele => {
+                str+=`<tr onclick='displayDetails(${ele.id})'>
+                    <td>${ele.id}</td>
+                    <td>${ele.name}</td>
+                    <td>${ele.gender}</td>
+                    <td>${ele.address}</td>
+                    </tr>`
+            });
+            display.innerHTML=str;
+        }
+        displayStudents(students);
+        let maleBtn=document.getElementById('maleBtn');
+        maleBtn.addEventListener('click', ()=>{
+            let maleStudents=students.filter(ele =>{
+                if(ele.gender=='Male')
+                {
+                    return ele;
+                }
+            })
+            displayStudents(maleStudents);
+        })
+        //do for female
+        let femaleBtn=document.getElementById('fmlBtn');
+        femaleBtn.addEventListener('click', ()=>{
+            let femaleStudents=students.filter(ele =>{
+                if(ele.gender=='Female')
+                {
+                    return ele;
+                }
+            })
+            displayStudents(femaleStudents);
+        })
+
+        let allBtn=document.querySelector('#allBtn');
+        allBtn.addEventListener('click', ()=>{
+         displayStudents(students);
+        })
+        let showDetails=document.querySelector('#showDetails');
+        function displayDetails(id){
+            console.log(id);
+            let student=students.find(ele => ele.id==id);
+            console.log(student);
+            let str="";
+            for(let key in student)
+            {
+                str +=`<li>${key}===${student[key]}</li>`
+            }
+            showDetails.innerHTML=str;
+        }
+
+    </script>
+</body>
+</html>
