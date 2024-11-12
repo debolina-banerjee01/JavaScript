@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+        }
+
+        div{
+            background-color: yellowgreen;
+            padding: 20px;
+            text-align: center;
+        }
+
+        div>button{
+            background-color: plum;
+            margin-top: 20px;
+        }
+        div>button:hover{
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        
+        <button id="inc-btn">increment</button>
+        <b id="count"></b>
+        <button id="dec-btn">decrement</button>
+    </div>
+    <!--script code-->
+    <script>
+        //let displayTag=document.getElementById('display');
+        let countTag=document.getElementById('count');
+        let incBtn=document.getElementById('inc-btn');
+        let decBtn=document.getElementById('dec-btn');
+
+        let count=localStorage.getItem('count')? localStorage.getItem('count'): 0;
+        countTag.innerHTML=count;
+
+        // function incQty(){
+        //     console.log(`before increase incQty, qty=${qty}`);
+        //     qty++;
+        //     console.log(`after increase incQty, qty=${qty}`);
+        //     displayTag.textContent=qty;
+        //     console.log('dispaly tag textcontent set');
+        // }
+        incBtn.addEventListener("click", ()=>{
+            countTag.innerHTML=++count;
+            localStorage.setItem('count', count);
+        })
+        decBtn.addEventListener("click", ()=>{
+            countTag.innerHTML=--count;
+            localStorage.setItem('count', count);
+        })
+        </script>
+    </body>
+</html>
