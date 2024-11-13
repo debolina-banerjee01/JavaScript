@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        localStorage.setItem("name", "Alaric");
+        localStorage.setItem("name", "Lizzy");
+        localStorage.setItem("num", 1000);
+        localStorage.setItem("flag", false);
+
+        let num=localStorage.getItem("num");
+        let name=localStorage.getItem("name");
+        let flag=localStorage.getItem("flag");
+        console.log(num, name, flag);
+       console.log(num, typeof num);
+
+       // localStorage.removeItem("name");
+      // localStorage.clear();
+
+      //non primitive data storing
+      let user={name: "Emma", address:"UK", "age": 25};
+
+      //console.log(JSON.stringify(user));//string type data, each key is inside double quotes
+      
+      
+      //any object to the storage is stored in form of strings
+      
+    //   let userJson={"name": "abc", "age": 25};
+    //   console.log(userJson);//JS object
+
+     localStorage.setItem("user", JSON.stringify(user));
+     let userData=localStorage.getItem("user");
+     console.log(userData, typeof userData);
+
+    let userObj=JSON.parse(userData);
+    console.log(userObj, typeof userObj);
+    console.log(userObj.name);//since userObj is converted to JS object from JSON data in line no 39, we can access the name from userObj by 
+    //dot method
+
+    // let arr=[1, 2, 3];
+    // localStorage.setItem("arr", JSON.stringify(arr));
+    // let arrData=JSON.parse(localStorage.getItem("arr"));
+    // console.log(arrData, typeof arrData);//1,2,3
+    //JSON data can be stored inside an object and inside an array also
+    
+    
+    </script>
+</body>
+</html>
