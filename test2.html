@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test2</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
     <script>
-        function main(){
-            let n1=Number(prompt('enter n1 value'));
-            let n2=Number(prompt('enter n2 value'));
-            console.log(`${n1}+ ${n2} = ${n1+n2}`);
-
+      let res = "";
+      let k = 1;
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 1; j <= 5; j++) {
+          res = res + k++ + "\t";
         }
-        main();
+        res += "\n";
+      }
+
+      console.log(res);
     </script>
-</head>
-<body>
-    <h1>Type conversion</h1>
-</body>
+  </body>
 </html>
