@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let res = "";
+      //let num = 1;
+      let n = 5;
+      //let space = n - 1;
+      for (let i = 1; i <= 5; i++) {
+        let k = i;
+        for (let j = 1; j <= n - i; j++) {
+          res += "  ";
+        }
+        for (let j = 1; j <= 2 * i - 1; j++) {
+          if (j <= i) {
+            res += j + " ";
+          } else {
+            res += --k + " ";
+          }
+        }
+        res += "\n";
+      }
+      console.log(res);
+    </script>
+  </body>
+</html>
