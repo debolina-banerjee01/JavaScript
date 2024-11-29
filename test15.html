@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   let res = "";
+      //   let n = 5;
+      //   for (let i = 1; i <= 5; i++) {
+      //     for (j = 1; j <= 5; j++) {
+      //       if (i == j || i + j == n + 1) {
+      //         res += "*";
+      //       } else {
+      //         res += " ";
+      //       }
+      //     }
+      //     res += "\n";
+      //   }
+      //   console.log(res);
+
+      let star = 5;
+      let space = 0;
+      let n = 5;
+      let res = "";
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 1; j <= space; j++) {
+          res += "  ";
+        }
+        for (let j = 1; j <= star; j++) {
+          res += "*" + " ";
+        }
+        res += "\n";
+        if (i <= Math.trunc(n / 2)) {
+          star = star - 2;
+          space++;
+        } else {
+          star += 2;
+          space--;
+        }
+      }
+      console.log(res);
+    </script>
+  </body>
+</html>
