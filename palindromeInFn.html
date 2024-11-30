@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>check if the given string is palindrome by using function</title>
+  </head>
+  <body>
+    <script>
+      let s1 = prompt("enter a string");
+      console.log(isPalindrome(s1));
+
+      function isPalindrome(s1) {
+        let i = 0;
+        let j = s1.length - 1;
+        while (i < j) {
+          if (s1.charAt(i) != s1.charAt(j)) {
+            return "not a palindrome";
+          } else {
+            i++;
+            j--;
+            return "is a palindrome";
+          }
+        }
+        //return "is a palindrome";
+      }
+    </script>
+  </body>
+</html>
