@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>print all the possible substrings of a given string</title>
+  </head>
+  <body>
+    <script>
+      let str = "malayalam";
+      for (let i = 0; i < str.length - 1; i++) {
+        for (let j = i + 2; j <= str.length; j++) {
+          console.log(str.slice(i, j));
+        }
+      }
+      //for first iteration, i value is 0.j value is 0+2=2.
+      //so 0th osition is m, 2nd osition is l.In slice method the end index
+      //i.e. is 2, letters will always be printed from start index
+      //to endIndex-1, i.e. from 0th position to the 1st position
+      //so ma is rinted.
+      //in 2nd iteration, i value is 0, j value(3) inceasing as it is given.
+      //it is fulfilling the condition as 3 is less than thelength of string which is 9.
+    </script>
+  </body>
+</html>
