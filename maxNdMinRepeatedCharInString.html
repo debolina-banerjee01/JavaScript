@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>find the maximum and minimum repeated charecter in a string</title>
+  </head>
+  <body>
+    <script>
+      let s1 = "banana";
+      let arr = [...s1];
+      let max = 0;
+      let min = arr.length;
+
+      let res = "";
+      let res1 = "";
+      for (let i = 0; i < arr.length; i++) {
+        let count = 1;
+        if (arr[i] == "") {
+          continue;
+        }
+        for (let j = i + 1; j < arr.length; j++) {
+          if (arr[i] == arr[j]) {
+            count++;
+            arr[j] = "";
+          }
+        }
+        if (count > max) {
+          max = count;
+          res = arr[i];
+        }
+        if (count < min) {
+          min = count;
+          res1 = arr[i];
+        }
+      }
+      console.log(res + "=" + max);
+      console.log(res1 + "=" + min);
+    </script>
+  </body>
+</html>
