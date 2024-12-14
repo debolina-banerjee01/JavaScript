@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insertion sort algorithm</title>
+  </head>
+  <body>
+    <script>
+      let arr = [7, 7, 4, 3, 1, 6];
+      for (let i = 1; i < arr.length; i++) {
+        //we assume that the first element(index 0) is already sortted. SO i is starting from 1.
+        let key = arr[i];
+        //key stores the current element we're trying to insert into the sorted portion
+        let j = i - 1;
+        //j is the index of the last element in the sorted portion. It starts from one position before
+        //the current element
+
+        while (j >= 0 && arr[j] < key) {
+          //j>0 checks that j doesn't go before position 0. j should always be greater than 0 and
+          //the element of j position should always be greater than key value
+          arr[j + 1] = arr[j];
+          j--;
+        }
+        arr[j + 1] = key;
+      }
+      console.log(arr);
+    </script>
+  </body>
+</html>
