@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>print the missing numbers</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 5, 9];
+      let key = arr[0];
+      for (let i = 1; i < arr.length; i++) {
+        if (key < arr[i]) {
+          while (key < arr[i]) {
+            key++;
+            while (key < arr[i]) {
+              console.log(key);
+              key++;
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
