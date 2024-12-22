@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>linear search</title>
+  </head>
+  <body>
+    <script>
+      let arr = [10, 20, 30, 40];
+      let key = 25;
+      let res = search(arr, 25);
+      function search(arr, key) {
+        for (let i = 0; i < arr.length; i++) {
+          if (key == arr[i]) {
+            return true;
+          }
+        }
+        return false;
+      }
+      console.log(res);
+    </script>
+  </body>
+</html>
