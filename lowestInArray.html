@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lowest element in an array</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1045, 1046, 409, 430, 9500];
+      let lowest = arr[0];
+      for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < lowest) {
+          lowest = arr[i];
+        }
+      }
+
+      console.log("The lowest element in the array is:", lowest);
+    </script>
+  </body>
+</html>
