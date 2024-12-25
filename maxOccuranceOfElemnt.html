@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function findMaxRepeatedElement(arr) {
+        if (arr.length === 0) {
+          return { element: null, count: 0 };
+        }
+
+        const frequencyMap = {};
+        let maxElement = arr[0];
+        let maxCount = 0;
+
+        // Count the frequency of each element
+        for (let num of arr) {
+          frequencyMap[num] = (frequencyMap[num] || 0) + 1;
+
+          // Update max element and count
+          if (frequencyMap[num] > maxCount) {
+            maxElement = num;
+            maxCount = frequencyMap[num];
+          }
+        }
+
+        return { element: maxElement, count: maxCount };
+      }
+
+      // Example usage
+      const array = [3, 1, 4, 4, 5, 3, 1, 4, 2, 4];
+      const result = findMaxRepeatedElement(array);
+      console.log(`Maximum repeated element: ${result.element}`);
+      console.log(`Repeated count: ${result.count}`);
+    </script>
+  </body>
+</html>
