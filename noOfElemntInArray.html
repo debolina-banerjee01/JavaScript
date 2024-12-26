@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>number of elements present in a given array</title>
+  </head>
+  <body>
+    <script>
+      let s1 = [1, 5, 7, 4, 9, 10, 60];
+      let arr = [...s1];
+      for (let i = 0; i < arr.length; i++) {
+        let count = 1;
+        if (arr[i] == "") {
+          continue;
+        }
+        for (let j = i + 1; j < arr.length; j++) {
+          if (arr[i] == arr[j]) {
+            count++;
+            arr[j] = "";
+          }
+        }
+        console.log(arr[i] + " = " + count);
+      }
+    </script>
+  </body>
+</html>
