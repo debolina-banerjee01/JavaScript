@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>adding two array elements in a third array</title>
+  </head>
+  <body>
+    <script>
+      let a = [1, 2, 3];
+      let b = [1, 2, 3, 4, 5];
+      let c = [];
+      let i = 0,
+        j = 0,
+        k = 0;
+      while (i < a.length && j < b.length) {
+        c[k++] = a[i++] + b[j++];
+      }
+
+      while (i < a.length) {
+        c[k++] = a[i++];
+      }
+      while (j < b.length) {
+        c[k++] = b[j++];
+      }
+      for (let i = 0; i < c.length; i++) {
+        console.log(c[i]);
+      }
+    </script>
+  </body>
+</html>
