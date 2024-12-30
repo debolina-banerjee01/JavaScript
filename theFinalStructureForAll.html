@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      finding the highest prime number according to user's given position
+    </title>
+    <script>
+      main();
+      function main() {
+        secondHPrime();
+      }
+      function isPrime(n) {
+        if (n <= 1) {
+          console.log("it is not a prime no");
+          return;
+        }
+        let flag = true;
+        for (let i = 2; i <= Math.trunc(n / 2); i++) {
+          if (n % i == 0) {
+            flag = false;
+            break;
+          }
+        }
+        if (flag) return true;
+        else return false;
+      }
+      function secondHPrime() {
+        let start = Number(prompt("enter a start value"));
+        let end = Number(prompt("enter a end value"));
+        let prime_position = Number(
+          prompt(
+            "Please enter the nth highest prime number that you want to print"
+          )
+        );
+
+        let prime_counter = 0;
+
+        if (end <= start) {
+          console.log("invalid inputs");
+          return;
+        }
+
+        for (let i = end; i >= start; i--) {
+          if (isPrime(i)) {
+            prime_counter = prime_counter + 1;
+            if (prime_counter == prime_position) {
+              console.log(`Required prime number is ${i}`);
+              //console.log(i);
+              break;
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
