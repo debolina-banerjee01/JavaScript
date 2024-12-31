@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test1</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finding the maximum number in array with pre-defined method</title>
+  </head>
+  <body>
     <script>
-        function main(){
-            console.log("2" *3);
-            console.log("hi"+3);
-            console.log("2"+3);
-            console.log("hi"*3);
-        }
-        main();
+      let arr = [1, 6, 7, 4, 0, 8];
+      function maxNumInArray() {
+        return Math.max(...arr);
+      }
+      let res = maxNumInArray(arr);
+      console.log(res);
     </script>
-    
-</head>
-<body>
-    <h1>Type coercion</h1>
-</body>
+  </body>
 </html>
