@@ -3,19 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Checking if the given string is palindrome</title>
   </head>
   <body>
     <script>
-      let res = "";
-      let k = 1;
-      for (let i = 1; i <= 5; i++) {
-        for (let j = 1; j <= 5; j++) {
-          res = res + k++ + "\t";
-        }
-        res += "\n";
+      let str = "1256";
+      function isPalindrome() {
+        return str === str.split("").reverse().join("");
       }
-
+      let res = isPalindrome(str);
       console.log(res);
     </script>
   </body>
