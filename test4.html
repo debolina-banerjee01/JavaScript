@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      A program that takes an array of numbers and return an array with only
+      even numbers
+    </title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 6, 7, 4, 0, 8];
+      function evenNumbers() {
+        return arr.filter((num) => num % 2 === 0);
+      }
+      let res = evenNumbers(arr);
+      console.log(res);
+    </script>
+  </body>
+</html>
