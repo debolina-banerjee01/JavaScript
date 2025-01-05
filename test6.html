@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of integers arr and an integer k, is there a pair of
+      numbers in the array that add up to k?
+    </title>
+  </head>
+  <body>
+    <script>
+      function hasPairWithSum(arr, k) {
+        const seen = new Set(arr);
+
+        for (let num of arr) {
+          let complement = k - num;
+          if (seen.has(complement)) {
+            return true;
+          }
+          seen.add(num);
+        }
+
+        return false;
+      }
+
+      // Example usage
+      const arr = [10, 15, 3, 7];
+      const k = 17;
+      console.log(hasPairWithSum(arr, k)); // Output: true
+    </script>
+  </body>
+</html>
