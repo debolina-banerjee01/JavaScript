@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Convert Celsius to Fahrenheit and vice versa</title>
+  </head>
+  <body>
+    <script>
+      // Function to convert Celsius to Fahrenheit
+      function celsiusToFahrenheit(celsius) {
+        return (celsius * 9) / 5 + 32;
+      }
+
+      // Function to convert Fahrenheit to Celsius
+      function fahrenheitToCelsius(fahrenheit) {
+        return ((fahrenheit - 32) * 5) / 9;
+      }
+
+      let celsius = Number(
+        prompt(
+          "enter a value in celsius that you want to convert into fahrenheit"
+        )
+      );
+      let fahrenheit = Number(
+        prompt(
+          "enter a value in fahrenheit that you want to convert into celsius"
+        )
+      );
+
+      console.log(
+        `${celsius}°C is equal to ${celsiusToFahrenheit(celsius).toFixed(2)}°F`
+      );
+      console.log(
+        `${fahrenheit}°F is equal to ${fahrenheitToCelsius(fahrenheit).toFixed(
+          2
+        )}°C`
+      );
+    </script>
+  </body>
+</html>
