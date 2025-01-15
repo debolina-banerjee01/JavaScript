@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find the second largest number in an array</title>
+  </head>
+  <body>
+    <script>
+      function findSecondLargest(arr) {
+        if (arr.length < 2) {
+          throw new Error("Array must have at least two elements.");
+        }
+
+        let largest = -Infinity;
+        let secondLargest = -Infinity;
+
+        for (let num of arr) {
+          if (num > largest) {
+            secondLargest = largest;
+            largest = num;
+          } else if (num > secondLargest && num !== largest) {
+            secondLargest = num;
+          }
+        }
+
+        return secondLargest;
+      }
+
+      // Example usage:
+      const numbers = [12, 35, 1, 10, 34, 1];
+      console.log(findSecondLargest(numbers)); // Output: 34
+    </script>
+  </body>
+</html>
