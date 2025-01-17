@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check if two arrays are equal</title>
+  </head>
+  <body>
+    <script>
+      function areArraysEqual(arr1, arr2) {
+        // Check if lengths are equal
+        if (arr1.length !== arr2.length) {
+          return false;
+        }
+
+        // Check each element for equality
+        for (let i = 0; i < arr1.length; i++) {
+          if (arr1[i] !== arr2[i]) {
+            return false;
+          }
+        }
+
+        return true;
+      }
+
+      // Example Usage
+      const array1 = [1, 2, 3, 4];
+      const array2 = [1, 2, 3, 4];
+      const array3 = [1, 2, 3, 5];
+
+      console.log(areArraysEqual(array1, array2));
+      console.log(areArraysEqual(array1, array3));
+    </script>
+  </body>
+</html>
