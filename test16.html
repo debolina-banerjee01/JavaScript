@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find the first non-repeating character in a string</title>
+  </head>
+  <body>
+    <script>
+      function firstNonRepeatingChar(str) {
+        const charCount = new Map();
+
+        // Count occurrences of each character
+        for (let char of str) {
+          charCount.set(char, (charCount.get(char) || 0) + 1);
+        }
+
+        // Find the first non-repeating character
+        for (let char of str) {
+          if (charCount.get(char) === 1) {
+            return char;
+          }
+        }
+
+        return null; // Return null if no non-repeating character is found
+      }
+
+      // Example usage:
+      console.log(firstNonRepeatingChar("swiss"));
+    </script>
+  </body>
+</html>
