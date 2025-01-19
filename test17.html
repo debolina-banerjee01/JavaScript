@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>check if two strings are anagrams</title>
+  </head>
+  <body>
+    <script>
+      function areAnagrams(str1, str2) {
+        // Remove spaces, convert to lowercase, and sort characters
+        let sortedStr1 = str1
+          .replace(/\s+/g, "")
+          .toLowerCase()
+          .split("")
+          .sort()
+          .join("");
+        let sortedStr2 = str2
+          .replace(/\s+/g, "")
+          .toLowerCase()
+          .split("")
+          .sort()
+          .join("");
+
+        // Compare the sorted strings
+        return sortedStr1 === sortedStr2;
+      }
+
+      // Example usage
+      console.log(areAnagrams("listen", "silent")); // true
+      console.log(areAnagrams("hello", "world")); // false
+      console.log(areAnagrams("Astronomer", "Moon starer")); // true
+    </script>
+  </body>
+</html>
