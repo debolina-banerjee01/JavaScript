@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find the second largest number in an array</title>
+  </head>
+  <body>
+    <script>
+      function secondLargest(arr) {
+        let largest = -Infinity,
+          secondLargest = -Infinity;
+
+        for (let num of arr) {
+          if (num > largest) {
+            secondLargest = largest;
+            largest = num;
+          } else if (num > secondLargest && num !== largest) {
+            secondLargest = num;
+          }
+        }
+
+        return secondLargest === -Infinity ? null : secondLargest;
+      }
+
+      console.log(secondLargest([10, 20, 4, 45, 99, 99])); // Output: 45
+    </script>
+  </body>
+</html>
