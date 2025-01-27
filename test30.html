@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sort an array of strings alphabetically</title>
+  </head>
+  <body>
+    <script>
+      function isSorted(arr) {
+        for (let i = 0; i < arr.length - 1; i++) {
+          if (arr[i] > arr[i + 1]) {
+            return false; // If any element is greater than the next, array is not sorted
+          }
+        }
+        return true; // If no such element is found, array is sorted
+      }
+
+      // Example usage
+      console.log(isSorted([1, 2, 3, 4, 5])); // true
+      console.log(isSorted([5, 3, 4, 1, 2])); // false
+      console.log(isSorted([10, 20, 30, 40])); // true
+      console.log(isSorted([10, 20, 20, 30])); // true
+    </script>
+  </body>
+</html>
