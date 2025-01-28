@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A program to check if an array is sorted</title>
+  </head>
+  <body>
+    <script>
+      function isSorted(arr) {
+        for (let i = 0; i < arr.length - 1; i++) {
+          if (arr[i] > arr[i + 1]) {
+            return false; // Not sorted
+          }
+        }
+        return true; // Sorted
+      }
+
+      // Example usage:
+      let arr1 = [1, 2, 3, 4, 5];
+      let arr2 = [1, 3, 2, 4, 5];
+
+      console.log(isSorted(arr1)); // Output: true
+      console.log(isSorted(arr2)); // Output: false
+    </script>
+  </body>
+</html>
