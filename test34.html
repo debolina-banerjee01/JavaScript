@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>a function that takes an array of objects and a key, and returns a new array sorted based on the values of that key 
+        in ascending order</title>
+</head>
+<body>
+    <script>
+        function sortArrayByKey(arr, key) {
+    return arr.sort((a, b) => {
+        if (a[key] < b[key]) {
+            return -1; // a comes first
+        } else if (a[key] > b[key]) {
+            return 1; // b comes first
+        } else {
+            return 0; // they are equal
+        }
+    });
+}
+
+// Example usage:
+let data = [
+    { name: 'Alice', age: 25 },
+    { name: 'Bob', age: 30 },
+    { name: 'Charlie', age: 20 }
+];
+
+console.log(sortArrayByKey(data, 'age'));
+// Output: [ { name: 'Charlie', age: 20 }, { name: 'Alice', age: 25 }, { name: 'Bob', age: 30 } ]
+
+    </script>
+</body>
+</html>
