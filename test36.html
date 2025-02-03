@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>a function that reverses the order of words in a sentence</title>
+</head>
+<body>
+    <script>
+        function reverseWords(sentence) {
+    // Split the sentence into words
+    let words = sentence.split(' ');
+    
+    // Create an empty array to hold the reversed words
+    let reversedWords = [];
+    
+    // Loop through the words from the end to the beginning
+    for (let i = words.length - 1; i >= 0; i--) {
+        reversedWords.push(words[i]);
+    }
+    
+    // Join the reversed words back into a sentence
+    return reversedWords.join(' ');
+}
+
+// Example usage:
+console.log(reverseWords("Hello World! How are you?"));
+// Output: "you? are How World! Hello"
+
+
+    </script>
+</body>
+</html>
