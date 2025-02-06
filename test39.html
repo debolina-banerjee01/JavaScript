@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filter object properties by value condition</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        a: 10,
+        b: 25,
+        c: 30,
+        d: 5,
+      };
+
+      // Filter properties where values are greater than 15
+      const filteredObj = Object.fromEntries(
+        Object.entries(obj).filter(([key, value]) => value > 15)
+      );
+
+      console.log(filteredObj); // { b: 25, c: 30 }
+    </script>
+  </body>
+</html>
