@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorting an array of objects by a key</title>
+  </head>
+  <body>
+    <script>
+      const users = [
+        { name: "Alice", age: 25 },
+        { name: "Bob", age: 30 },
+        { name: "Charlie", age: 22 },
+      ];
+
+      // Sort by age (ascending)
+      users.sort((a, b) => a.age - b.age);
+
+      console.log(users);
+    </script>
+  </body>
+</html>
