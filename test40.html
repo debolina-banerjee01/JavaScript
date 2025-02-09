@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Filtering an object by key condition</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implement a function that finds the index of a specific element in an array. 
+        If the element is not found, the function should return -1</title>
+</head>
+<body>
     <script>
-      const user = {
-        name: "Alice",
-        age: 25,
-        email: "alice@example.com",
-        isActive: true,
-      };
+      function findIndex(arr, element) {
+  // Loop through the array to find the element
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === element) {
+      return i; // Return the index if element is found
+    }
+  }
+  
+  return -1; // Return -1 if element is not found
+}
+const arr = [10, 20, 30, 40, 50];
 
-      // Keep only properties that start with "a"
-      const filteredUser = Object.fromEntries(
-        Object.entries(user).filter(([key, value]) => key.startsWith("a"))
-      );
+console.log(findIndex(arr, 30)); // Output: 2
+console.log(findIndex(arr, 100)); // Output: -1
 
-      console.log(filteredUser); // { age: 25 }
+
+
     </script>
-  </body>
+</body>
 </html>
