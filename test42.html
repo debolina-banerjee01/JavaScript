@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Converting a decimal number to binary</title>
+  </head>
+  <body>
+    <script>
+      function decimalToBinaryManual(n) {
+        let binary = "";
+        while (n > 0) {
+          binary = (n % 2) + binary; // Get remainder and add to result
+          n = Math.floor(n / 2); // Divide by 2
+        }
+        return binary || "0"; // Return "0" if input is 0
+      }
+
+      console.log(decimalToBinaryManual(10)); // Output: "1010"
+      console.log(decimalToBinaryManual(25)); // Output: "11001"
+    </script>
+  </body>
+</html>
