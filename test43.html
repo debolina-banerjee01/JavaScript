@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find the greatest common divisor (GCD) of two numbers</title>
+  </head>
+  <body>
+    <script>
+      function gcdIterative(a, b) {
+        while (b !== 0) {
+          let temp = b;
+          b = a % b;
+          a = temp;
+        }
+        return a;
+      }
+
+      console.log(gcdIterative(56, 98)); // Output: 14
+      console.log(gcdIterative(48, 18)); // Output: 6
+    </script>
+  </body>
+</html>
