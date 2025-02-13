@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Write a function to capitalize the first letter of each word in a string
+    </title>
+  </head>
+  <body>
+    <script>
+      function capitalizeWords(str) {
+        let words = str.split(" "); // Split the string into an array of words
+        for (let i = 0; i < words.length; i++) {
+          if (words[i].length > 0) {
+            words[i] = words[i][0].toUpperCase() + words[i].slice(1);
+          }
+        }
+        return words.join(" "); // Join the words back into a string
+      }
+
+      // Example usage:
+      console.log(capitalizeWords("hello world! this is javascript."));
+      // Output: "Hello World! This Is Javascript."
+    </script>
+  </body>
+</html>
