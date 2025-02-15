@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Write a function to check if two strings are anagrams</title>
+  </head>
+  <body>
+    <script>
+      function areAnagrams(str1, str2) {
+        // Convert strings to lowercase
+        let s1 = str1.toLowerCase().split("").sort().join("");
+        let s2 = str2.toLowerCase().split("").sort().join("");
+
+        // Compare the sorted versions of both strings
+        return s1 === s2;
+      }
+
+      // Test cases
+      console.log(areAnagrams("listen", "silent")); // true
+    </script>
+  </body>
+</html>
