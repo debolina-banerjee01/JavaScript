@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remove all occurrences of a specific character from a string</title>
+  </head>
+  <body>
+    <script>
+      function removeCharacter(str, charToRemove) {
+        return str.split(charToRemove).join("");
+      }
+
+      console.log(removeCharacter("hello world", "o")); // "hell wrld"s
+    </script>
+  </body>
+</html>
