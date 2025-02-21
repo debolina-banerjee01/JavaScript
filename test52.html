@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement a function to perform deep cloning of an object using recursion
+    </title>
+  </head>
+  <body>
+    <script>
+      function deepClone(obj) {
+        if (obj === null || typeof obj !== "object") {
+          return obj;
+        }
+
+        if (Array.isArray(obj)) {
+          return obj.map((item) => deepClone(item));
+        }
+
+        const clonedObj = {};
+        for (let key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            clonedObj[key] = deepClone(obj[key]);
+          }
+        }
+
+        return clonedObj;
+      }
+
+      // Example usage:
+      const original = {
+        name: "Alice",
+        age: 25,
+        details: {
+          hobbies: ["reading", "traveling"],
+          address: { city: "New York", country: "USA" },
+        },
+      };
+
+      const cloned = deepClone(original);
+      cloned.details.address.city = "Los Angeles";
+
+      console.log(original.details.address.city); // "New York" (unchanged)
+      console.log(cloned.details.address.city); // "Los Angeles"
+    </script>
+  </body>
+</html>
