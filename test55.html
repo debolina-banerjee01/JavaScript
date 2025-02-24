@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Write a function to check if a given object is empty (using Object.keys()
+      method)
+    </title>
+  </head>
+  <body>
+    <script>
+      function isObjectEmpty(obj) {
+        return Object.keys(obj).length === 0;
+      }
+
+      // Example usage
+      console.log(isObjectEmpty({})); // true
+      console.log(isObjectEmpty({ key: "value" })); // false
+    </script>
+  </body>
+</html>
