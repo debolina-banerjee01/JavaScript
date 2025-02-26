@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Write a function to debounce a function call</title>
+  </head>
+  <body>
+    <script>
+      function debounce(func, delay) {
+        let timer;
+        return function (...args) {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            func.apply(this, args);
+          }, delay);
+        };
+      }
+
+      // Example Usage:
+      function handleResize() {
+        console.log("Resized at", new Date().toLocaleTimeString());
+      }
+
+      const debouncedResize = debounce(handleResize, 500);
+
+      window.addEventListener("resize", debouncedResize);
+    </script>
+  </body>
+</html>
