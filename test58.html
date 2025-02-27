@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Write a function to throttle a function call</title>
+  </head>
+  <body>
+    <script>
+      function throttle(func, limit) {
+        let lastFunc;
+        let lastRan;
+
+        return function () {
+          const context = this;
+          const args = arguments;
+
+          if (!lastRan) {
+            func.apply(context, args);
+            lastRan = Date.now();
+          } else {
+            clearTimeout(lastFunc);
+            lastFunc = setTimeout(function () {
+              if (Date.now() - lastRan >= limit) {
+                func.apply(context, args);
+                lastRan = Date.now();
+              }
+            }, limit - (Date.now() - lastRan));
+          }
+        };
+      }
+
+      // Example usage
+      const logMessage = () => console.log("Throttled Function Executed!");
+
+      const throttledLog = throttle(logMessage, 2000);
+
+      window.addEventListener("resize", throttledLog); // Will execute at most once every 2 seconds
+    </script>
+  </body>
+</html>
