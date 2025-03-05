@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Write a function to convert a string to camelCase</title>
+  </head>
+  <body>
+    <script>
+      function toCamelCase(str) {
+        return str
+          .toLowerCase() // Convert the string to lowercase
+          .replace(/[^a-zA-Z0-9]+(.)/g, (match, char) => char.toUpperCase()); // Remove non-alphanumeric characters and capitalize next letter
+      }
+
+      // Example usage:
+      console.log(toCamelCase("hello world")); // "helloWorld"
+      console.log(toCamelCase("convert-this_to camelCase")); // "convertThisToCamelCase"
+      console.log(toCamelCase("JavaScript is awesome!")); // "javaScriptIsAwesome"
+    </script>
+  </body>
+</html>
