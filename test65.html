@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement a function that returns a memoized version of another function
+    </title>
+  </head>
+  <body>
+    <script>
+      function memoize(fn) {
+        const cache = new Map();
+
+        return function (...args) {
+          const key = JSON.stringify(args);
+          if (cache.has(key)) {
+            console.log("Fetching from cache for:", args);
+            return cache.get(key);
+          }
+          console.log("Computing result for:", args);
+          const result = fn(...args);
+          cache.set(key, result);
+          return result;
+        };
+      }
+
+      // Example usage:
+      function slowFunction(num) {
+        // Simulating an expensive computation
+        for (let i = 0; i < 1e6; i++) {}
+        return num * num;
+      }
+
+      const memoizedSlowFunction = memoize(slowFunction);
+
+      console.log(memoizedSlowFunction(5)); // Computed
+      console.log(memoizedSlowFunction(5)); // Cached
+      console.log(memoizedSlowFunction(10)); // Computed
+      console.log(memoizedSlowFunction(10)); // Cached
+    </script>
+  </body>
+</html>
