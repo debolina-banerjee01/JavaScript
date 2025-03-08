@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a function that converts an array of objects into an object using a specified key</title>
+</head>
+<body>
+    <script>
+       function arrayToObject(arr, key) {
+    return arr.reduce((acc, obj) => {
+        if (obj[key] !== undefined) {
+            acc[obj[key]] = obj;
+        }
+        return acc;
+    }, {});
+}
+
+// Example usage:
+const data = [
+    { id: 1, name: "Alice", age: 25 },
+    { id: 2, name: "Bob", age: 30 },
+    { id: 3, name: "Charlie", age: 22 }
+];
+
+const result = arrayToObject(data, "id");
+console.log(result);
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
