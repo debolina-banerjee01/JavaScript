@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implement a custom version of Array.prototype.map() as myMap()</title>
+</head>
+<body>
+    <script>
+       Array.prototype.myMap = function (callback) {
+  // Check if the callback is a function
+  if (typeof callback !== "function") {
+    throw new TypeError(callback + " is not a function");
+  }
+
+  // Create a new array to store results
+  let resultArray = [];
+
+  // Iterate over each element in the array
+  for (let i = 0; i < this.length; i++) {
+    // Check if the element exists in the array (handling sparse arrays)
+    if (this.hasOwnProperty(i)) {
+      resultArray[i] = callback(this[i], i, this);
+    }
+  }
+
+  return resultArray;
+};
+
+// Example usage:
+const numbers = [1, 2, 3, 4];
+const squaredNumbers = numbers.myMap((num) => num * num);
+console.log(squaredNumbers); // Output: [1, 4, 9, 16]
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
