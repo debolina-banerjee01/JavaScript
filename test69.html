@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implement a function that executes an array of promises sequentially</title>
+</head>
+<body>
+    <script>
+      async function executeSequentially(promiseFunctions) {
+  const results = [];
+
+  for (let i = 0; i < promiseFunctions.length; i++) {
+    try {
+      const result = await promiseFunctions[i]();
+      results.push(result);
+    } catch (error) {
+      console.error(`Promise ${i + 1} failed:`, error);
+      results.push(null); // Or handle the error as needed
+    }
+  }
+
+  return results;
+}
+// Simulate async functions returning promises
+const asyncTask1 = () => new Promise(resolve => setTimeout(() => resolve('Result 1'), 1000));
+const asyncTask2 = () => new Promise(resolve => setTimeout(() => resolve('Result 2'), 500));
+const asyncTask3 = () => new Promise((resolve, reject) => setTimeout(() => reject('Error in Task 3'), 700));
+
+const tasks = [asyncTask1, asyncTask2, asyncTask3];
+
+executeSequentially(tasks)
+  .then(results => {
+    console.log('All tasks completed.');
+    console.log(results);
+  })
+  .catch(err => console.error('Error in sequential execution:', err));
+
+
+
+
+    </script>
+</body>
+</html>
