@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      A knight's tour is a sequence of moves by a knight on a chessboard such
+      that all squares are visited once. Given N, write a function to return the
+      number of knight's tours on an N by N chessboard.
+    </title>
+  </head>
+  <body>
+    <script>
+      function countKnightsTours(N) {
+        // All 8 possible moves for a knight
+        const moves = [
+          [2, 1],
+          [1, 2],
+          [-1, 2],
+          [-2, 1],
+          [-2, -1],
+          [-1, -2],
+          [1, -2],
+          [2, -1],
+        ];
+
+        // Create the chessboard (initially unvisited)
+        const board = Array.from({ length: N }, () => Array(N).fill(-1));
+
+        let totalTours = 0; // Counter for valid tours
+
+        // Check if the position is valid and unvisited
+        function isValid(x, y) {
+          return x >= 0 && x < N && y >= 0 && y < N && board[x][y] === -1;
+        }
+
+        // Recursive function to explore all possible knight moves
+        function solve(x, y, moveCount) {
+          // If we have visited all squares, we found a valid tour
+          if (moveCount === N * N) {
+            totalTours++;
+            return;
+          }
+
+          // Try all 8 knight moves from the current position
+          for (let [dx, dy] of moves) {
+            const nx = x + dx;
+            const ny = y + dy;
+
+            if (isValid(nx, ny)) {
+              board[nx][ny] = moveCount; // Mark the move
+              solve(nx, ny, moveCount + 1); // Recurse
+              board[nx][ny] = -1; // Backtrack
+            }
+          }
+        }
+
+        // Start from (0, 0)
+        board[0][0] = 0;
+        solve(0, 0, 1);
+
+        return totalTours;
+      }
+
+      // Example usage:
+      const N = 5;
+      console.log(
+        `Number of knight's tours on a ${N}x${N} board: ${countKnightsTours(N)}`
+      );
+    </script>
+  </body>
+</html>
