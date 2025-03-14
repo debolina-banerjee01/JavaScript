@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aletrnate prime numbers</title>
+    <title>Aletrnate prime numbers within a range</title>
     <script>
         main();
         function main()
@@ -14,7 +14,9 @@
 
             for(let i=start; i<=end; i++)
             {
-                if(i<=1) break;
+                if(i<=1){ 
+                    break;
+                }
                 if(isPrime(i))
                 {
                     count++;
@@ -25,11 +27,7 @@
         }
         function isPrime(n)
         {
-            if(n<=1)
-            {
-                console.log('it is not a prime no');
-                return;
-            }
+            
             let flag=true;
             for(let i=2; i<=Math.trunc(n/2); i++)
             {
@@ -47,7 +45,5 @@
         }
     </script>
 </head>
-<body>
-    <h2>Aletrnate prime numbers</h2>
-</body>
+
 </html>
