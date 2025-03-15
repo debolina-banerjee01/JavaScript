@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assume you have access to a function toss_biased() which returns 0 or 1 with a probability that's not 
+      50-50 (but also not 0-100 or 100-0). You do not know the bias of the coin.
+
+      Write a function to simulate an unbiased coin toss</title>
+</head>
+<body>
+    <script>
+      // Simulating the given biased coin toss function
+// Example: returns 0 or 1 with some unknown bias
+function toss_biased() {
+  return Math.random() < 0.7 ? 0 : 1; // Bias example (70% chance of 0)
+}
+
+// Unbiased toss using Von Neumann's algorithm
+function unbiased_toss() {
+  let first, second;
+  
+  while (true) {
+    first = toss_biased();
+    second = toss_biased();
+
+    if (first !== second) {
+      return first;
+    }
+    // If both are same, repeat the process
+  }
+}
+
+// Example usage
+const trials = 100000;
+let count0 = 0, count1 = 0;
+
+for (let i = 0; i < trials; i++) {
+  if (unbiased_toss() === 0) count0++;
+  else count1++;
+}
+
+console.log(`0s: ${count0}, 1s: ${count1}`);
+
+    </script>
+</body>
+</html>
