@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      A number is considered perfect if its digits sum up to exactly 10.Given a
+      positive integer n, return the n-th perfect number. For example, given 1,
+      you should return 19. Given 2, you should return 28
+    </title>
+  </head>
+  <body>
+    <script>
+      function isPerfect(num) {
+        let sum = 0;
+        let temp = num;
+
+        // Sum the digits of the number
+        while (temp > 0) {
+          sum += temp % 10;
+          temp = Math.floor(temp / 10);
+        }
+
+        return sum === 10;
+      }
+
+      function findNthPerfectNumber(n) {
+        let count = 0;
+        let num = 19; // First perfect number
+
+        while (true) {
+          if (isPerfect(num)) {
+            count++;
+            if (count === n) {
+              return num;
+            }
+          }
+          num++;
+        }
+      }
+
+      // Example usage:
+      console.log(findNthPerfectNumber(1)); // Output: 19
+      console.log(findNthPerfectNumber(2)); // Output: 28
+      console.log(findNthPerfectNumber(3)); // Output: 37
+    </script>
+  </body>
+</html>
