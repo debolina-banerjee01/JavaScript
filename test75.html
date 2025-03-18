@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Using a function rand7() that returns an integer from 1 to 7 (inclusive)
+      with uniform probability, implement a function rand5() that returns an
+      integer from 1 to 5 (inclusive).
+    </title>
+  </head>
+  <body>
+    <script>
+      // Given function: returns 1 to 7 uniformly
+      function rand7() {
+        return Math.floor(Math.random() * 7) + 1;
+      }
+
+      // Implement rand5() using rand7()
+      function rand5() {
+        let num;
+        do {
+          num = rand7();
+        } while (num > 5);
+        return num;
+      }
+
+      // Example usage:
+      console.log(rand5()); // Output: 1 to 5 (uniform distribution)
+    </script>
+  </body>
+</html>
