@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In a directed graph, each node is assigned an uppercase letter. We define a path's value as the number of most 
+      frequently-occurring letter along that path. For example, if a path in the graph goes through "ABACA", the value of the 
+      path is 3, since there are 3 occurrences of 'A' on the path.
+
+      Given a graph with n nodes and m directed edges, return the largest value path of the graph. If the largest value is infinite, 
+      then return null.
+      
+      The graph is represented with a string and an edge list. The i-th character represents the uppercase letter of the i-th node. 
+      Each tuple in the edge list (i, j) means there is a directed edge from the i-th node to the j-th node. Self-edges are possible, 
+      as well as multi-edges</title>
+</head>
+<body>
+    <script>
+      function largestPathValue(letters, edges) {
+  const n = letters.length;
+  const graph = Array.from({ length: n }, () => []);
+  const inDegree = Array(n).fill(0);
+
+  // Build the graph and calculate in-degree
+  for (const [from, to] of edges) {
+    graph[from].push(to);
+    inDegree[to]++;
+  }
+
+  // Queue for nodes with 0 in-degree
+  const queue = [];
+  for (let i = 0; i < n; i++) {
+    if (inDegree[i] === 0) queue.push(i);
+  }
+
+  // Each node will have an array of size 26 (A-Z letter counts)
+  const counts = Array.from({ length: n }, () => Array(26).fill(0));
+
+  let visitedNodes = 0;
+  let result = 0;
+
+  while (queue.length > 0) {
+    const node = queue.shift();
+    visitedNodes++;
+
+    const letterIndex = letters.charCodeAt(node) - 65;
+    counts[node][letterIndex]++;
+
+    // Update result with the max count found so far
+    result = Math.max(result, counts[node][letterIndex]);
+
+    // Process neighbors
+    for (const neighbor of graph[node]) {
+      // For each letter, update the neighbor's counts based on current node
+      for (let i = 0; i < 26; i++) {
+        counts[neighbor][i] = Math.max(
+          counts[neighbor][i],
+          counts[node][i]
+        );
+      }
+
+      // Decrease in-degree and if it becomes 0, add to queue
+      inDegree[neighbor]--;
+      if (inDegree[neighbor] === 0) queue.push(neighbor);
+    }
+  }
+
+  // If we didn't visit all nodes, there is a cycle (infinite loop)
+  return visitedNodes === n ? result : null;
+}
+
+// Example usage:
+const letters1 = "ABACA";
+const edges1 = [
+  [0, 1],
+  [0, 2],
+  [2, 3],
+  [3, 4]
+];
+console.log(largestPathValue(letters1, edges1)); // Output: 3
+
+const letters2 = "A";
+const edges2 = [[0, 0]];
+console.log(largestPathValue(letters2, edges2)); // Output: null
+
+    </script>
+</body>
+</html>
