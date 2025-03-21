@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a 2D matrix of characters and a target word, write a function that
+      returns whether the word can be found in the matrix by going
+      left-to-right, or up-to-down.
+    </title>
+  </head>
+  <body>
+    <script>
+      function wordExists(matrix, word) {
+        const rows = matrix.length;
+        const cols = matrix[0].length;
+
+        // Helper function to check if the word matches starting from (r, c) going right
+        function checkRight(r, c) {
+          if (c + word.length > cols) return false;
+
+          for (let i = 0; i < word.length; i++) {
+            if (matrix[r][c + i] !== word[i]) return false;
+          }
+          return true;
+        }
+
+        // Helper function to check if the word matches starting from (r, c) going down
+        function checkDown(r, c) {
+          if (r + word.length > rows) return false;
+
+          for (let i = 0; i < word.length; i++) {
+            if (matrix[r + i][c] !== word[i]) return false;
+          }
+          return true;
+        }
+
+        // Iterate through each cell in the matrix
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            if (checkRight(r, c) || checkDown(r, c)) {
+              return true;
+            }
+          }
+        }
+
+        // If no match found
+        return false;
+      }
+
+      // Example matrix
+      const matrix = [
+        ["F", "A", "C", "I"],
+        ["O", "B", "Q", "P"],
+        ["A", "N", "O", "B"],
+        ["M", "A", "S", "S"],
+      ];
+
+      // Example usage
+      console.log(wordExists(matrix, "FOAM")); // true
+      console.log(wordExists(matrix, "MASS")); // true
+      console.log(wordExists(matrix, "FACE")); // false
+    </script>
+  </body>
+</html>
