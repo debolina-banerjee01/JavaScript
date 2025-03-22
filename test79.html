@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a N by M matrix of numbers, print out the matrix in a clockwise
+      spiral
+    </title>
+  </head>
+  <body>
+    <script>
+      function printSpiral(matrix) {
+        if (!matrix.length || !matrix[0].length) return;
+
+        let top = 0;
+        let bottom = matrix.length - 1;
+        let left = 0;
+        let right = matrix[0].length - 1;
+
+        while (top <= bottom && left <= right) {
+          // Print top row
+          for (let col = left; col <= right; col++) {
+            console.log(matrix[top][col]);
+          }
+          top++;
+
+          // Print right column
+          for (let row = top; row <= bottom; row++) {
+            console.log(matrix[row][right]);
+          }
+          right--;
+
+          // Print bottom row if still in bounds
+          if (top <= bottom) {
+            for (let col = right; col >= left; col--) {
+              console.log(matrix[bottom][col]);
+            }
+            bottom--;
+          }
+
+          // Print left column if still in bounds
+          if (left <= right) {
+            for (let row = bottom; row >= top; row--) {
+              console.log(matrix[row][left]);
+            }
+            left++;
+          }
+        }
+      }
+
+      // Example matrix
+      const matrix = [
+        [1, 2, 3, 4, 5],
+        [6, 7, 8, 9, 10],
+        [11, 12, 13, 14, 15],
+        [16, 17, 18, 19, 20],
+      ];
+
+      // Call the function
+      printSpiral(matrix);
+    </script>
+  </body>
+</html>
