@@ -3,11 +3,11 @@ chp1- H)e)   The length & breadth of a rectangle and radius of a circle are inpu
 */
 
 let length = Number(prompt("Please enter length of the rectangle :"));
-let breadth = Number(prompt("Please enter breadth of the rectangle :"));
+let width = Number(prompt("Please enter width of the rectangle :"));
 let radius = Number(prompt("Please enter radius of the circle :"));
 
-const rArea = length * breadth;
-const rPeri = 2 * (length + breadth);
+const rArea = length * width;
+const rPeri = 2 * (length + width);
 const cArea = 3.14 * (radius * radius);
 const cCircum = 2 * 3.14 * radius;
 
