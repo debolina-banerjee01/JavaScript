@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a list of points, a central point, and an integer k, find the
+      nearest k points from the central point.
+    </title>
+  </head>
+  <body>
+    <script>
+      function kNearestPoints(points, center, k) {
+        let [x1, y1] = center;
+
+        // Compute distances and store them in an array
+        let distances = points.map(([x2, y2]) => ({
+          point: [x2, y2],
+          distance: (x2 - x1) ** 2 + (y2 - y1) ** 2, // Squared Euclidean distance
+        }));
+
+        // Sort based on distance
+        distances.sort((a, b) => a.distance - b.distance);
+
+        // Extract the k closest points
+        return distances.slice(0, k).map((item) => item.point);
+      }
+
+      // Example usage
+      const points = [
+        [1, 2],
+        [3, 4],
+        [1, -1],
+        [-2, 3],
+        [5, 8],
+      ];
+      const center = [0, 0];
+      const k = 3;
+
+      console.log(kNearestPoints(points, center, k));
+    </script>
+  </body>
+</html>
