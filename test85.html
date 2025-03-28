@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given n numbers as well as n probabilities that sum up to 1. Write
+      a function to generate one of the numbers with its corresponding
+      probability.
+    </title>
+  </head>
+  <body>
+    <script>
+      function weightedRandom(numbers, probabilities) {
+        if (numbers.length !== probabilities.length) {
+          throw new Error(
+            "Numbers and probabilities arrays must have the same length"
+          );
+        }
+
+        // Compute cumulative probabilities
+        let cumulative = [];
+        let sum = 0;
+        for (let prob of probabilities) {
+          sum += prob;
+          cumulative.push(sum);
+        }
+
+        // Generate a random number between 0 and 1
+        let rand = Math.random();
+
+        // Find the corresponding number
+        for (let i = 0; i < cumulative.length; i++) {
+          if (rand < cumulative[i]) {
+            return numbers[i];
+          }
+        }
+
+        return null; // Should never reach here if probabilities sum to 1
+      }
+
+      // Example Usage:
+      const numbers = [1, 2, 3, 4];
+      const probabilities = [0.1, 0.3, 0.4, 0.2];
+
+      console.log(weightedRandom(numbers, probabilities)); // Outputs 1, 2, 3, or 4 based on probability
+    </script>
+  </body>
+</html>
