@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a multiset of integers, return whether it can be partitioned into
+      two subsets whose sums are the same.
+    </title>
+  </head>
+  <body>
+    <script>
+      function canPartition(nums) {
+        let sum = nums.reduce((acc, num) => acc + num, 0);
+
+        // If sum is odd, we can't partition it into two equal subsets
+        if (sum % 2 !== 0) return false;
+
+        let target = sum / 2;
+        let dp = new Array(target + 1).fill(false);
+        dp[0] = true;
+
+        for (let num of nums) {
+          for (let j = target; j >= num; j--) {
+            dp[j] = dp[j] || dp[j - num];
+          }
+        }
+
+        return dp[target];
+      }
+
+      // Test cases
+      console.log(canPartition([15, 5, 20, 10, 35, 15, 10])); // true
+      console.log(canPartition([15, 5, 20, 10, 35])); // false
+    </script>
+  </body>
+</html>
