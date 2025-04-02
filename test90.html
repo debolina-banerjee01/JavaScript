@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a binary tree, find a minimum path sum from root to a leaf.
+
+        For example, the minimum path in this tree is [10, 5, 1, -1], which has sum 15.</title>
+</head>
+<body>
+    <script>
+     // Definition for a binary tree node
+class TreeNode {
+  constructor(val = 0, left = null, right = null) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+/**
+ * Function to find the minimum path sum from root to leaf
+ * @param {TreeNode} root - The root node of the binary tree
+ * @return {number} - The minimum path sum
+ */
+function minPathSum(root) {
+  if (!root) {
+    return 0;
+  }
+  
+  // If we're at a leaf node, return its value
+  if (!root.left && !root.right) {
+    return root.val;
+  }
+  
+  // If node has only one child, recurse on that child
+  if (!root.left) {
+    return root.val + minPathSum(root.right);
+  }
+  if (!root.right) {
+    return root.val + minPathSum(root.left);
+  }
+  
+  // If node has both children, take the minimum path
+  const leftSum = minPathSum(root.left);
+  const rightSum = minPathSum(root.right);
+  
+  return root.val + Math.min(leftSum, rightSum);
+}
+
+/**
+ * Function to find the minimum path sum and the actual path
+ * @param {TreeNode} root - The root node of the binary tree
+ * @return {Array} - [minSum, path]
+ */
+function minPathSumWithPath(root) {
+  if (!root) {
+    return [Infinity, []];
+  }
+  
+  // If we're at a leaf node
+  if (!root.left && !root.right) {
+    return [root.val, [root.val]];
+  }
+  
+  // Get path sums from left and right subtrees
+  const [leftSum, leftPath] = root.left ? minPathSumWithPath(root.left) : [Infinity, []];
+  const [rightSum, rightPath] = root.right ? minPathSumWithPath(root.right) : [Infinity, []];
+  
+  // Choose the minimum path
+  if (leftSum <= rightSum) {
+    return [root.val + leftSum, [root.val, ...leftPath]];
+  } else {
+    return [root.val + rightSum, [root.val, ...rightPath]];
+  }
+}
+     
+     
+     
+     
+     
+     
+     // Create the example tree:
+//     10
+//    /  \
+//   5    8
+//  / \    \
+// 1   2    6
+// /
+//-1
+
+const tree = new TreeNode(10,
+  new TreeNode(5,
+    new TreeNode(1,
+      new TreeNode(-1)
+    ),
+    new TreeNode(2)
+  ),
+  new TreeNode(8,
+    null,
+    new TreeNode(6)
+  )
+);
+
+// Calculate minimum path sum
+const minSum = minPathSum(tree);
+console.log("Minimum path sum:", minSum);  // Should output 15
+
+// Calculate minimum path sum and the path
+const [sum, path] = minPathSumWithPath(tree);
+console.log("Minimum path sum:", sum);     // Should output 15
+console.log("Path:", path);                // Should output [10, 5, 1, -1]
+    </script>
+</body>
+</html>
