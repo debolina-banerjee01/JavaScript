@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a string, return the first recurring character in it, or null if there is no recurring character.</title>
+</head>
+<body>
+    <script>
+     function firstRecurringCharacter(str) {
+    const seen = new Set();
+
+    for (let char of str) {
+        if (seen.has(char)) {
+            return char; // Found the first recurring character
+        }
+        seen.add(char);
+    }
+
+    return null; // No recurring character found
+}
+
+// Example usage:
+console.log(firstRecurringCharacter("abcdefa")); // Output: "a"
+console.log(firstRecurringCharacter("abcde"));   // Output: null
+console.log(firstRecurringCharacter("abca"));    // Output: "a"
+              
+    </script>
+</body>
+</html>
