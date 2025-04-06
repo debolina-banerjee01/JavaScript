@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a list of words, return the shortest unique prefix of each word.
+    </title>
+  </head>
+  <body>
+    <script>
+      function shortestUniquePrefixes(words) {
+        const prefixes = [];
+
+        for (let i = 0; i < words.length; i++) {
+          let prefix = "";
+          for (let j = 1; j <= words[i].length; j++) {
+            prefix = words[i].substring(0, j);
+
+            let isUnique = true;
+            for (let k = 0; k < words.length; k++) {
+              if (i !== k && words[k].startsWith(prefix)) {
+                isUnique = false;
+                break;
+              }
+            }
+
+            if (isUnique) {
+              prefixes.push(prefix);
+              break;
+            }
+          }
+        }
+
+        return prefixes;
+      }
+
+      // Example usage
+      const words = ["dog", "dove", "duck"];
+      console.log(shortestUniquePrefixes(words)); // Output: ["dog", "dov", "du"]
+    </script>
+  </body>
+</html>
