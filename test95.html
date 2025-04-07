@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You have a large array with most of the elements as zero. Use a more
+      space-efficient data structure, SparseArray, that implements the same
+      interface:
+    </title>
+  </head>
+  <body>
+    <script>
+      class SparseArray {
+        constructor(arr, size) {
+          this.size = size;
+          this.data = {}; // Only store non-zero values
+
+          for (let i = 0; i < size; i++) {
+            if (arr[i] !== 0) {
+              this.data[i] = arr[i];
+            }
+          }
+        }
+
+        set(i, val) {
+          if (i < 0 || i >= this.size) {
+            throw new Error("Index out of bounds");
+          }
+
+          if (val === 0) {
+            delete this.data[i]; // Don't store zeros
+          } else {
+            this.data[i] = val;
+          }
+        }
+
+        get(i) {
+          if (i < 0 || i >= this.size) {
+            throw new Error("Index out of bounds");
+          }
+
+          return this.data[i] || 0; // Return stored value or 0 by default
+        }
+      }
+      const arr = [0, 0, 5, 0, 0, 9, 0];
+      const sparse = new SparseArray(arr, arr.length);
+
+      console.log(sparse.get(2)); // 5
+      console.log(sparse.get(3)); // 0
+
+      sparse.set(3, 7); // Now index 3 has 7
+      console.log(sparse.get(3)); // 7
+
+      sparse.set(2, 0); // Removing value at index 2
+      console.log(sparse.get(2)); // 0
+    </script>
+  </body>
+</html>
