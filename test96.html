@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Let's represent an integer in a linked list format by having each node
+      represent a digit in the number. The nodes make up the number in reversed
+      order.
+    </title>
+  </head>
+  <body>
+    <script>
+      // Node structure
+      class ListNode {
+        constructor(value) {
+          this.val = value;
+          this.next = null;
+        }
+      }
+
+      // Function to add two linked lists
+      function addTwoNumbers(l1, l2) {
+        let dummy = new ListNode(0); // Start of the result list
+        let current = dummy;
+        let carry = 0;
+
+        // Loop until both lists are done and there's no carry left
+        while (l1 || l2 || carry) {
+          let val1 = l1 ? l1.val : 0; // Get value from l1 or 0
+          let val2 = l2 ? l2.val : 0; // Get value from l2 or 0
+
+          let sum = val1 + val2 + carry; // Add the digits and carry
+          carry = Math.floor(sum / 10); // Update carry
+
+          current.next = new ListNode(sum % 10); // Create new node with last digit
+          current = current.next;
+
+          if (l1) l1 = l1.next; // Move to next node
+          if (l2) l2 = l2.next;
+        }
+
+        return dummy.next; // Return the result list (skip dummy head)
+      }
+      // Create a linked list from an array
+      function createList(arr) {
+        let dummy = new ListNode(0);
+        let current = dummy;
+        for (let num of arr) {
+          current.next = new ListNode(num);
+          current = current.next;
+        }
+        return dummy.next;
+      }
+
+      // Print a linked list
+      function printList(head) {
+        let result = [];
+        while (head) {
+          result.push(head.val);
+          head = head.next;
+        }
+        console.log(result.join(" -> "));
+      }
+
+      // Test it
+      let l1 = createList([2, 4, 3]); // 342
+      let l2 = createList([5, 6, 4]); // 465
+
+      let result = addTwoNumbers(l1, l2); // 807 -> 7 -> 0 -> 8
+      printList(result);
+    </script>
+  </body>
+</html>
