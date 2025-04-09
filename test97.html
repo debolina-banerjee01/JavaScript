@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implement a 2D iterator class. It will be initialized with an array of arrays, and should implement the following methods:
+
+        next(): returns the next element in the array of arrays. If there are no more elements, raise an exception.
+        has_next(): returns whether or not the iterator still has elements left.</title>
+</head>
+<body>
+    <script>
+     class TwoDIterator {
+  constructor(vec) {
+    this.vec = vec;
+    this.row = 0;
+    this.col = 0;
+    this._advanceToNext();
+  }
+
+  // Private method to move to the next available element
+  _advanceToNext() {
+    while (this.row < this.vec.length && this.col >= this.vec[this.row].length) {
+      this.row++;
+      this.col = 0;
+    }
+  }
+
+  has_next() {
+    this._advanceToNext();
+    return this.row < this.vec.length;
+  }
+
+  next() {
+    if (!this.has_next()) {
+      throw new Error("No more elements");
+    }
+    const value = this.vec[this.row][this.col];
+    this.col++;
+    return value;
+  }
+}
+
+// Example usage:
+const vec2d = [[1, 2], [], [3], [4, 5, 6]];
+const iterator = new TwoDIterator(vec2d);
+
+while (iterator.has_next()) {
+  console.log(iterator.next()); // Outputs: 1 2 3 4 5 6
+}
+
+    </script>
+</body>
+</html>
