@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an array of integers, return a new array where
+      each element in the new array is the number of smaller elements to the right of that element in the original input array</title>
+</head>
+<body>
+    <script>
+     class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.leftCount = 0;
+    this.count = 1;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function insert(node, val, smallerCount) {
+  if (!node) {
+    return { node: new TreeNode(val), count: smallerCount };
+  }
+
+  if (val === node.val) {
+    node.count++;
+    return { node, count: smallerCount + node.leftCount };
+  }
+
+  if (val < node.val) {
+    node.leftCount++;
+    const left = insert(node.left, val, smallerCount);
+    node.left = left.node;
+    return { node, count: left.count };
+  } else {
+    const right = insert(node.right, val, smallerCount + node.count + node.leftCount);
+    node.right = right.node;
+    return { node, count: right.count };
+  }
+}
+
+function countSmaller(nums) {
+  let result = [];
+  let root = null;
+
+  // Iterate from right to left
+  for (let i = nums.length - 1; i >= 0; i--) {
+    const inserted = insert(root, nums[i], 0);
+    result[i] = inserted.count;
+    root = inserted.node;
+  }
+
+  return result;
+}
+
+// Example usage
+const input = [5, 2, 6, 1];
+console.log(countSmaller(input)); // Output: [2, 1, 1, 0]
+
+    </script>
+</body>
+</html>
