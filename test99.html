@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given the root of a binary search tree, and a target K, return two nodes
+      in the tree whose sum equals K.
+    </title>
+  </head>
+  <body>
+    <script>
+      // TreeNode definition
+      class TreeNode {
+        constructor(val, left = null, right = null) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+        }
+      }
+
+      // Function to find two values that sum to target k
+      function findTarget(root, k) {
+        const set = new Set();
+
+        function dfs(node) {
+          if (!node) return null;
+
+          if (set.has(k - node.val)) {
+            return [k - node.val, node.val];
+          }
+
+          set.add(node.val);
+          return dfs(node.left) || dfs(node.right);
+        }
+
+        return dfs(root);
+      }
+
+      // Example BST:
+      //        5
+      //       / \
+      //      3   6
+      //     / \   \
+      //    2   4   7
+      const root = new TreeNode(
+        5,
+        new TreeNode(3, new TreeNode(2), new TreeNode(4)),
+        new TreeNode(6, null, new TreeNode(7))
+      );
+
+      // Example usage:
+      const target = 9;
+      const result = findTarget(root, target);
+
+      if (result) {
+        console.log(`Two values found: ${result[0]} and ${result[1]}`);
+      } else {
+        console.log("No two values found with the given sum.");
+      }
+    </script>
+  </body>
+</html>
