@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a set of closed intervals, find the smallest set of numbers that
+      covers all the intervals. If there are multiple smallest sets, return any
+      of them.
+    </title>
+  </head>
+  <body>
+    <script>
+      function findMinimumCoveringSet(intervals) {
+        // Step 1: Sort intervals by their end values
+        intervals.sort((a, b) => a[1] - b[1]);
+
+        const result = [];
+        let lastPoint = -Infinity;
+
+        for (const [start, end] of intervals) {
+          // Step 2: If lastPoint doesn't cover this interval, pick end of current interval
+          if (lastPoint < start) {
+            result.push(end);
+            lastPoint = end;
+          }
+        }
+
+        return result;
+      }
+
+      // Example usage:
+      const intervals = [
+        [0, 3],
+        [2, 6],
+        [3, 4],
+        [6, 9],
+      ];
+
+      const coverSet = findMinimumCoveringSet(intervals);
+      console.log("Minimum covering set:", coverSet);
+    </script>
+  </body>
+</html>
