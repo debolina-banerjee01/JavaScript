@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Given a real number n, find the square root of n</title>
+  </head>
+  <body>
+    <script>
+      function sqrt(n, precision = 1e-6) {
+        if (n < 0) return NaN; // square root of negative number is not real
+
+        let left = 0;
+        let right = n < 1 ? 1 : n; // for numbers between 0 and 1
+
+        while (right - left > precision) {
+          const mid = (left + right) / 2;
+          if (mid * mid < n) {
+            left = mid;
+          } else {
+            right = mid;
+          }
+        }
+
+        return (left + right) / 2;
+      }
+
+      console.log(sqrt(9)); // ~3
+      console.log(sqrt(2)); // ~1.4142
+      console.log(sqrt(0.25)); // ~0.5
+    </script>
+  </body>
+</html>
