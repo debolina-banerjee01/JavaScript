@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string s and a list of words words, where each word is the same
+      length, find all starting indices of substrings in s that is a
+      concatenation of every word in words exactly once
+    </title>
+  </head>
+  <body>
+    <script>
+      function findSubstring(s, words) {
+        if (words.length === 0 || s.length === 0) return [];
+
+        const wordLength = words[0].length;
+        const wordCount = words.length;
+        const totalLength = wordLength * wordCount;
+        const result = [];
+
+        const wordMap = {};
+        for (let word of words) {
+          wordMap[word] = (wordMap[word] || 0) + 1;
+        }
+
+        for (let i = 0; i <= s.length - totalLength; i++) {
+          const seen = {};
+          let j = 0;
+
+          while (j < wordCount) {
+            const wordStart = i + j * wordLength;
+            const word = s.substring(wordStart, wordStart + wordLength);
+
+            if (!wordMap[word]) break;
+
+            seen[word] = (seen[word] || 0) + 1;
+
+            if (seen[word] > wordMap[word]) break;
+
+            j++;
+          }
+
+          if (j === wordCount) {
+            result.push(i);
+          }
+        }
+
+        return result;
+      }
+
+      // Example usage:
+      console.log(findSubstring("dogcatcatcodecatdog", ["cat", "dog"])); // Output: [0, 13]
+      console.log(findSubstring("barfoobazbitbyte", ["dog", "cat"])); // Output: []
+    </script>
+  </body>
+</html>
