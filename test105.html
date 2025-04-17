@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>example of ad-hoc polymorphism</title>
+  </head>
+  <body>
+    <script>
+      function display(value) {
+        if (typeof value === "string") {
+          console.log("String: " + value);
+        } else if (typeof value === "number") {
+          console.log("Number: " + value);
+        } else if (Array.isArray(value)) {
+          console.log("Array: " + value.join(", "));
+        } else {
+          console.log("Unknown type");
+        }
+      }
+
+      display("Hello"); // Output: String: Hello
+      display(123); // Output: Number: 123
+      display([1, 2, 3]); // Output: Array: 1, 2, 3
+    </script>
+  </body>
+</html>
