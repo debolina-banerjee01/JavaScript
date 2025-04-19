@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtype polymorphism</title>
+</head>
+<body>
+    <script>
+     // Parent class
+class Animal {
+  speak() {
+    console.log("The animal makes a sound");
+  }
+}
+
+// Subclasses
+class Dog extends Animal {
+  speak() {
+    console.log("The dog barks");
+  }
+}
+
+class Cat extends Animal {
+  speak() {
+    console.log("The cat meows");
+  }
+}
+
+// Function that demonstrates polymorphism
+function makeAnimalSpeak(animal) {
+  animal.speak(); // Calls the appropriate method depending on the object
+}
+
+// Create instances
+const dog = new Dog();
+const cat = new Cat();
+
+// Even though makeAnimalSpeak expects an Animal,
+// it works correctly with Dog and Cat because of subtype polymorphism
+makeAnimalSpeak(dog); // Output: The dog barks
+makeAnimalSpeak(cat); // Output: The cat meows
+
+
+    </script>
+</body>
+</html>
