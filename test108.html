@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a linked list and a positive integer k, rotate the list to the right by k places</title>
+</head>
+<body>
+    <script>
+     
+     function ListNode(val, next = null) {
+    this.val = val;
+    this.next = next;
+}
+
+function rotateRight(head, k) {
+    if (!head || k === 0) return head;
+
+    // First, find the length of the list
+    let length = 1;
+    let tail = head;
+    while (tail.next) {
+        tail = tail.next;
+        length++;
+    }
+
+    // Normalize k if it's greater than the length
+    k = k % length;
+    if (k === 0) return head;
+
+    // Make the list circular
+    tail.next = head;
+
+    // Find the new tail: (length - k - 1)th node
+    let newTail = head;
+    for (let i = 0; i < length - k - 1; i++) {
+        newTail = newTail.next;
+    }
+
+    // Set the new head
+    const newHead = newTail.next;
+    newTail.next = null;
+
+    return newHead;
+}
+
+
+
+    </script>
+</body>
+</html>
