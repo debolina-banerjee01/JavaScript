@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Determine whether there exists a one-to-one character mapping from one string s1 to another s2</title>
+</head>
+<body>
+    <script>
+     
+     function hasOneToOneMapping(s1, s2) {
+    if (s1.length !== s2.length) return false;
+
+    const map = new Map();
+    const mappedValues = new Set();
+
+    for (let i = 0; i < s1.length; i++) {
+        const char1 = s1[i];
+        const char2 = s2[i];
+
+        if (map.has(char1)) {
+            if (map.get(char1) !== char2) {
+                return false; // Same char in s1 mapped to different chars in s2
+            }
+        } else {
+            if (mappedValues.has(char2)) {
+                return false; // char2 is already mapped by another char
+            }
+            map.set(char1, char2);
+            mappedValues.add(char2);
+        }
+    }
+
+    return true;
+}
+
+// Examples
+console.log(hasOneToOneMapping("abc", "bcd")); // true
+console.log(hasOneToOneMapping("foo", "bar")); // false
+
+
+
+
+    </script>
+</body>
+</html>
