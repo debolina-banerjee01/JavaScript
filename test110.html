@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alice wants to join her school's Probability Student Club. Membership dues are computed via one of two simple 
+        probabilistic games.
+
+        The first game: roll a die repeatedly. Stop rolling once you get a five followed by a six. Your number of rolls is the 
+        amount you pay, in dollars.
+        
+        The second game: same, except that the stopping condition is a five followed by a five.
+        
+        Which of the two games should Alice elect to play? Does it even matter?</title>
+</head>
+<body>
+    <script>
+     
+     function rollDie() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+
+function playGame(targetSequence) {
+  let rolls = 0;
+  let previous = 0;
+
+  while (true) {
+    const current = rollDie();
+    rolls++;
+
+    if (previous === targetSequence[0] && current === targetSequence[1]) {
+      break;
+    }
+
+    previous = current;
+  }
+
+  return rolls;
+}
+
+function simulateGames(targetSequence, simulations = 100000) {
+  let totalRolls = 0;
+
+  for (let i = 0; i < simulations; i++) {
+    totalRolls += playGame(targetSequence);
+  }
+
+  return totalRolls / simulations;
+}
+
+const simulations = 100000;
+const expectedGame1 = simulateGames([5, 6], simulations);
+const expectedGame2 = simulateGames([5, 5], simulations);
+
+console.log(`Expected rolls for Game 1 (5 then 6): ${expectedGame1.toFixed(4)}`);
+console.log(`Expected rolls for Game 2 (5 then 5): ${expectedGame2.toFixed(4)}`);
+
+if (expectedGame1 < expectedGame2) {
+  console.log("Alice should choose Game 1 (5 then 6) for a lower expected cost.");
+} else if (expectedGame2 < expectedGame1) {
+  console.log("Alice should choose Game 2 (5 then 5) for a lower expected cost.");
+} else {
+  console.log("Both games have the same expected cost. It doesn't matter which one Alice picks.");
+}
+
+
+
+
+    </script>
+</body>
+</html>
