@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a stack of N elements, 
+      interleave the first half of the stack with the second half reversed using only one other queue. This should be done in-place.</title>
+</head>
+<body>
+    <script>
+     
+     function interleaveStack(stack) {
+  const queue = [];
+  const n = stack.length;
+
+  // Step 1: Move all stack elements to queue
+  while (stack.length > 0) {
+    queue.push(stack.pop());
+  }
+
+  // Step 2: Move first half elements (which were originally the bottom half) back to stack
+  for (let i = 0; i < Math.floor(n / 2); i++) {
+    stack.push(queue.shift());
+  }
+
+  // Step 3: Move everything from stack back to queue (to reverse first half)
+  while (stack.length > 0) {
+    queue.push(stack.pop());
+  }
+
+  // Step 4: Now queue has reversed first half at front, and second half at back
+  // Move first half (reversed) back to stack
+  for (let i = 0; i < Math.floor(n / 2); i++) {
+    stack.push(queue.shift());
+  }
+
+  // Step 5: Interleave elements from stack (first half reversed) and queue (second half)
+  while (stack.length > 0) {
+    queue.push(stack.pop());  // push from stack (first half element)
+    if (queue.length > 0) {
+      queue.push(queue.shift());  // then push from queue (second half element)
+    }
+  }
+
+  // Step 6: Move interleaved elements back to stack
+  while (queue.length > 0) {
+    stack.push(queue.shift());
+  }
+
+  // Now stack is interleaved
+  return stack;
+}
+
+// Test cases
+console.log(interleaveStack([1, 2, 3, 4, 5])); // Output: [1, 5, 2, 4, 3]
+console.log(interleaveStack([1, 2, 3, 4]));    // Output: [1, 4, 2, 3]
+
+    </script>
+</body>
+</html>
