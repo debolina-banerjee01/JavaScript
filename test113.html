@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a string, split it into as few strings as possible such that each string is a palindrome.</title>
+</head>
+<body>
+    <script>
+     
+    
+    
+     function isPalindrome(str) {
+  return str === str.split('').reverse().join('');
+}
+
+function minPalindromePartition(s) {
+  let result = [];
+
+  function backtrack(start, path) {
+    if (start === s.length) {
+      if (result.length === 0 || path.length < result.length) {
+        result = [...path];
+      }
+      return;
+    }
+
+    for (let end = start + 1; end <= s.length; end++) {
+      const substring = s.substring(start, end);
+      if (isPalindrome(substring)) {
+        path.push(substring);
+        backtrack(end, path);
+        path.pop(); // backtrack
+      }
+    }
+  }
+
+  backtrack(0, []);
+  return result;
+}
+
+// Example usage:
+console.log(minPalindromePartition("racecarannakayak")); // ["racecar", "anna", "kayak"]
+console.log(minPalindromePartition("abc"));              // ["a", "b", "c"]
+
+
+   
+
+
+    </script>
+</body>
+</html>
