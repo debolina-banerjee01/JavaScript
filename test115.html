@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given n numbers, find the greatest common denominator between them.
+    </title>
+  </head>
+  <body>
+    <script>
+      // Function to find GCD of two numbers
+      function gcd(a, b) {
+        if (b === 0) {
+          return a;
+        }
+        return gcd(b, a % b);
+      }
+
+      // Function to find GCD of an array of numbers
+      function findGCD(arr) {
+        return arr.reduce((acc, num) => gcd(acc, num));
+      }
+
+      // Example usage:
+      const numbers = [48, 18, 30];
+      const result = findGCD(numbers);
+
+      console.log("GCD is:", result);
+    </script>
+  </body>
+</html>
