@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given two rectangles on a 2D graph, return the area of their intersection.
+    </title>
+  </head>
+  <body>
+    <script>
+      function intersectionArea(rect1, rect2) {
+        // Each rectangle is represented as { x1, y1, x2, y2 }
+        // where (x1, y1) is bottom-left and (x2, y2) is top-right.
+
+        const xOverlap = Math.max(
+          0,
+          Math.min(rect1.x2, rect2.x2) - Math.max(rect1.x1, rect2.x1)
+        );
+        const yOverlap = Math.max(
+          0,
+          Math.min(rect1.y2, rect2.y2) - Math.max(rect1.y1, rect2.y1)
+        );
+
+        return xOverlap * yOverlap;
+      }
+
+      // Example usage:
+      const rect1 = { x1: 0, y1: 0, x2: 4, y2: 4 };
+      const rect2 = { x1: 2, y1: 2, x2: 6, y2: 6 };
+
+      console.log(intersectionArea(rect1, rect2)); // Output: 4
+    </script>
+  </body>
+</html>
