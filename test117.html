@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of positive integers, divide the array into two subsets
+      such that the difference between the sum of the subsets is as small as
+      possible.
+    </title>
+  </head>
+  <body>
+    <script>
+      function minSubsetSumDifference(arr) {
+        const totalSum = arr.reduce((a, b) => a + b, 0);
+        const n = arr.length;
+        const half = Math.floor(totalSum / 2);
+
+        // dp[i] is true if a subset with sum i is possible
+        const dp = new Array(half + 1).fill(false);
+        dp[0] = true;
+
+        for (let num of arr) {
+          for (let j = half; j >= num; j--) {
+            dp[j] = dp[j] || dp[j - num];
+          }
+        }
+
+        // Find the largest j such that dp[j] is true
+        let s1 = 0;
+        for (let j = half; j >= 0; j--) {
+          if (dp[j]) {
+            s1 = j;
+            break;
+          }
+        }
+
+        const s2 = totalSum - s1;
+        return Math.abs(s2 - s1); // Minimum difference
+      }
+
+      // Example usage:
+      const arr = [1, 6, 11, 5];
+      console.log(minSubsetSumDifference(arr)); // Output: 1
+    </script>
+  </body>
+</html>
