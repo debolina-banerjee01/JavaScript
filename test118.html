@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement a URL shortener with the following methods: shorten(url), which
+      shortens the url into a six-character alphanumeric string, such as zLg6wl.
+      restore(short), which expands the shortened string into the original url.
+      If no such shortened string exists, return null.
+    </title>
+  </head>
+  <body>
+    <script>
+      class URLShortener {
+        constructor() {
+          this.urlMap = new Map(); // short -> original
+          this.reverseMap = new Map(); // original -> short
+          this.characters =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        }
+
+        generateShortCode() {
+          let code = "";
+          for (let i = 0; i < 6; i++) {
+            const randomIndex = Math.floor(
+              Math.random() * this.characters.length
+            );
+            code += this.characters[randomIndex];
+          }
+          return code;
+        }
+
+        shorten(url) {
+          // If already shortened, return existing short code
+          if (this.reverseMap.has(url)) {
+            return this.reverseMap.get(url);
+          }
+
+          let shortCode = this.generateShortCode();
+          // Ensure uniqueness
+          while (this.urlMap.has(shortCode)) {
+            shortCode = this.generateShortCode();
+          }
+
+          this.urlMap.set(shortCode, url);
+          this.reverseMap.set(url, shortCode);
+          return shortCode;
+        }
+
+        restore(shortCode) {
+          return this.urlMap.get(shortCode) || null;
+        }
+      }
+
+      // Example usage:
+      const shortener = new URLShortener();
+
+      const short = shortener.shorten("https://www.example.com");
+      console.log("Shortened:", short);
+
+      const original = shortener.restore(short);
+      console.log("Restored:", original);
+    </script>
+  </body>
+</html>
