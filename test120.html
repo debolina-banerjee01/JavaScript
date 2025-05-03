@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string s and an integer k, break up the string into multiple lines
+      such that each line has a length of k or less. You must break it up so
+      that words don't break across lines. Each line has to have the maximum
+      possible amount of words. If there's no way to break the text up, then
+      return null.
+    </title>
+  </head>
+  <body>
+    <script>
+      function breakStringIntoLines(s, k) {
+        const words = s.split(" ");
+        const lines = [];
+        let currentLine = "";
+
+        for (const word of words) {
+          // If any word is longer than k, we cannot break it properly
+          if (word.length > k) return null;
+
+          if (currentLine.length === 0) {
+            currentLine = word;
+          } else if (currentLine.length + 1 + word.length <= k) {
+            currentLine += " " + word;
+          } else {
+            lines.push(currentLine);
+            currentLine = word;
+          }
+        }
+
+        if (currentLine.length > 0) {
+          lines.push(currentLine);
+        }
+
+        return lines;
+      }
+      const s = "The quick brown fox jumps over the lazy dog";
+      const k = 10;
+      console.log(breakStringIntoLines(s, k));
+    </script>
+  </body>
+</html>
