@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The power set of a set is the set of all its subsets. Write a function
+      that, given a set, generates its power set.
+    </title>
+  </head>
+  <body>
+    <script>
+      function getPowerSet(set) {
+        const powerSet = [[]];
+
+        for (const elem of set) {
+          const currentLength = powerSet.length;
+          for (let i = 0; i < currentLength; i++) {
+            powerSet.push([...powerSet[i], elem]);
+          }
+        }
+
+        return powerSet;
+      }
+
+      // Example usage:
+      const mySet = [1, 2, 3];
+      const result = getPowerSet(mySet);
+      console.log(result);
+    </script>
+  </body>
+</html>
