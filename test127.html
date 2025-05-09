@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given the root of a binary tree, find the most frequent subtree sum. The
+      subtree sum of a node is the sum of all values under a node, including the
+      node itself.
+    </title>
+  </head>
+  <body>
+    <script>
+      function findFrequentTreeSum(root) {
+        if (!root) return [];
+
+        const sumFrequency = new Map();
+        let maxFreq = 0;
+
+        function postOrder(node) {
+          if (!node) return 0;
+
+          const leftSum = postOrder(node.left);
+          const rightSum = postOrder(node.right);
+          const totalSum = node.val + leftSum + rightSum;
+
+          const freq = (sumFrequency.get(totalSum) || 0) + 1;
+          sumFrequency.set(totalSum, freq);
+
+          maxFreq = Math.max(maxFreq, freq);
+          return totalSum;
+        }
+
+        postOrder(root);
+
+        const result = [];
+        for (let [sum, freq] of sumFrequency.entries()) {
+          if (freq === maxFreq) {
+            result.push(sum);
+          }
+        }
+
+        return result;
+      }
+      // Helper function to build a TreeNode
+      function TreeNode(val, left = null, right = null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+      }
+
+      const root = new TreeNode(5, new TreeNode(2), new TreeNode(-3));
+
+      console.log(findFrequentTreeSum(root)); // Output could be [2, -3, 4]
+    </script>
+  </body>
+</html>
