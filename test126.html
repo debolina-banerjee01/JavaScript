@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Let A be an N by M matrix in which every row and every column is sorted.
+      Given i1, j1, i2, and j2, compute the number of elements of M smaller than
+      M[i1, j1] and larger than M[i2, j2].
+    </title>
+  </head>
+  <body>
+    <script>
+      function countElements(matrix, i1, j1, i2, j2) {
+        const N = matrix.length;
+        const M = matrix[0].length;
+        const targetSmall = matrix[i1][j1];
+        const targetLarge = matrix[i2][j2];
+
+        let countSmaller = 0;
+        let countLarger = 0;
+
+        for (let i = 0; i < N; i++) {
+          countSmaller += countLessThan(matrix[i], targetSmall);
+          countLarger += countGreaterThan(matrix[i], targetLarge);
+        }
+
+        return {
+          smallerThanTarget: countSmaller,
+          greaterThanTarget: countLarger,
+        };
+      }
+
+      // Binary search for number of elements less than target
+      function countLessThan(row, target) {
+        let left = 0;
+        let right = row.length;
+
+        while (left < right) {
+          let mid = Math.floor((left + right) / 2);
+          if (row[mid] < target) {
+            left = mid + 1;
+          } else {
+            right = mid;
+          }
+        }
+
+        return left;
+      }
+
+      // Binary search for number of elements greater than target
+      function countGreaterThan(row, target) {
+        let left = 0;
+        let right = row.length;
+
+        while (left < right) {
+          let mid = Math.floor((left + right) / 2);
+          if (row[mid] <= target) {
+            left = mid + 1;
+          } else {
+            right = mid;
+          }
+        }
+
+        return row.length - left;
+      }
+      //example
+      const matrix = [
+        [1, 3, 5],
+        [2, 6, 9],
+        [3, 6, 10],
+      ];
+
+      const result = countElements(matrix, 1, 2, 0, 0);
+      console.log(result); // Output: { smallerThanTarget: X, greaterThanTarget: Y }
+    </script>
+  </body>
+</html>
