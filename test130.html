@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a list of integers S and a target number k, write a function that
+      returns a subset of S that adds up to k. If such a subset cannot be made,
+      then return null. Integers can appear more than once in the list. You may
+      assume all numbers in the list are positive.
+    </title>
+  </head>
+  <body>
+    <script>
+      function subsetSum(S, k) {
+        function helper(index, currentSubset, currentSum) {
+          if (currentSum === k) {
+            return currentSubset;
+          }
+
+          if (currentSum > k || index === S.length) {
+            return null;
+          }
+
+          // Include the current number
+          let withCurrent = helper(
+            index + 1,
+            [...currentSubset, S[index]],
+            currentSum + S[index]
+          );
+          if (withCurrent) return withCurrent;
+
+          // Exclude the current number
+          return helper(index + 1, currentSubset, currentSum);
+        }
+
+        return helper(0, [], 0);
+      }
+      //example
+      console.log(subsetSum([2, 4, 6, 10], 16)); // might return [6, 10] or [2, 4, 10]
+      console.log(subsetSum([1, 2, 5], 10)); // returns null
+    </script>
+  </body>
+</html>
