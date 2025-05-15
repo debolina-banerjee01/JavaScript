@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are given an array of arrays of integers, where each array corresponds to a row in a triangle of numbers. 
+      We define a path in the triangle to start at the top and go down one row at a time to an adjacent value, eventually ending with an entry on the bottom row.
+    Write a program that returns the weight of the maximum weight path.</title>
+</head>
+<body>
+    <script>
+function maximumPathSum(triangle) {
+  // Start from the second to last row and go upwards
+  for (let row = triangle.length - 2; row >= 0; row--) {
+    for (let col = 0; col < triangle[row].length; col++) {
+      // Update the current cell by adding the max of the two adjacent numbers in the row below
+      triangle[row][col] += Math.max(triangle[row + 1][col], triangle[row + 1][col + 1]);
+    }
+  }
+
+  // The top element now contains the maximum total path sum
+  return triangle[0][0];
+}
+
+// Example usage
+const triangle = [[1], [2, 3], [1, 5, 1]];
+console.log(maximumPathSum(triangle));  // Output: 9
+
+    </script>
+</body>
+</html>
