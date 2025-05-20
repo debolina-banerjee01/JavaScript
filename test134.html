@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement a URL shortener with the following methods: shorten(url), which
+      shortens the url into a six-character alphanumeric string, such as zLg6wl.
+      restore(short), which expands the shortened string into the original url.
+      If no such shortened string exists, return null.
+    </title>
+  </head>
+  <body>
+    <script>
+      class URLShortener {
+        constructor() {
+          this.urlToShort = new Map(); // Original URL -> short code
+          this.shortToUrl = new Map(); // Short code -> original URL
+          this.charset =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+          this.codeLength = 6;
+        }
+
+        // Generate a random 6-character alphanumeric string
+        generateShortCode() {
+          let code = "";
+          for (let i = 0; i < this.codeLength; i++) {
+            const randIndex = Math.floor(Math.random() * this.charset.length);
+            code += this.charset[randIndex];
+          }
+          return code;
+        }
+
+        shorten(url) {
+          // If already shortened, return existing code
+          if (this.urlToShort.has(url)) {
+            return this.urlToShort.get(url);
+          }
+
+          let shortCode;
+          do {
+            shortCode = this.generateShortCode();
+          } while (this.shortToUrl.has(shortCode)); // Ensure uniqueness
+
+          this.urlToShort.set(url, shortCode);
+          this.shortToUrl.set(shortCode, url);
+
+          return shortCode;
+        }
+
+        restore(short) {
+          return this.shortToUrl.get(short) || null;
+        }
+      }
+
+      // Example usage:
+      const shortener = new URLShortener();
+
+      const short = shortener.shorten("https://www.example.com");
+      console.log("Shortened:", short);
+
+      const original = shortener.restore(short);
+      console.log("Restored:", original);
+
+      // Try restoring a fake short code
+      console.log(shortener.restore("abcdef")); // null
+    </script>
+  </body>
+</html>
