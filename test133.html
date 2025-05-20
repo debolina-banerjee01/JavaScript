@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given a list of data entries that represent entries and exits of
+      groups of people into a building. An entry looks like this: {"timestamp":
+      1526579928, count: 3, "type": "enter"} 
+      This means 3 people entered the
+      building. An exit looks like this: {"timestamp": 1526580382, count: 2,
+      "type": "exit"}. 
+      Find the busiest period in the building, that is, the
+      time with the most people in the building. Return it as a pair of (start,
+      end) timestamps. You can assume the building always starts off and ends up
+      empty, i.e. with 0 people inside.
+    </title>
+  </head>
+  <body>
+    <script>
+      function findBusiestPeriod(data) {
+        // Step 1: Sort by timestamp
+        data.sort((a, b) => a.timestamp - b.timestamp);
+
+        let maxPeople = 0;
+        let currentPeople = 0;
+        let busiestStart = null;
+        let busiestEnd = null;
+
+        for (let i = 0; i < data.length; i++) {
+          const entry = data[i];
+
+          // Update currentPeople
+          if (entry.type === "enter") {
+            currentPeople += entry.count;
+          } else if (entry.type === "exit") {
+            currentPeople -= entry.count;
+          }
+
+          // Check against next timestamp if it exists
+          const nextTimestamp = data[i + 1]?.timestamp;
+
+          if (currentPeople > maxPeople) {
+            maxPeople = currentPeople;
+            busiestStart = entry.timestamp;
+            busiestEnd = nextTimestamp ?? entry.timestamp; // if no next timestamp, use current
+          }
+        }
+
+        return [busiestStart, busiestEnd];
+      }
+
+      // Example usage
+      const logs = [
+        { timestamp: 1526579928, count: 3, type: "enter" },
+        { timestamp: 1526580382, count: 2, type: "exit" },
+        { timestamp: 1526581123, count: 5, type: "enter" },
+        { timestamp: 1526581256, count: 3, type: "exit" },
+      ];
+
+      console.log(findBusiestPeriod(logs));
+      // Output: [1526581123, 1526581256] (for this example)
+    </script>
+  </body>
+</html>
