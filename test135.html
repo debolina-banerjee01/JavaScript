@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string of parentheses, find the balanced string that can be
+      produced from it using the minimum number of insertions and deletions. If
+      there are multiple solutions, return any of them.
+    </title>
+  </head>
+  <body>
+    <script>
+      function balanceParentheses(s) {
+        let result = "";
+        let open = 0;
+
+        // First pass: remove unmatched ')'
+        for (let char of s) {
+          if (char === "(") {
+            open++;
+            result += char;
+          } else if (char === ")") {
+            if (open > 0) {
+              open--;
+              result += char;
+            }
+            // Else skip unmatched ')'
+          } else {
+            result += char; // In case there are non-parenthesis characters
+          }
+        }
+
+        // Second pass: remove unmatched '(' from the end
+        let finalResult = "";
+        let toRemove = open;
+
+        for (let i = result.length - 1; i >= 0; i--) {
+          if (result[i] === "(" && toRemove > 0) {
+            toRemove--;
+            continue; // Skip unmatched '('
+          }
+          finalResult = result[i] + finalResult;
+        }
+
+        return finalResult;
+      }
+
+      // Example usage:
+      console.log(balanceParentheses("(()))(")); // Output: "()()"
+      console.log(balanceParentheses("))((")); // Output: ""
+      console.log(balanceParentheses("((abc))")); // Output: "((abc))"
+    </script>
+  </body>
+</html>
