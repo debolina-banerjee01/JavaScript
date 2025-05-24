@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      A Collatz sequence in mathematics can be defined as follows. Starting with any positive integer: 
+      if n is even, the next number in the sequence is n /2 if n is odd, the next number in the sequence is 3n + 1 It is conjectured
+      that every such sequence eventually reaches the number 1. Test this conjecture.
+    </title>
+  </head>
+  <body>
+    <script>
+      function collatzSequence(n) {
+        if (n <= 0 || !Number.isInteger(n)) {
+          console.log("Please enter a positive integer.");
+          return;
+        }
+
+        const sequence = [n];
+
+        while (n !== 1) {
+          if (n % 2 === 0) {
+            n = n / 2;
+          } else {
+            n = 3 * n + 1;
+          }
+          sequence.push(n);
+        }
+
+        console.log("Collatz sequence:", sequence.join(" → "));
+      }
+
+      // Test with a sample number
+      collatzSequence(13);
+    </script>
+  </body>
+</html>
