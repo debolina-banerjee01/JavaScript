@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Spreadsheets often use this alphabetical encoding for its columns: "A", "B", "C", ..., "AA", "AB", ..., "ZZ", "AAA", "AAB", .... 
+      Given a column number, return its alphabetical column id. For example, given 1, return "A". Given 27, return "AA".
+    </title>
+  </head>
+  <body>
+    <script>
+      function numberToColumnName(columnNumber) {
+        let columnName = "";
+        while (columnNumber > 0) {
+          columnNumber--; // Adjust for 0-based indexing
+          const remainder = columnNumber % 26;
+          columnName = String.fromCharCode(65 + remainder) + columnName;
+          columnNumber = Math.floor(columnNumber / 26);
+        }
+        return columnName;
+      }
+
+      // Example usage:
+      console.log(numberToColumnName(1)); // Output: "A"
+      console.log(numberToColumnName(27)); // Output: "AA"
+      console.log(numberToColumnName(702)); // Output: "ZZ"
+      console.log(numberToColumnName(703)); // Output: "AAA"
+    </script>
+  </body>
+</html>
