@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string and a pattern, find the starting indices of all occurrences
+      of the pattern in the string.
+    </title>
+  </head>
+  <body>
+    <script>
+      function findPatternIndices(text, pattern) {
+        let indices = [];
+        let index = text.indexOf(pattern);
+
+        while (index !== -1) {
+          indices.push(index);
+          index = text.indexOf(pattern, index + 1);
+        }
+
+        return indices;
+      }
+
+      // Example usage
+      const text = "abracadabra";
+      const pattern = "abr";
+      console.log(findPatternIndices(text, pattern)); // Output: [0, 7]
+    </script>
+  </body>
+</html>
