@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an integer n, return the length of the longest consecutive run of 1s
+      in its binary representation.
+    </title>
+  </head>
+  <body>
+    <script>
+      function longestConsecutiveOnes(n) {
+        const binary = n.toString(2); // Convert number to binary string
+        const onesGroups = binary.split("0"); // Split by 0 to get runs of 1s
+        let maxLength = 0;
+
+        for (let group of onesGroups) {
+          if (group.length > maxLength) {
+            maxLength = group.length;
+          }
+        }
+
+        return maxLength;
+      }
+
+      // Example usage:
+      console.log(longestConsecutiveOnes(156)); // Output: 3
+    </script>
+  </body>
+</html>
