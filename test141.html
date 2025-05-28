@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string of digits, generate all possible valid IP address
+      combinations. IP addresses must follow the format A.B.C.D, where A, B, C,
+      and D are numbers between 0 and 255. Zero-prefixed numbers, such as 01 and
+      065, are not allowed, except for 0 itself
+    </title>
+  </head>
+  <body>
+    <script>
+      function restoreIpAddresses(s) {
+        const result = [];
+
+        function isValid(segment) {
+          if (segment.length > 1 && segment[0] === "0") return false;
+          const num = Number(segment);
+          return num >= 0 && num <= 255;
+        }
+
+        const n = s.length;
+        for (let i = 1; i < Math.min(4, n - 2); i++) {
+          for (let j = i + 1; j < Math.min(i + 4, n - 1); j++) {
+            for (let k = j + 1; k < Math.min(j + 4, n); k++) {
+              const A = s.slice(0, i);
+              const B = s.slice(i, j);
+              const C = s.slice(j, k);
+              const D = s.slice(k);
+
+              if ([A, B, C, D].every(isValid)) {
+                result.push(`${A}.${B}.${C}.${D}`);
+              }
+            }
+          }
+        }
+
+        return result;
+      }
+
+      // Example usage:
+      const input = "2542540123";
+      console.log(restoreIpAddresses(input)); // ['254.25.40.123', '254.254.0.123']
+    </script>
+  </body>
+</html>
