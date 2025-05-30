@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      We say a number is sparse if there are no adjacent ones in its binary
+      representation. For a given input N, find the smallest sparse number
+      greater than or equal to N. Do this in faster than O(N log N) time.
+    </title>
+  </head>
+  <body>
+    <script>
+      function nextSparse(n) {
+        let bin = [];
+
+        // Step 1: Store binary representation of n in reverse order
+        while (n > 0) {
+          bin.push(n & 1);
+          n = n >> 1;
+        }
+
+        bin.push(0); // Append a 0 at the end to handle edge case
+        let size = bin.length;
+
+        let lastFinal = 0;
+
+        // Step 2: Fix adjacent 1s
+        for (let i = 1; i < size - 1; i++) {
+          if (bin[i] === 1 && bin[i - 1] === 1 && bin[i + 1] !== 1) {
+            bin[i + 1] = 1;
+            for (let j = i; j >= lastFinal; j--) {
+              bin[j] = 0;
+            }
+            lastFinal = i + 1;
+          }
+        }
+
+        // Step 3: Reconstruct number from binary
+        let result = 0;
+        for (let i = 0; i < size; i++) {
+          if (bin[i] === 1) {
+            result += 1 << i;
+          }
+        }
+
+        return result;
+      }
+
+      // Example:
+      console.log(nextSparse(21)); // Output: 21
+      console.log(nextSparse(22)); // Output: 24
+    </script>
+  </body>
+</html>
