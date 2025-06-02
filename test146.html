@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an integer, find the next permutation of it in absolute order.
+    </title>
+  </head>
+  <body>
+    <script>
+      function nextPermutation(num) {
+        // Convert number to array of digits
+        let digits = num.toString().split("").map(Number);
+        let n = digits.length;
+
+        // Step 1: Find first decreasing digit from the right
+        let i = n - 2;
+        while (i >= 0 && digits[i] >= digits[i + 1]) {
+          i--;
+        }
+
+        if (i >= 0) {
+          // Step 2: Find the next larger digit on the right of i
+          let j = n - 1;
+          while (j > i && digits[j] <= digits[i]) {
+            j--;
+          }
+
+          // Step 3: Swap digits[i] and digits[j]
+          [digits[i], digits[j]] = [digits[j], digits[i]];
+        }
+
+        // Step 4: Reverse the subarray from i + 1 to end
+        let left = i + 1,
+          right = n - 1;
+        while (left < right) {
+          [digits[left], digits[right]] = [digits[right], digits[left]];
+          left++;
+          right--;
+        }
+
+        return parseInt(digits.join(""), 10);
+      }
+
+      // Example
+      console.log(nextPermutation(48975)); // Output: 49578
+    </script>
+  </body>
+</html>
