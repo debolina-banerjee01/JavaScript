@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand. 
+      Find the minimum element in O(log N) time. You may assume the array does not contain duplicates.</title>
+</head>
+<body>
+    <script>
+function findMin(nums) {
+    let left = 0;
+    let right = nums.length - 1;
+
+    // If the array is not rotated (e.g., [1, 2, 3, 4])
+    if (nums[left] < nums[right]) return nums[left];
+
+    while (left < right) {
+        let mid = Math.floor((left + right) / 2);
+
+        // If mid element is greater than the rightmost, min must be to the right
+        if (nums[mid] > nums[right]) {
+            left = mid + 1;
+        } else {
+            // Else, the min could be at mid or to the left
+            right = mid;
+        }
+    }
+
+    return nums[left];
+}
+console.log(findMin([5, 7, 10, 3, 4])); // Output: 3
+console.log(findMin([3, 4, 5, 1, 2]));  // Output: 1
+console.log(findMin([1, 2, 3, 4, 5]));  // Output: 1 (no rotation)
+
+
+    </script>
+</body>
+</html>
