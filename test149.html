@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku is a puzzle where you're given a partially-filled 9 by 9 grid with digits. The objective is to fill the grid with the constraint that every row, 
+      column, and box (3 by 3 subgrid) must contain all of the digits from 1 to 9.</title>
+</head>
+<body>
+    <script>
+function solveSudoku(board) {
+    function isValid(board, row, col, num) {
+        const boxRow = Math.floor(row / 3) * 3;
+        const boxCol = Math.floor(col / 3) * 3;
+
+        for (let i = 0; i < 9; i++) {
+            if (board[row][i] === num) return false;       // check row
+            if (board[i][col] === num) return false;       // check column
+            if (board[boxRow + Math.floor(i / 3)][boxCol + i % 3] === num)
+                return false;                              // check 3x3 box
+        }
+
+        return true;
+    }
+
+    function backtrack() {
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                if (board[row][col] === 0) { // empty cell
+                    for (let num = 1; num <= 9; num++) {
+                        if (isValid(board, row, col, num)) {
+                            board[row][col] = num;
+
+                            if (backtrack()) return true; // continue
+                            board[row][col] = 0;          // backtrack
+                        }
+                    }
+                    return false; // no valid number found
+                }
+            }
+        }
+        return true; // puzzle solved
+    }
+
+    backtrack();
+    return board;
+}
+let puzzle = [
+    [5, 1, 7, 6, 0, 0, 0, 3, 4],
+    [2, 8, 9, 0, 0, 4, 0, 0, 0],
+    [3, 4, 6, 2, 0, 5, 0, 9, 0],
+    [6, 0, 2, 0, 0, 0, 0, 1, 0],
+    [0, 3, 8, 0, 0, 6, 0, 4, 7],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 9, 0, 0, 0, 0, 0, 7, 8],
+    [7, 0, 3, 4, 0, 0, 5, 6, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+];
+
+let solved = solveSudoku(puzzle);
+console.table(solved);
+
+
+    </script>
+</body>
+</html>
