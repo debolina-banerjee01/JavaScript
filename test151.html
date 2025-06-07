@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a sorted array, find the smallest positive integer that is not the sum of a subset of the array.</title>
+</head>
+<body>
+    <script>
+ function findSmallestNonSum(arr) {
+    let res = 1;
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] <= res) {
+            res += arr[i];
+        } else {
+            break;
+        }
+    }
+
+    return res;
+}
+
+// Example usage:
+console.log(findSmallestNonSum([1, 2, 3, 10])); // Output: 7
+
+
+    </script>
+</body>
+</html>
