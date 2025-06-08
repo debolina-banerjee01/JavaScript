@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      There are N prisoners standing in a circle, waiting to be executed. The
+      executions are carried out starting with the kth person, and removing
+      every successive kth person going clockwise until there is no one left.
+      Given N and k, write an algorithm to determine where a prisoner should
+      stand in order to be the last survivor.
+    </title>
+  </head>
+  <body>
+    <script>
+      function josephus(N, k) {
+        let survivor = 0;
+        for (let i = 2; i <= N; i++) {
+          survivor = (survivor + k) % i;
+        }
+        return survivor + 1; // convert to 1-based indexing
+      }
+
+      // Example:
+      console.log(josephus(5, 2)); // Output: 3
+
+      //When k = 2, the problem has a special binary pattern.
+      function josephusPowerOfTwo(N) {
+        let power = 1;
+        while (power * 2 <= N) {
+          power *= 2;
+        }
+        return 2 * (N - power) + 1;
+      }
+
+      // Example:
+      console.log(josephusPowerOfTwo(5)); // Output: 3
+    </script>
+  </body>
+</html>
