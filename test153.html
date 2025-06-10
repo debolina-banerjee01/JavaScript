@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an undirected graph represented as an adjacency matrix and an integer k, write a function to determine whether each vertex in the 
+      graph can be colored such that no two adjacent vertices share the same color using at most k colors.
+    </title>
+  </head>
+  <body>
+    <script>
+      function canColorGraph(graph, k) {
+        const V = graph.length;
+        const colors = Array(V).fill(0); // 0 means uncolored
+
+        function isSafe(vertex, c) {
+          for (let i = 0; i < V; i++) {
+            if (graph[vertex][i] === 1 && colors[i] === c) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+        function colorGraph(vertex) {
+          if (vertex === V) return true;
+
+          for (let c = 1; c <= k; c++) {
+            if (isSafe(vertex, c)) {
+              colors[vertex] = c;
+              if (colorGraph(vertex + 1)) return true;
+              colors[vertex] = 0; // backtrack
+            }
+          }
+          return false;
+        }
+
+        return colorGraph(0);
+      }
+      // 4 vertices, adjacency matrix for a square (cycle of 4 nodes)
+      const graph = [
+        [0, 1, 0, 1],
+        [1, 0, 1, 0],
+        [0, 1, 0, 1],
+        [1, 0, 1, 0],
+      ];
+
+      console.log(canColorGraph(graph, 2)); // true (2-colorable)
+      console.log(canColorGraph(graph, 1)); // false (not 1-colorable)
+    </script>
+  </body>
+</html>
