@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a list of numbers, create an algorithm that arranges them in order
+      to form the largest possible integer.
+    </title>
+  </head>
+  <body>
+    <script>
+      function largestNumber(nums) {
+        // Convert numbers to strings for comparison
+        nums = nums.map(String);
+
+        // Custom sort: compare which concatenation gives a larger result
+        nums.sort((a, b) => (b + a).localeCompare(a + b));
+
+        // Edge case: if the largest number is '0', the result is '0'
+        if (nums[0] === "0") return "0";
+
+        // Join and return the result
+        return nums.join("");
+      }
+
+      // Example usage:
+      const nums = [10, 7, 76, 415];
+      console.log(largestNumber(nums)); // Output: "77641510"
+    </script>
+  </body>
+</html>
