@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string with repeated characters, rearrange the string so that no
+      two adjacent characters are the same. If this is not possible, return
+      none.
+    </title>
+  </head>
+  <body>
+    <script>
+      function rearrangeString(str) {
+        const freqMap = new Map();
+
+        // Count frequency of each character
+        for (let char of str) {
+          freqMap.set(char, (freqMap.get(char) || 0) + 1);
+        }
+
+        // Create a max heap (using an array and sort)
+        let heap = Array.from(freqMap.entries());
+        heap.sort((a, b) => b[1] - a[1]); // sort by frequency descending
+
+        let result = "";
+        let prev = null;
+
+        while (heap.length > 0) {
+          let [char, count] = heap.shift(); // get the highest freq char
+
+          // Append to result
+          result += char;
+          count--;
+
+          // If previous char still has count, push it back into the heap
+          if (prev) {
+            heap.push(prev);
+          }
+
+          // Prepare next previous if count > 0
+          prev = count > 0 ? [char, count] : null;
+
+          // Re-sort the heap
+          heap.sort((a, b) => b[1] - a[1]);
+        }
+
+        // Final check: if the result length matches the input, return it
+        return result.length === str.length ? result : null;
+      }
+
+      // Test cases
+      console.log(rearrangeString("aaabbc")); // e.g., "ababac"
+      console.log(rearrangeString("aaab")); // null
+    </script>
+  </body>
+</html>
