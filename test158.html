@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement a PrefixMapSum class with the following methods: 
+      insert(key: str, value: int): Set a given key's value in the map. If the key already exists, overwrite the value. 
+      sum(prefix: str): Return the sum of all values of keys that begin with a given prefix.
+    </title>
+  </head>
+  <body>
+    <script>
+      class PrefixMapSum {
+        constructor() {
+          this.map = new Map(); // Stores key -> value
+        }
+
+        insert(key, value) {
+          this.map.set(key, value);
+        }
+
+        sum(prefix) {
+          let total = 0;
+          for (let [key, value] of this.map.entries()) {
+            if (key.startsWith(prefix)) {
+              total += value;
+            }
+          }
+          return total;
+        }
+      }
+
+      // Example usage:
+      const prefixMap = new PrefixMapSum();
+      prefixMap.insert("apple", 3);
+      prefixMap.insert("app", 2);
+      prefixMap.insert("apricot", 4);
+      prefixMap.insert("apple", 5); // Overwrites value
+
+      console.log(prefixMap.sum("app")); // Output: 7 (5 from "apple" + 2 from "app")
+      console.log(prefixMap.sum("apr")); // Output: 4
+      console.log(prefixMap.sum("a")); // Output: 11
+    </script>
+  </body>
+</html>
