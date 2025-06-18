@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of numbers of length N, find both the minimum and maximum
+      using less than 2 * (N - 2) comparisons.
+    </title>
+  </head>
+  <body>
+    <script>
+      function findMinAndMax(arr) {
+        const n = arr.length;
+        if (n === 0) return null;
+
+        let min, max;
+        let i = 0;
+
+        // If length is even, initialize with first two elements
+        if (n % 2 === 0) {
+          if (arr[0] < arr[1]) {
+            min = arr[0];
+            max = arr[1];
+          } else {
+            min = arr[1];
+            max = arr[0];
+          }
+          i = 2;
+        } else {
+          // If length is odd, initialize with first element
+          min = max = arr[0];
+          i = 1;
+        }
+
+        // Process pairs
+        while (i < n - 1) {
+          let localMin, localMax;
+          if (arr[i] < arr[i + 1]) {
+            localMin = arr[i];
+            localMax = arr[i + 1];
+          } else {
+            localMin = arr[i + 1];
+            localMax = arr[i];
+          }
+
+          if (localMin < min) min = localMin;
+          if (localMax > max) max = localMax;
+
+          i += 2;
+        }
+
+        return { min, max };
+      }
+
+      // Example:
+      const arr = [3, 1, 7, 9, 2, 6, 8];
+      const result = findMinAndMax(arr);
+      console.log(result); // { min: 1, max: 9 }
+    </script>
+  </body>
+</html>
