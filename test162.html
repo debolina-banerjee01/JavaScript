@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of numbers of length N, find both the minimum and maximum
+      using less than 2 * (N - 2) comparisons.
+    </title>
+  </head>
+  <body>
+    <script>
+      function maxSubarraySum(arr) {
+        let maxSoFar = 0;
+        let maxEndingHere = 0;
+
+        for (let i = 0; i < arr.length; i++) {
+          maxEndingHere = Math.max(0, maxEndingHere + arr[i]);
+          maxSoFar = Math.max(maxSoFar, maxEndingHere);
+        }
+
+        return maxSoFar;
+      }
+      console.log(maxSubarraySum([34, -50, 42, 14, -5, 86])); // 137
+      console.log(maxSubarraySum([-5, -1, -8, -9])); // 0
+      console.log(maxSubarraySum([4, -1, 2, 1])); // 6
+    </script>
+  </body>
+</html>
