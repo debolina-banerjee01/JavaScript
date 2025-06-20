@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a array of numbers representing the stock prices of a company in
+      chronological order, write a function that calculates the maximum profit
+      you could have made from buying and selling that stock once. You must buy
+      before you can sell it.
+    </title>
+  </head>
+  <body>
+    <script>
+      function maxProfit(prices) {
+        if (prices.length < 2) return 0;
+
+        let minPrice = prices[0];
+        let maxProfit = 0;
+
+        for (let i = 1; i < prices.length; i++) {
+          const price = prices[i];
+
+          // Update maxProfit if selling at current price is better
+          const potentialProfit = price - minPrice;
+          maxProfit = Math.max(maxProfit, potentialProfit);
+
+          // Update minPrice if current price is lower
+          minPrice = Math.min(minPrice, price);
+        }
+
+        return maxProfit;
+      }
+      const prices = [9, 11, 8, 5, 7, 10];
+      console.log(maxProfit(prices)); // Output: 5
+    </script>
+  </body>
+</html>
