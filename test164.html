@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a string, find the longest palindromic contiguous substring. If there are more than one with the maximum length, return any one.</title>
+</head>
+<body>
+    <script>
+function longestPalindrome(s) {
+    if (!s || s.length < 1) return "";
+
+    let start = 0, end = 0;
+
+    // Helper function to expand from center
+    function expandAroundCenter(left, right) {
+        while (left >= 0 && right < s.length && s[left] === s[right]) {
+            left--;
+            right++;
+        }
+        return [left + 1, right - 1]; // return the bounds of the palindrome
+    }
+
+    for (let i = 0; i < s.length; i++) {
+        const [left1, right1] = expandAroundCenter(i, i);     // Odd length
+        const [left2, right2] = expandAroundCenter(i, i + 1); // Even length
+
+        if (right1 - left1 > end - start) {
+            start = left1;
+            end = right1;
+        }
+
+        if (right2 - left2 > end - start) {
+            start = left2;
+            end = right2;
+        }
+    }
+
+    return s.substring(start, end + 1);
+}
+
+// Examples
+console.log(longestPalindrome("aabcdcb"));   // Output: "bcdcb"
+console.log(longestPalindrome("bananas"));   // Output: "anana"
+console.log(longestPalindrome("racecar"));   // Output: "racecar"
+console.log(longestPalindrome("abcde"));     // Output: "a" (or any single letter)
+
+
+    </script>
+</body>
+</html>
