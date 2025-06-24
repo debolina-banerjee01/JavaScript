@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In academia, the h-index is a metric used to calculate the impact of a researcher's papers. It is calculated as follows:
+
+A researcher has index h if at least h of her N papers have h citations each. If there are multiple h satisfying this formula, the maximum is chosen.
+Given a list of paper citations of a researcher, calculate their h-index.</title>
+</head>
+<body>
+    <script>
+function calculateHIndex(citations) {
+    // Sort citations in descending order
+    citations.sort((a, b) => b - a);
+
+    let hIndex = 0;
+
+    // Loop through sorted citations
+    for (let i = 0; i < citations.length; i++) {
+        if (citations[i] >= i + 1) {
+            hIndex = i + 1;
+        } else {
+            break;
+        }
+    }
+
+    return hIndex;
+}
+
+// Example usage:
+const citations = [4, 3, 0, 1, 5];
+console.log("H-Index:", calculateHIndex(citations)); // Output: H-Index: 3
+
+
+    </script>
+</body>
+</html>
