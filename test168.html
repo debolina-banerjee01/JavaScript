@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an array of integers where every integer occurs three times except for one integer, which only occurs once, find and return the non-duplicated integer
+
+    </title>
+</head>
+<body>
+    <script>
+function findUniqueNumber(nums) {
+  let ones = 0, twos = 0;
+
+  for (const num of nums) {
+    // `ones` holds bits which have appeared once so far
+    ones = (ones ^ num) & ~twos;
+
+    // `twos` holds bits which have appeared twice so far
+    twos = (twos ^ num) & ~ones;
+  }
+
+  return ones;
+}
+console.log(findUniqueNumber([6, 1, 3, 3, 3, 6, 6])); // 1
+console.log(findUniqueNumber([13, 19, 13, 13]));      // 19
+
+    </script>
+</body>
+</html>
