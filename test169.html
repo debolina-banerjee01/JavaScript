@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an array of numbers N and an integer k, your task is to split N into k partitions such that the maximum sum of any partition is minimized. 
+      Return this sum
+    </title>
+</head>
+<body>
+    <script>
+function splitArrayMinLargestSum(N, k) {
+  // Helper to check if we can split into <= k partitions
+  function canSplit(maxPartitionSum) {
+    let count = 1;
+    let currentSum = 0;
+
+    for (let num of N) {
+      if (currentSum + num > maxPartitionSum) {
+        count++;
+        currentSum = num;
+      } else {
+        currentSum += num;
+      }
+    }
+
+    return count <= k;
+  }
+
+  let left = Math.max(...N);
+  let right = N.reduce((a, b) => a + b, 0);
+  let result = right;
+
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+
+    if (canSplit(mid)) {
+      result = mid;         // valid, try smaller
+      right = mid - 1;
+    } else {
+      left = mid + 1;       // invalid, need bigger partitions
+    }
+  }
+
+  return result;
+}
+
+// Test case
+const N = [5, 1, 2, 7, 3, 4];
+const k = 3;
+console.log(splitArrayMinLargestSum(N, k)); // Output: 8
+
+
+    </script>
+</body>
+</html>
