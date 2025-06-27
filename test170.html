@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sieve of Eratosthenes is an algorithm used to generate all prime numbers smaller than N. The method is to take 
+      increasingly larger prime numbers, and mark their multiples as composite.
+      Bonus: Create a generator that produces primes indefinitely (that is, without taking N as an input).
+    </title>
+</head>
+<body>
+    <script>
+
+function sieveOfEratosthenes(N) {
+    const isPrime = new Array(N).fill(true);
+    isPrime[0] = isPrime[1] = false; // 0 and 1 are not primes
+
+    for (let i = 2; i * i < N; i++) {
+        if (isPrime[i]) {
+            for (let j = i * i; j < N; j += i) {
+                isPrime[j] = false;
+            }
+        }
+    }
+
+    // Collect and return primes
+    const primes = [];
+    for (let i = 2; i < N; i++) {
+        if (isPrime[i]) primes.push(i);
+    }
+
+    return primes;
+}
+
+// Example usage:
+console.log(sieveOfEratosthenes(100));
+
+
+//bonus
+function* primeGenerator() {
+    const primes = [];
+    let num = 2;
+
+    while (true) {
+        let isPrime = true;
+        for (let p of primes) {
+            if (p * p > num) break;
+            if (num % p === 0) {
+                isPrime = false;
+                break;
+            }
+        }
+        if (isPrime) {
+            primes.push(num);
+            yield num;
+        }
+        num++;
+    }
+}
+
+// Example usage:
+const gen = primeGenerator();
+console.log(gen.next().value); // 2
+
+// You can continue calling gen.next().value to get more primes
+
+
+    </script>
+</body>
+</html>
