@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Find the maximum of two numbers without using any if-else statements,
+      branching, or direct comparisons
+    </title>
+  </head>
+  <body>
+    <script>
+      function max(a, b) {
+        const diff = a - b;
+
+        // Extract sign bit (0 if diff >= 0, 1 if diff < 0)
+        const k = (diff >> 31) & 1;
+
+        // If k = 0 → a is max; if k = 1 → b is max
+        return a - k * diff;
+      }
+
+      // Example
+      console.log(max(10, 20)); // 20
+      console.log(max(25, 5)); // 25
+    </script>
+  </body>
+</html>
