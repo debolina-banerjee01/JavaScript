@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an array of integers, find the maximum XOR of any two elements.
+    </title>
+</head>
+<body>
+    <script>
+
+class TrieNode {
+    constructor() {
+        this.children = {};
+    }
+}
+
+function insert(root, num) {
+    let node = root;
+    for (let i = 31; i >= 0; i--) {
+        let bit = (num >>> i) & 1;
+        if (!node.children[bit]) {
+            node.children[bit] = new TrieNode();
+        }
+        node = node.children[bit];
+    }
+}
+
+function findMaximumXOR(nums) {
+    let root = new TrieNode();
+
+    // Build the trie
+    for (let num of nums) {
+        insert(root, num);
+    }
+
+    let maxXOR = 0;
+
+    for (let num of nums) {
+        let node = root;
+        let currXOR = 0;
+        for (let i = 31; i >= 0; i--) {
+            let bit = (num >>> i) & 1;
+            let toggledBit = bit ^ 1;
+            if (node.children[toggledBit]) {
+                currXOR |= (1 << i);
+                node = node.children[toggledBit];
+            } else {
+                node = node.children[bit];
+            }
+        }
+        maxXOR = Math.max(maxXOR, currXOR);
+    }
+
+    return maxXOR;
+}
+
+// Example
+const nums = [3, 10, 5, 25, 2, 8];
+console.log(findMaximumXOR(nums)); // Output: 28
+
+
+
+    </script>
+</body>
+</html>
