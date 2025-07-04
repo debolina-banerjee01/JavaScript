@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The ancient Egyptians used to express fractions as a sum of several terms
+      where each numerator is one. Create an algorithm to turn an ordinary
+      fraction a / b, where a < b, into an Egyptian fraction.
+    </title>
+  </head>
+  <body>
+    <script>
+      function egyptianFraction(a, b) {
+        const result = [];
+
+        while (a !== 0) {
+          // Find the ceiling of b/a
+          let x = Math.ceil(b / a);
+          result.push(`1/${x}`);
+
+          // Update a and b to represent the new fraction
+          a = a * x - b;
+          b = b * x;
+
+          // Reduce the fraction
+          let gcd = function (u, v) {
+            while (v !== 0) {
+              let temp = u % v;
+              u = v;
+              v = temp;
+            }
+            return u;
+          };
+
+          let g = gcd(a, b);
+          a /= g;
+          b /= g;
+        }
+
+        return result;
+      }
+
+      // Example:
+      const a = 4,
+        b = 13;
+      console.log(
+        `Egyptian Fraction of ${a}/${b}:`,
+        egyptianFraction(a, b).join(" + ")
+      );
+    </script>
+  </body>
+</html>
