@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The edit distance between two strings refers to the minimum number of
+      character insertions, deletions, and substitutions required to change one
+      string to the other. Given two strings, compute the edit distance between
+      them.
+    </title>
+  </head>
+  <body>
+    <script>
+      function editDistance(str1, str2) {
+        const m = str1.length;
+        const n = str2.length;
+
+        // Create a 2D array (m+1 x n+1)
+        const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+        // Initialize base cases
+        for (let i = 0; i <= m; i++) {
+          dp[i][0] = i; // i deletions
+        }
+        for (let j = 0; j <= n; j++) {
+          dp[0][j] = j; // j insertions
+        }
+
+        // Fill dp table
+        for (let i = 1; i <= m; i++) {
+          for (let j = 1; j <= n; j++) {
+            if (str1[i - 1] === str2[j - 1]) {
+              dp[i][j] = dp[i - 1][j - 1]; // characters match
+            } else {
+              dp[i][j] =
+                1 +
+                Math.min(
+                  dp[i - 1][j], // deletion
+                  dp[i][j - 1], // insertion
+                  dp[i - 1][j - 1] // substitution
+                );
+            }
+          }
+        }
+
+        return dp[m][n];
+      }
+
+      // Example usage:
+      console.log(editDistance("kitten", "sitting")); // Output: 3
+    </script>
+  </body>
+</html>
