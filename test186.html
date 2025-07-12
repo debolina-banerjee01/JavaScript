@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement regular expression matching with the following special
+      characters: . (period) which matches any single character * (asterisk)
+      which matches zero or more of the preceding element That is, implement a
+      function that takes in a string and a valid regular expression and returns
+      whether or not the string matches the regular expression.
+    </title>
+  </head>
+  <body>
+    <script>
+      function isMatch(s, p) {
+        const m = s.length;
+        const n = p.length;
+
+        // dp[i][j] = does s[0..i-1] match p[0..j-1]
+        const dp = Array.from({ length: m + 1 }, () =>
+          Array(n + 1).fill(false)
+        );
+        dp[0][0] = true; // Empty string matches empty pattern
+
+        // Initialize for patterns like a*, a*b*, etc.
+        for (let j = 1; j <= n; j++) {
+          if (p[j - 1] === "*") {
+            dp[0][j] = dp[0][j - 2];
+          }
+        }
+
+        for (let i = 1; i <= m; i++) {
+          for (let j = 1; j <= n; j++) {
+            if (p[j - 1] === "." || p[j - 1] === s[i - 1]) {
+              dp[i][j] = dp[i - 1][j - 1];
+            } else if (p[j - 1] === "*") {
+              // Zero occurrence of the char before '*'
+              dp[i][j] = dp[i][j - 2];
+              // One or more occurrences if match
+              if (p[j - 2] === "." || p[j - 2] === s[i - 1]) {
+                dp[i][j] = dp[i][j] || dp[i - 1][j];
+              }
+            }
+          }
+        }
+
+        return dp[m][n];
+      }
+      //example
+      console.log(isMatch("aab", "c*a*b")); // true
+    </script>
+  </body>
+</html>
