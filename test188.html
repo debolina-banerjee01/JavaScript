@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The sequence [0, 1, ..., N] has been jumbled, and the only clue you have for its order is an array representing whether each number is larger or 
+        smaller than the last.Given this information, reconstruct an array that is consistent with it. For example, given [None, +, +, -, +], you could return 
+        [1, 2, 3, 0, 4].
+    </title>
+</head>
+<body>
+    <script>
+function reconstructSequence(clues) {
+    const n = clues.length; // clues includes the first `None`, so array length is n
+    const result = [];
+    const stack = [];
+
+    for (let i = 0; i < n; i++) {
+        // Push the current number onto the stack
+        stack.push(i);
+
+        // If the clue is '+' or it's the last element, we continue
+        // But if the next clue is '-' or we're at the end, we pop the stack
+        if (i === n - 1 || clues[i + 1] === '-') {
+            while (stack.length) {
+                result.push(stack.pop());
+            }
+        }
+    }
+
+    return result;
+}
+
+// Example usage:
+const clues = [null, '+', '+', '-', '+'];
+console.log(reconstructSequence(clues)); // Possible output: [1, 2, 3, 0, 4]
+
+
+    </script>
+</body>
+</html>
