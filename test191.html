@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A builder is looking to build a row of N houses that can be of K different colors. He has a goal of minimizing cost while ensuring that no two 
+        neighboring houses are of the same color.
+
+Given an N by K matrix where the nth row and kth column represents the cost to build the nth house with kth color, return the minimum cost which achieves this goal.
+    </title>
+</head>
+<body>
+    <script>
+function printMaxSubarrays(arr, k) {
+  const deque = []; // will store indices
+
+  for (let i = 0; i < arr.length; i++) {
+    // Remove indices that are out of the current window
+    while (deque.length && deque[0] <= i - k) {
+      deque.shift();
+    }
+
+    // Remove indices whose corresponding values are less than arr[i]
+    while (deque.length && arr[deque[deque.length - 1]] < arr[i]) {
+      deque.pop();
+    }
+
+    // Add current index to the deque
+    deque.push(i);
+
+    // The front of the deque is the largest element of the current window
+    if (i >= k - 1) {
+      console.log(arr[deque[0]]);
+    }
+  }
+}
+// Example usage
+const array = [10, 5, 2, 7, 8, 7];
+const k = 3;
+
+printMaxSubarrays(array, k);
+// Output:
+// 10
+// 7
+// 8
+// 8
+
+
+
+    </script>
+</body>
+</html>
