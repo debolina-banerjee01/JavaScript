@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaCorp wants to give bonuses to its employees based on how many lines of codes they have written. They would like to give the smallest positive 
+      amount to each worker consistent with the constraint that if a developer has written more lines of code than their neighbor, they should receive more money.
+
+Given an array representing a line of seats of employees at MegaCorp, determine how much each one should get paid.
+    </title>
+</head>
+<body>
+    <script>
+function calculateBonuses(linesOfCode) {
+    const n = linesOfCode.length;
+    const bonuses = new Array(n).fill(1);
+
+    // First pass: left to right
+    for (let i = 1; i < n; i++) {
+        if (linesOfCode[i] > linesOfCode[i - 1]) {
+            bonuses[i] = bonuses[i - 1] + 1;
+        }
+    }
+
+    // Second pass: right to left
+    for (let i = n - 2; i >= 0; i--) {
+        if (linesOfCode[i] > linesOfCode[i + 1]) {
+            bonuses[i] = Math.max(bonuses[i], bonuses[i + 1] + 1);
+        }
+    }
+
+    return bonuses;
+}
+
+// Example usage
+const input = [10, 40, 200, 1000, 60, 30];
+const result = calculateBonuses(input);
+console.log(result); // Output: [1, 2, 3, 4, 2, 1]
+
+
+
+
+    </script>
+</body>
+</html>
