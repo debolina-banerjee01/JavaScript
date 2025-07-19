@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      A step word is formed by taking a given word, adding a letter, and
+      anagramming the result. For example, starting with the word "APPLE", you
+      can add an "A" and anagram to get "APPEAL". Given a dictionary of words
+      and an input word, create a function that returns all valid step words.
+    </title>
+  </head>
+  <body>
+    <script>
+      function findStepWords(input, dictionary) {
+        const sortWord = (word) => word.split("").sort().join("");
+
+        // Get a sorted version of the input word
+        const inputSorted = sortWord(input);
+
+        // Map of input character counts
+        const inputMap = getCharMap(input);
+
+        const results = [];
+
+        for (const word of dictionary) {
+          if (word.length !== input.length + 1) continue;
+
+          const wordMap = getCharMap(word);
+          const diff = getCharDifference(inputMap, wordMap);
+
+          if (diff === 1) {
+            results.push(word);
+          }
+        }
+
+        return results;
+      }
+
+      // Helper: get character count map
+      function getCharMap(word) {
+        const map = {};
+        for (const ch of word) {
+          map[ch] = (map[ch] || 0) + 1;
+        }
+        return map;
+      }
+
+      // Helper: how many extra letters word2 has than word1
+      function getCharDifference(map1, map2) {
+        let diff = 0;
+        for (const ch in map2) {
+          const count1 = map1[ch] || 0;
+          const count2 = map2[ch];
+          if (count2 > count1) {
+            diff += count2 - count1;
+          }
+        }
+        return diff;
+      }
+      //example
+      const dictionary = [
+        "appeal",
+        "peal",
+        "apple",
+        "paddle",
+        "palped",
+        "lapel",
+        "apples",
+      ];
+      const input = "apple";
+
+      const stepWords = findStepWords(input, dictionary);
+      console.log(stepWords); // Output: ['appeal']
+    </script>
+  </body>
+</html>
