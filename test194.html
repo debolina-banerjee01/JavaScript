@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a set of characters C and an integer k, a De Bruijn sequence is a
+      cyclic sequence in which every possible k-length string of characters in C
+      occurs exactly once.
+    </title>
+  </head>
+  <body>
+    <script>
+      function deBruijn(C, k) {
+        const n = C.length;
+        const a = new Array(n * k).fill(0);
+        const sequence = [];
+
+        function db(t, p) {
+          if (t > k) {
+            if (k % p === 0) {
+              for (let i = 1; i <= p; i++) {
+                sequence.push(C[a[i]]);
+              }
+            }
+          } else {
+            a[t] = a[t - p];
+            db(t + 1, p);
+            for (let j = a[t - p] + 1; j < n; j++) {
+              a[t] = j;
+              db(t + 1, t);
+            }
+          }
+        }
+
+        db(1, 1);
+
+        // To make it cyclic
+        for (let i = 0; i < k - 1; i++) {
+          sequence.push(sequence[i]);
+        }
+
+        return sequence.join("");
+      }
+
+      // Example usage:
+      const C = ["0", "1"];
+      const k = 3;
+      console.log(deBruijn(C, k)); // Outputs: de Bruijn sequence for binary alphabet and k = 3
+      //example
+      console.log(deBruijn(["0", "1"], 2)); // Output: '0011' (cyclically contains '00', '01', '11', '10')
+    </script>
+  </body>
+</html>
