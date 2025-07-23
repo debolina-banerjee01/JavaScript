@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a sorted list of integers of length N, determine if an element x is
+      in the list without performing any multiplication, division, or bit-shift
+      operations. Do this in O(log N) time.
+    </title>
+  </head>
+  <body>
+    <script>
+      function binarySearch(arr, x) {
+        let low = 0;
+        let high = arr.length - 1;
+
+        while (low <= high) {
+          // Instead of (low + high) / 2, use this to avoid division:
+          let mid = low + Math.floor((high - low) / 2);
+
+          if (arr[mid] === x) {
+            return true;
+          } else if (arr[mid] < x) {
+            low = mid + 1;
+          } else {
+            high = mid - 1;
+          }
+        }
+
+        return false;
+      }
+      //example
+      const list = [1, 3, 5, 7, 9, 11, 13];
+      console.log(binarySearch(list, 7)); // true
+      console.log(binarySearch(list, 2)); // false
+    </script>
+  </body>
+</html>
