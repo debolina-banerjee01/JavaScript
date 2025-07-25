@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Write a function, throw_dice(N, faces, total), that determines how many
+      ways it is possible to throw N dice with some number of faces each to get
+      a specific total.
+    </title>
+  </head>
+  <body>
+    <script>
+      function throw_dice(N, faces, total) {
+        const memo = {};
+
+        function helper(diceLeft, remainingTotal) {
+          // Base cases
+          if (diceLeft === 0 && remainingTotal === 0) return 1;
+          if (diceLeft === 0 || remainingTotal <= 0) return 0;
+
+          const key = `${diceLeft}-${remainingTotal}`;
+          if (key in memo) return memo[key];
+
+          let ways = 0;
+          for (let i = 1; i <= faces; i++) {
+            ways += helper(diceLeft - 1, remainingTotal - i);
+          }
+
+          memo[key] = ways;
+          return ways;
+        }
+
+        return helper(N, total);
+      }
+
+      // Example usage
+      console.log(throw_dice(3, 6, 7)); // Output: 15
+    </script>
+  </body>
+</html>
