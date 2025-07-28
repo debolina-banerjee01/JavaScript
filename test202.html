@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The "look and say" sequence is defined as follows: beginning with the term
+      1, each subsequent term visually describes the digits appearing in the
+      previous term. The first few terms are as follows: 1 11 21 1211 111221 As
+      an example, the fourth term is 1211, since the third term consists of one
+      2 and one 1. Given an integer N, print the Nth term of this sequence
+    </title>
+  </head>
+  <body>
+    <script>
+      function lookAndSay(n) {
+        if (n <= 0) return "";
+        let term = "1";
+
+        for (let i = 1; i < n; i++) {
+          let nextTerm = "";
+          let count = 1;
+
+          for (let j = 1; j < term.length; j++) {
+            if (term[j] === term[j - 1]) {
+              count++;
+            } else {
+              nextTerm += count.toString() + term[j - 1];
+              count = 1;
+            }
+          }
+
+          nextTerm += count.toString() + term[term.length - 1];
+          term = nextTerm;
+        }
+
+        return term;
+      }
+
+      // Example usage:
+      console.log(lookAndSay(1)); // "1"
+      console.log(lookAndSay(2)); // "11"
+      console.log(lookAndSay(3)); // "21"
+      console.log(lookAndSay(4)); // "1211"
+      console.log(lookAndSay(5)); // "111221"
+      console.log(lookAndSay(6)); // "312211"
+    </script>
+  </body>
+</html>
