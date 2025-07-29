@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A fixed point in an array is an element whose value is equal to its index. 
+        Given a sorted array of distinct elements, return a fixed point, if one exists. Otherwise, return False.
+    </title>
+</head>
+<body>
+    <script>
+function findFixedPoint(arr) {
+    let low = 0;
+    let high = arr.length - 1;
+
+    while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        
+        if (arr[mid] === mid) {
+            return mid;
+        } else if (arr[mid] > mid) {
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+
+    return false;
+}
+
+// Example usage:
+console.log(findFixedPoint([-6, 0, 2, 40])); // Output: 2
+console.log(findFixedPoint([1, 5, 7, 8]));   // Output: false
+
+
+
+
+
+    </script>
+</body>
+</html>
