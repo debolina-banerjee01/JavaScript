@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      A classroom consists of N students, whose friendships can be represented
+      in an adjacency list. For example, the following descibes a situation
+      where 0 is friends with 1 and 2, 3 is friends with 6, and so on. {0: [1,
+      2], 1: [0, 5], 2: [0], 3: [6], 4: [], 5: [1], 6: [3]} Each student can be
+      placed in a friend group, which can be defined as the transitive closure
+      of that student's friendship relations. In other words, this is the
+      smallest set such that no student in the group has any friends outside
+      this group. For the example above, the friend groups would be {0, 1, 2,
+      5}, {3, 6}, {4}. Given a friendship list such as the one above, determine
+      the number of friend groups in the class
+    </title>
+  </head>
+  <body>
+    <script>
+      function countFriendGroups(friendships) {
+        const visited = new Set();
+        let groupCount = 0;
+
+        function dfs(student) {
+          visited.add(student);
+          for (const friend of friendships[student]) {
+            if (!visited.has(friend)) {
+              dfs(friend);
+            }
+          }
+        }
+
+        for (const student in friendships) {
+          if (!visited.has(Number(student))) {
+            dfs(Number(student));
+            groupCount++;
+          }
+        }
+
+        return groupCount;
+      }
+
+      // Example usage:
+      const friendships = {
+        0: [1, 2],
+        1: [0, 5],
+        2: [0],
+        3: [6],
+        4: [],
+        5: [1],
+        6: [3],
+      };
+
+      console.log(countFriendGroups(friendships)); // Output: 3
+    </script>
+  </body>
+</html>
