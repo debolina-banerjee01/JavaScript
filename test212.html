@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a list of numbers and a number k, return whether any two numbers
+      from the list add up to k
+    </title>
+  </head>
+  <body>
+    <script>
+      function hasTwoSum(nums, k) {
+        const seen = new Set();
+
+        for (let num of nums) {
+          if (seen.has(k - num)) {
+            return true; // Found two numbers that add up to k
+          }
+          seen.add(num);
+        }
+
+        return false; // No such pair found
+      }
+      //example
+      console.log(hasTwoSum([10, 15, 3, 7], 17)); // true (10 + 7)
+    </script>
+  </body>
+</html>
