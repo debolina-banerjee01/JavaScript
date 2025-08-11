@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The number 6174 is known as Kaprekar's contant, after the mathematician
+      who discovered an associated property: for all four-digit numbers with at
+      least two distinct digits, repeatedly applying a simple procedure
+      eventually results in this value. The procedure is as follows: For a given
+      input x, create two new numbers that consist of the digits in x in
+      ascending and descending order. Subtract the smaller number from the
+      larger number. 
+      Write a function that returns how many steps this will take
+      for a given input N.
+    </title>
+  </head>
+  <body>
+    <script>
+      function kaprekarSteps(N) {
+        // Ensure N is treated as a string to handle leading zeros
+        let num = N.toString().padStart(4, "0");
+        let count = 0;
+
+        // Repeat until the number becomes 6174
+        while (num !== "6174") {
+          // Sort digits ascending and descending
+          let asc = num
+            .split("")
+            .sort((a, b) => a - b)
+            .join("");
+          let desc = num
+            .split("")
+            .sort((a, b) => b - a)
+            .join("");
+
+          // Compute the new number
+          num = (parseInt(desc) - parseInt(asc)).toString().padStart(4, "0");
+
+          count++;
+
+          // Kaprekar's process stops if all digits are the same (e.g., 1111)
+          if (parseInt(num) === 0) break;
+        }
+
+        return count;
+      }
+
+      // Example usage:
+      console.log(kaprekarSteps(1234)); // Output: 3
+    </script>
+  </body>
+</html>
