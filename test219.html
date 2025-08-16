@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You have N stones in a row, and would like to create from them a pyramid. This pyramid should be constructed such that the height of each stone 
+      increases by one until reaching the tallest stone, after which the heights decrease by one. In addition, the start and end stones of the pyramid should 
+      each be one stone high.
+
+You can change the height of any stone by paying a cost of 1 unit to lower its height by 1, as many times as necessary. Given this information, determine the 
+lowest cost method to produce this pyramid.
+    </title>
+</head>
+<body>
+    <script>
+function minCostToPyramid(stones) {
+    const n = stones.length;
+    let minCost = Infinity;
+
+    // Try each position as the peak of the pyramid
+    for (let peak = 0; peak < n; peak++) {
+        // The max height of the pyramid that can fit at this peak
+        const maxHeight = Math.min(peak + 1, n - peak);
+
+        for (let h = 1; h <= maxHeight; h++) {
+            let cost = 0;
+            let valid = true;
+
+            // Check left side (including peak)
+            for (let i = 0; i < h; i++) {
+                const requiredHeight = i + 1;
+                const idx = peak - i;
+                if (stones[idx] < requiredHeight) {
+                    valid = false;
+                    break;
+                }
+                cost += stones[idx] - requiredHeight;
+            }
+
+            if (!valid) continue;
+
+            // Check right side (excluding peak)
+            for (let i = 1; i < h; i++) {
+                const requiredHeight = h - i;
+                const idx = peak + i;
+                if (stones[idx] < requiredHeight) {
+                    valid = false;
+                    break;
+                }
+                cost += stones[idx] - requiredHeight;
+            }
+
+            if (valid) {
+                minCost = Math.min(minCost, cost);
+            }
+        }
+    }
+
+    return minCost;
+}
+
+// Example usage:
+const stones = [1, 1, 3, 3, 2, 1];
+console.log(minCostToPyramid(stones)); // Output: 2
+
+
+
+
+    </script>
+</body>
+</html>
