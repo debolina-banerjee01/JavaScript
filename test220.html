@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pascal's triangle is a triangular array of integers constructed with the following formula:
+
+The first row consists of the number 1.
+For each subsequent row, each element is the sum of the numbers directly above it, on either side.
+Given an input k, return the kth row of Pascal's triangle.
+    </title>
+</head>
+<body>
+    <script>
+function getPascalRow(k) {
+  const row = Array(k + 1).fill(0);
+  row[0] = 1;
+
+  for (let i = 1; i <= k; i++) {
+    for (let j = i; j > 0; j--) {
+      row[j] += row[j - 1];
+    }
+  }
+
+  return row;
+}
+//example
+console.log(getPascalRow(0)); // [1]
+console.log(getPascalRow(1)); // [1, 1]
+
+
+
+    </script>
+</body>
+</html>
