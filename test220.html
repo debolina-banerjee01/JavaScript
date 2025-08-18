@@ -1,35 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pascal's triangle is a triangular array of integers constructed with the following formula:
-
-The first row consists of the number 1.
-For each subsequent row, each element is the sum of the numbers directly above it, on either side.
-Given an input k, return the kth row of Pascal's triangle.
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      At a popular bar, each customer has a set of favorite drinks, and will
+      happily accept any drink among this set. For example, in the following
+      situation, customer 0 will be satisfied with drinks 0, 1, 3, or 6. A lazy
+      bartender working at this bar is trying to reduce his effort by limiting
+      the drink recipes he must memorize. Given a dictionary input such as the
+      one above, return the fewest number of drinks he must learn in order to
+      satisfy all customers. For the input above, the answer would be 2, as
+      drinks 1 and 5 will satisfy everyone.
     </title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-function getPascalRow(k) {
-  const row = Array(k + 1).fill(0);
-  row[0] = 1;
+      function minDrinks(preferences) {
+        const customers = Object.keys(preferences);
+        const allDrinks = new Set();
+        for (let c of customers) {
+          for (let d of preferences[c]) {
+            allDrinks.add(d);
+          }
+        }
+        const drinks = Array.from(allDrinks);
 
-  for (let i = 1; i <= k; i++) {
-    for (let j = i; j > 0; j--) {
-      row[j] += row[j - 1];
-    }
-  }
+        // Helper: check if a chosen set of drinks satisfies everyone
+        function satisfies(chosen) {
+          return customers.every((c) =>
+            preferences[c].some((d) => chosen.has(d))
+          );
+        }
 
-  return row;
-}
-//example
-console.log(getPascalRow(0)); // [1]
-console.log(getPascalRow(1)); // [1, 1]
+        // Try all combinations of drinks starting from size 1 upward
+        for (let size = 1; size <= drinks.length; size++) {
+          function* combinations(arr, k, start = 0, chosen = []) {
+            if (chosen.length === k) {
+              yield chosen;
+              return;
+            }
+            for (let i = start; i < arr.length; i++) {
+              yield* combinations(arr, k, i + 1, [...chosen, arr[i]]);
+            }
+          }
 
+          for (let combo of combinations(drinks, size)) {
+            if (satisfies(new Set(combo))) {
+              return size; // minimal set size found
+            }
+          }
+        }
 
+        return drinks.length; // worst case, need all
+      }
 
+      // Example
+      const preferences = {
+        0: [0, 1, 3, 6],
+        1: [1, 4, 7],
+        2: [2, 4, 7, 5],
+        3: [3, 2, 5],
+        4: [5, 8],
+      };
+
+      console.log(minDrinks(preferences)); // Output: 2
     </script>
-</body>
+  </body>
 </html>
