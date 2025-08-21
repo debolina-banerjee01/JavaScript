@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      On a mysterious island there are creatures known as Quxes which come in
+      three colors: red, green, and blue. One power of the Qux is that if two of
+      them are standing next to each other, they can transform into a single
+      creature of the third color. Given N Quxes standing in a line, determine
+      the smallest number of them remaining after any possible sequence of such
+      transformations.
+    </title>
+  </head>
+  <body>
+    <script>
+      function minRemainingQuxes(quxes) {
+        const n = quxes.length;
+        const uniqueColors = new Set(quxes);
+
+        // Case 1: all same color
+        if (uniqueColors.size === 1) {
+          return n;
+        }
+
+        // Case 2: multiple colors
+        return n % 2 === 0 ? 2 : 1;
+      }
+
+      // Example usage:
+      console.log(minRemainingQuxes(["R", "R", "R"])); // 3
+      console.log(minRemainingQuxes(["R", "G"])); // 1
+      console.log(minRemainingQuxes(["R", "G", "B"])); // 1
+      console.log(minRemainingQuxes(["R", "G", "R", "B"])); // 2
+    </script>
+  </body>
+</html>
