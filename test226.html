@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      There are M people sitting in a row of N seats, where M < N. Your task is
+      to redistribute people such that there are no gaps between any of them,
+      while keeping overall movement to a minimum. Return the lowest possible
+      cost of moving people to remove all gaps.
+    </title>
+  </head>
+  <body>
+    <script>
+      function minCostToCluster(seats) {
+        // Step 1: Collect positions of people
+        let positions = [];
+        for (let i = 0; i < seats.length; i++) {
+          if (seats[i] === 1) positions.push(i);
+        }
+
+        let m = positions.length;
+        if (m === 0) return 0;
+
+        // Step 2: Find the median index in positions
+        let medianIdx = Math.floor(m / 2);
+        let median = positions[medianIdx];
+
+        // Step 3: Calculate minimal movement
+        let cost = 0;
+        for (let i = 0; i < m; i++) {
+          // We want them packed around the median without gaps
+          // so target positions are median - medianIdx + i
+          let target = median - medianIdx + i;
+          cost += Math.abs(positions[i] - target);
+        }
+
+        return cost;
+      }
+
+      // Example
+      console.log(minCostToCluster([0, 1, 1, 0, 1, 0, 0, 0, 1])); // Output: 5
+    </script>
+  </body>
+</html>
