@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write an algorithm that finds the total number of set bits in all integers between 1 and N
+    </title>
+</head>
+<body>
+    <script>
+function countTotalSetBits(N) {
+    let count = 0;
+    N = BigInt(N); // To handle large numbers safely
+    let i = 0n;
+
+    while ((1n << i) <= N) {
+        const powerOfTwo = 1n << i;
+        const totalPairs = (N + 1n) / (powerOfTwo << 1n);
+        const remainder = (N + 1n) % (powerOfTwo << 1n);
+
+        const setBitsAtI = totalPairs * powerOfTwo + (remainder > powerOfTwo ? remainder - powerOfTwo : 0n);
+        count += setBitsAtI;
+
+        i += 1n;
+    }
+
+    return count.toString(); // Return as string to avoid precision issues
+}
+
+
+
+
+    </script>
+</body>
+</html>
