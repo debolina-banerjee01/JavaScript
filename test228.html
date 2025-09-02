@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a array that's sorted but rotated at some unknown pivot, in which all elements are distinct, find a "peak" element in O(log N) time.
+
+An element is considered a peak if it is greater than both its left and right neighbors. It is guaranteed that the first and last elements are lower than all others.
+    </title>
+</head>
+<body>
+    <script>
+function findPeak(arr) {
+    let low = 1;
+    let high = arr.length - 2; // Because first and last elements can't be peak
+
+    while (low <= high) {
+        let mid = Math.floor((low + high) / 2);
+
+        if (arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]) {
+            return mid; // Found a peak
+        } else if (arr[mid - 1] > arr[mid]) {
+            high = mid - 1; // Move left
+        } else {
+            low = mid + 1; // Move right
+        }
+    }
+
+    return -1; // This shouldn't happen based on problem constraints
+}
+//example
+let arr = [9, 10, 2, 3, 4, 5, 6, 7, 8]; // Rotated sorted array
+let peakIndex = findPeak(arr);
+console.log("Peak Index:", peakIndex);
+console.log("Peak Value:", arr[peakIndex]);
+
+
+
+    </script>
+</body>
+</html>
