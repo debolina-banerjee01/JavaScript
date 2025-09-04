@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are given a 2 x N board, and instructed to completely cover the board with the following shapes: 
+        Dominoes, or 2 x 1 rectangles. 
+        Trominoes, or L-shapes. 
+        For example, if N = 4, here is one possible configuration, where A is a domino, and B and C are trominoes. 
+        A B B C 
+        A B C C 
+        Given an integer N, determine in how many ways this task is possible.
+    </title>
+</head>
+<body>
+    <script>
+function numTilings(n) {
+    if (n === 0) return 1;
+    if (n === 1) return 1;
+    if (n === 2) return 2;
+
+    const dp = new Array(n + 1).fill(0);
+    const sumDp = new Array(n + 1).fill(0);
+
+    dp[0] = 1;  // 1 way to tile 2x0 board (do nothing)
+    dp[1] = 1;  // 1 way: one vertical domino
+    dp[2] = 2;  // 2 ways: two vertical or two horizontal dominoes
+
+    sumDp[0] = dp[0];
+    sumDp[1] = dp[0] + dp[1];
+    sumDp[2] = sumDp[1] + dp[2];
+
+    for (let i = 3; i <= n; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2] + 2 * sumDp[i - 3];
+        sumDp[i] = sumDp[i - 1] + dp[i];
+    }
+
+    return dp[n];
+}
+//example
+console.log(numTilings(4));  // Output: 11
+
+
+
+
+    </script>
+</body>
+</html>
