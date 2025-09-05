@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      In linear algebra, a Toeplitz matrix is one in which the elements on any
+      given diagonal from top left to bottom right are identical. Write a
+      program to determine whether a given input is a Toeplitz matrix.
+    </title>
+  </head>
+  <body>
+    <script>
+      function isToeplitzMatrix(matrix) {
+        let rows = matrix.length;
+        let cols = matrix[0].length;
+
+        // Start checking from second row and second column
+        for (let i = 1; i < rows; i++) {
+          for (let j = 1; j < cols; j++) {
+            if (matrix[i][j] !== matrix[i - 1][j - 1]) {
+              return false;
+            }
+          }
+        }
+        return true;
+      }
+
+      // Example usage:
+      let matrix1 = [
+        [1, 2, 3, 4],
+        [5, 1, 2, 3],
+        [9, 5, 1, 2],
+      ];
+
+      let matrix2 = [
+        [1, 2],
+        [2, 2],
+      ];
+
+      console.log(isToeplitzMatrix(matrix1)); // true
+      console.log(isToeplitzMatrix(matrix2)); // false
+    </script>
+  </body>
+</html>
