@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given an array of length N, where each element i represents the
+      number of ways we can produce i units of change. For example, [1, 0, 1, 1,
+      2] would indicate that there is only one way to make 0, 2, or 3 units, and
+      two ways of making 4 units. Given such an array, determine the
+      denominations that must be in use. In the case above, for example, there
+      must be coins with value 2, 3, and 4.
+    </title>
+  </head>
+  <body>
+    <script>
+      function findDenominations(ways) {
+        const n = ways.length;
+        const denominations = [];
+        const dp = Array(n).fill(0);
+        dp[0] = 1; // base case: one way to make 0
+
+        for (let i = 1; i < n; i++) {
+          // if current dp doesn't match given ways, i must be a coin
+          if (dp[i] !== ways[i] && ways[i] > 0) {
+            denominations.push(i);
+
+            // update dp by adding coin i
+            for (let j = i; j < n; j++) {
+              dp[j] += dp[j - i];
+            }
+          }
+        }
+
+        return denominations;
+      }
+
+      // Example
+      console.log(findDenominations([1, 0, 1, 1, 2])); // [2, 3, 4]
+    </script>
+  </body>
+</html>
