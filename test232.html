@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a function that returns the bitwise AND of all integers between M and N, inclusive.
+    </title>
+</head>
+<body>
+    <script>
+function rangeBitwiseAnd(m, n) {
+    while (m < n) {
+        n = n & (n - 1);
+    }
+    return n;
+}
+//example
+console.log(rangeBitwiseAnd(5, 7)); // Output: 4
+
+
+    </script>
+</body>
+</html>
