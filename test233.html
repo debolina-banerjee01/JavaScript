@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are going on a road trip, and would like to create a suitable music playlist. The trip will require N songs, though you only have M songs downloaded,
+         where M < N. A valid playlist should select each song at least once, and guarantee a buffer of B songs between repeats.
+
+Given N, M, and B, determine the number of valid playlists.
+    </title>
+</head>
+<body>
+    <script>
+function numPlaylists(N, M, B) {
+    const MOD = 1e9 + 7;
+    const memo = new Map();
+
+    function dp(n, used) {
+        const key = `${n},${used}`;
+        if (memo.has(key)) return memo.get(key);
+
+        if (n === 0) {
+            // All songs chosen
+            return used === M ? 1 : 0;
+        }
+
+        let total = 0;
+
+        // Pick a new song
+        if (used < M) {
+            total += dp(n - 1, used + 1) * (M - used);
+            total %= MOD;
+        }
+
+        // Pick an old song (respect buffer)
+        if (used > B) {
+            total += dp(n - 1, used) * (used - B);
+            total %= MOD;
+        }
+
+        memo.set(key, total);
+        return total;
+    }
+
+    return dp(N, 0);
+}
+
+//example
+console.log(numPlaylists(3, 2, 1)); // Example: N=3, M=2, B=1
+
+
+
+    </script>
+</body>
+</html>
