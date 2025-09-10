@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a string, find the length of the smallest window that contains every distinct character. Characters may appear more than once in the window.
+    </title>
+</head>
+<body>
+    <script>
+function smallestDistinctWindow(s) {
+    const distinctChars = new Set(s); // Step 1: Get all distinct characters
+    const totalDistinct = distinctChars.size;
+
+    let charCount = new Map();
+    let minLen = Infinity;
+    let left = 0;
+    let count = 0;
+
+    for (let right = 0; right < s.length; right++) {
+        const rightChar = s[right];
+        charCount.set(rightChar, (charCount.get(rightChar) || 0) + 1);
+
+        // Increment count only when a new character from distinct set is fully included
+        if (charCount.get(rightChar) === 1) {
+            count++;
+        }
+
+        // Try to shrink the window from the left
+        while (count === totalDistinct) {
+            minLen = Math.min(minLen, right - left + 1);
+
+            const leftChar = s[left];
+            charCount.set(leftChar, charCount.get(leftChar) - 1);
+
+            if (charCount.get(leftChar) === 0) {
+                count--;
+            }
+
+            left++;
+        }
+    }
+
+    return minLen;
+}
+
+// Example usage:
+console.log(smallestDistinctWindow("jiujitsu")); // Output: 5
+
+
+    </script>
+</body>
+</html>
