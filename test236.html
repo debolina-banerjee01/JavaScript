@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement a function that finds the second smallest element in an array of
+      integers
+    </title>
+  </head>
+  <body>
+    <script>
+      function secondSmallest(arr) {
+        if (arr.length < 2) return null;
+
+        // sort in ascending order
+        arr.sort((a, b) => a - b);
+
+        // find the first element larger than the smallest
+        for (let i = 1; i < arr.length; i++) {
+          if (arr[i] > arr[0]) {
+            return arr[i];
+          }
+        }
+
+        return null; // no second smallest (all elements are equal)
+      }
+
+      // example
+      console.log(secondSmallest([4, 2, 7, 1, 9])); // 2
+    </script>
+  </body>
+</html>
