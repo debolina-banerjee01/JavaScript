@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implement a function that finds the index of a specific element in an array. If the element is not found, the function should return -1.
+    </title>
+</head>
+<body>
+    <script>
+function findIndex(array, target) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === target) {
+      return i;
+    }
+  }
+  return -1;
+}
+//example
+const arr = [10, 20, 30, 40, 50];
+
+console.log(findIndex(arr, 30)); // Output: 2
+
+
+    </script>
+</body>
+</html>
