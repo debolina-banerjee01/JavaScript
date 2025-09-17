@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an algorithm to efficiently compute the approximate median of a list of numbers.
+
+More precisely, given an unordered list of N numbers, find an element whose rank is between N / 4 and 3 * N / 4, with a high level of certainty, 
+in less than O(N) time.
+
+
+    </title>
+</head>
+<body>
+    <script>
+function approximateMedian(arr, sampleSize = 50) {
+    const n = arr.length;
+
+    if (n === 0) {
+        throw new Error("Cannot compute median of an empty array");
+    }
+
+    // Choose k = sampleSize random elements
+    const sample = [];
+    for (let i = 0; i < sampleSize; i++) {
+        const randomIndex = Math.floor(Math.random() * n);
+        sample.push(arr[randomIndex]);
+    }
+
+    // Sort the sample
+    sample.sort((a, b) => a - b);
+
+    // Return the middle element of the sample
+    return sample[Math.floor(sampleSize / 2)];
+}
+//example
+const largeArray = Array.from({ length: 1_000_000 }, () => Math.floor(Math.random() * 100000));
+
+const approx = approximateMedian(largeArray);
+console.log("Approximate median:", approx);
+
+
+
+    </script>
+</body>
+</html>
