@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Write a program to merge two binary trees. Each node in the new tree
+      should hold a value equal to the sum of the values of the corresponding
+      nodes of the input trees. If only one input tree has a node in a given
+      position, the corresponding node in the new tree should match that input
+      node.
+    </title>
+  </head>
+  <body>
+    <script>
+      class TreeNode {
+        constructor(val) {
+          this.val = val;
+          this.left = null;
+          this.right = null;
+        }
+      }
+
+      function mergeTrees(t1, t2) {
+        if (!t1 && !t2) return null;
+        if (!t1) return t2;
+        if (!t2) return t1;
+
+        // Sum values if both exist
+        let merged = new TreeNode(t1.val + t2.val);
+
+        // Recursively merge children
+        merged.left = mergeTrees(t1.left, t2.left);
+        merged.right = mergeTrees(t1.right, t2.right);
+
+        return merged;
+      }
+
+      // Helper: print tree in preorder
+      function preorder(root) {
+        if (!root) return [];
+        return [root.val, ...preorder(root.left), ...preorder(root.right)];
+      }
+
+      // Example
+      let t1 = new TreeNode(1);
+      t1.left = new TreeNode(3);
+      t1.right = new TreeNode(2);
+      t1.left.left = new TreeNode(5);
+
+      let t2 = new TreeNode(2);
+      t2.left = new TreeNode(1);
+      t2.right = new TreeNode(3);
+      t2.left.right = new TreeNode(4);
+      t2.right.right = new TreeNode(7);
+
+      let mergedTree = mergeTrees(t1, t2);
+
+      console.log(preorder(mergedTree));
+      // Output: [3, 4, 5, 4, 5, 7]
+      // Explanation: merged preorder traversal
+    </script>
+  </body>
+</html>
