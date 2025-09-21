@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given a string consisting of the letters x and y, such as
+      xyxxxyxyy. In addition, you have an operation called flip, which changes a
+      single x to y or vice versa. Determine how many times you would need to
+      apply this operation to ensure that all x's come before all y's. In the
+      preceding example, it suffices to flip the second and sixth characters, so
+      you should return 2.
+    </title>
+  </head>
+  <body>
+    <script>
+      function minFlipsXY(s) {
+        const n = s.length;
+        const prefixY = Array(n + 1).fill(0); // count of 'y' up to i
+        const suffixX = Array(n + 1).fill(0); // count of 'x' from i to end
+
+        // Build prefixY
+        for (let i = 0; i < n; i++) {
+          prefixY[i + 1] = prefixY[i] + (s[i] === "y" ? 1 : 0);
+        }
+
+        // Build suffixX
+        for (let i = n - 1; i >= 0; i--) {
+          suffixX[i] = suffixX[i + 1] + (s[i] === "x" ? 1 : 0);
+        }
+
+        let minFlips = n; // upper bound
+        for (let i = 0; i <= n; i++) {
+          // Split at i: [0..i-1] should be all x, [i..n-1] should be all y
+          const flips = prefixY[i] + suffixX[i];
+          minFlips = Math.min(minFlips, flips);
+        }
+
+        return minFlips;
+      }
+
+      // Example
+      console.log(minFlipsXY("xyxxxyxyy")); // 2
+      console.log(minFlipsXY("xxxx")); // 0
+      console.log(minFlipsXY("yyyy")); // 0
+      console.log(minFlipsXY("yxyx")); // 2
+    </script>
+  </body>
+</html>
