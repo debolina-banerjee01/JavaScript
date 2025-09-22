@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given integers M and N, write a program that counts how many positive
+      integer pairs (a, b) satisfy the following conditions: a + b = M a XOR b =
+      N
+    </title>
+  </head>
+  <body>
+    <script>
+      function countPairs(M, N) {
+        // Step 1: Quick checks
+        if (M < N) return 0;
+        if ((M - N) % 2 !== 0) return 0;
+
+        const K = (M - N) / 2;
+
+        // Step 2: Check that AND and XOR don't overlap
+        if ((K & N) !== 0) return 0;
+
+        // Step 3: Count bits in N
+        const bitCount = N.toString(2).split("1").length - 1;
+
+        // Step 4: Number of ordered pairs
+        let result = 1 << bitCount; // 2^(bitCount)
+
+        // Step 5: Exclude (a=0 or b=0) since we need positive integers
+        if (K === 0) result -= 2;
+
+        return result;
+      }
+
+      // Example tests
+      console.log(countPairs(10, 2)); // Output: 2 (pairs: (4,6), (6,4))
+    </script>
+  </body>
+</html>
