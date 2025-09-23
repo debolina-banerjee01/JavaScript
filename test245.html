@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      At a party, there is a single person who everyone knows, but who does not
+      know anyone in return (the "celebrity"). To help figure out who this is,
+      you have access to an O(1) method called knows(a, b), which returns True
+      if person a knows person b, else False. Given a list of N people and the
+      above operation, find a way to identify the celebrity in O(N) time.
+    </title>
+  </head>
+  <body>
+    <script>
+      // Example knows function (to be provided in real case)
+      function knows(a, b) {
+        // This should return true if person a knows person b
+        // Implementation depends on input
+      }
+
+      // Find celebrity
+      function findCelebrity(n) {
+        let candidate = 0;
+
+        // Step 1: Find the potential celebrity
+        for (let i = 1; i < n; i++) {
+          if (knows(candidate, i)) {
+            candidate = i; // candidate knows i → candidate cannot be celebrity
+          }
+          // else i cannot be celebrity, keep candidate
+        }
+
+        // Step 2: Verify candidate
+        for (let i = 0; i < n; i++) {
+          if (i === candidate) continue;
+
+          // Celebrity should not know anyone
+          // Everyone should know the celebrity
+          if (knows(candidate, i) || !knows(i, candidate)) {
+            return -1; // No celebrity
+          }
+        }
+
+        return candidate; // Found celebrity
+      }
+    </script>
+  </body>
+</html>
