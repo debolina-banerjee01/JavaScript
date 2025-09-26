@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a function that checks if a given string is a palindrome, considering only alphanumeric characters and ignoring case. 
+
+
+    </title>
+</head>
+<body>
+    <script>
+function isPalindrome(str) {
+  // Remove non-alphanumeric characters and convert to lowercase
+  const cleaned = str.replace(/[^a-z0-9]/gi, '').toLowerCase();
+  
+  // Compare cleaned string with its reverse
+  return cleaned === cleaned.split('').reverse().join('');
+}
+//example
+console.log(isPalindrome("A man, a plan, a canal: Panama")); // true
+    </script>
+</body>
+</html>
