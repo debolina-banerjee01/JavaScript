@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an integer n, find the next biggest integer with the same number of 1-bits on. For example, given the number 6 (0110 in binary), return 9 (1001).
+
+
+    </title>
+</head>
+<body>
+    <script>
+function nextHigherWithSameBits(n) {
+    if (n === 0) return 0;
+
+    let c = n;
+    let c0 = 0; // count of zeros on the right
+    let c1 = 0; // count of ones on the right
+
+    // Count trailing zeros (c0)
+    while (((c & 1) === 0) && (c !== 0)) {
+        c0++;
+        c >>= 1;
+    }
+
+    // Count ones (c1)
+    while ((c & 1) === 1) {
+        c1++;
+        c >>= 1;
+    }
+
+    // If n is like 11110000..00 then there's no bigger number with same 1s
+    if (c0 + c1 === 31 || c0 + c1 === 0) {
+        return -1;
+    }
+
+    // Position of rightmost non-trailing zero (to flip)
+    const p = c0 + c1;
+
+    // Step 1: Flip rightmost non-trailing zero
+    n |= (1 << p);
+
+    // Step 2: Clear all bits to the right of p
+    n &= ~((1 << p) - 1);
+
+    // Step 3: Insert (c1-1) ones on the right
+    n |= (1 << (c1 - 1)) - 1;
+
+    return n;
+}
+
+// Example:
+const input = 6;
+const result = nextHigherWithSameBits(input);
+console.log(result);           // Output: 9
+console.log(result.toString(2)); // Output: '1001'
+
+    </script>
+</body>
+</html>
