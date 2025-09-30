@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an array of numbers and a number k, determine if there are three entries in the array which add up to the specified number k. 
+        For example, given [20, 303, 3, 4, 25] and k = 49, return true as 20 + 4 + 25 = 49
+
+
+    </title>
+</head>
+<body>
+    <script>
+function hasThreeSum(arr, k) {
+    const n = arr.length;
+
+    // Sort the array to apply two-pointer technique
+    arr.sort((a, b) => a - b);
+
+    for (let i = 0; i < n - 2; i++) {
+        let target = k - arr[i];
+        let left = i + 1;
+        let right = n - 1;
+
+        while (left < right) {
+            const sum = arr[left] + arr[right];
+            if (sum === target) {
+                return true;
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+    }
+
+    return false;
+}
+//example
+const arr = [20, 303, 3, 4, 25];
+const k = 49;
+
+console.log(hasThreeSum(arr, k));  // Output: true
+
+    </script>
+</body>
+</html>
