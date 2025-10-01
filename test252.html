@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a set of points (x, y) on a 2D cartesian plane, find the two closest points. 
+        For example, given the points [(1, 1), (-1, -1), (3, 4), (6, 1), (-1, -6), (-4, -3)], return [(-1, -1), (1, 1)].
+
+
+    </title>
+</head>
+<body>
+    <script>
+function findClosestPoints(points) {
+  let minDist = Infinity;
+  let closestPair = [];
+
+  for (let i = 0; i < points.length; i++) {
+    for (let j = i + 1; j < points.length; j++) {
+      const [x1, y1] = points[i];
+      const [x2, y2] = points[j];
+      const dist = Math.hypot(x2 - x1, y2 - y1); // Euclidean distance
+
+      if (dist < minDist) {
+        minDist = dist;
+        closestPair = [points[i], points[j]];
+      }
+    }
+  }
+
+  return closestPair;
+}
+
+// Example usage
+const points = [(1, 1), (-1, -1), (3, 4), (6, 1), (-1, -6), (-4, -3)];
+
+// Important: use arrays instead of tuples in JS
+const correctedPoints = [[1, 1], [-1, -1], [3, 4], [6, 1], [-1, -6], [-4, -3]];
+
+console.log(findClosestPoints(correctedPoints)); // Output: [[-1, -1], [1, 1]]
+
+    </script>
+</body>
+</html>
