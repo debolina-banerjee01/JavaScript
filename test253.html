@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a function called lucky_sevens which takes an array of integers and returns true if any three consecutive elements sum to 7.
+
+
+    </title>
+</head>
+<body>
+    <script>
+function lucky_sevens(arr) {
+  for (let i = 0; i < arr.length - 2; i++) {
+    const sum = arr[i] + arr[i + 1] + arr[i + 2];
+    if (sum === 7) {
+      return true;
+    }
+  }
+  return false;
+}
+//example
+console.log(lucky_sevens([1, 2, 4, 0]));      // true (1 + 2 + 4 = 7)
+console.log(lucky_sevens([2, 2, 3, 1]));      // true (2 + 2 + 3 = 7)
+console.log(lucky_sevens([1, 2, 3, 4]));      // false
+console.log(lucky_sevens([7]));              // false (not enough elements)
+console.log(lucky_sevens([0, 0, 7, 0]));     // true (0 + 0 + 7 = 7)
+
+    </script>
+</body>
+</html>
