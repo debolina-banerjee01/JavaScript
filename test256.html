@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given a tree with an even number of nodes. Consider each
+      connection between a parent and child node to be an "edge". You would like
+      to remove some of these edges, such that the disconnected subtrees that
+      remain each have an even number of nodes. For example, suppose your input
+      was the following tree: 1 / \ 2 3 / \ 4 5 / | \ 6 7 8 In this case,
+      removing the edge (3, 4) satisfies our requirement. Write a function that
+      returns the maximum number of edges you can remove while still satisfying
+      this requirement.
+    </title>
+  </head>
+  <body>
+    <script>
+      // n = number of nodes
+      // edges = list of pairs [u, v] (undirected tree)
+      function maxRemovableEdges(n, edges) {
+        // Build adjacency list
+        const graph = Array.from({ length: n + 1 }, () => []);
+        for (const [u, v] of edges) {
+          graph[u].push(v);
+          graph[v].push(u);
+        }
+
+        let removableEdges = 0;
+
+        function dfs(node, parent) {
+          let size = 1; // count current node
+
+          for (const child of graph[node]) {
+            if (child === parent) continue;
+            const childSize = dfs(child, node);
+            if (childSize % 2 === 0) {
+              // child subtree has even nodes — we can remove this edge
+              removableEdges++;
+            } else {
+              size += childSize; // otherwise, keep it
+            }
+          }
+
+          return size;
+        }
+
+        dfs(1, -1); // assuming node 1 is root
+        return removableEdges;
+      }
+
+      // Example usage:
+      const n = 8;
+      const edges = [
+        [1, 2],
+        [1, 3],
+        [3, 4],
+        [3, 5],
+        [4, 6],
+        [4, 7],
+        [4, 8],
+      ];
+
+      console.log(maxRemovableEdges(n, edges)); // Output: 2
+    </script>
+  </body>
+</html>
