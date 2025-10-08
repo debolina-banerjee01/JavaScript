@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given a string of length N and a parameter k. The string can be
+      manipulated by taking one of the first k letters and moving it to the end.
+      Write a program to determine the lexicographically smallest string that
+      can be created after an unlimited number of moves. For example, suppose we
+      are given the string daily and k = 1. The best we can create in this case
+      is ailyd
+    </title>
+  </head>
+  <body>
+    <script>
+      function smallestString(s, k) {
+        if (k === 1) {
+          // Generate all rotations and return lexicographically smallest
+          let smallest = s;
+          for (let i = 1; i < s.length; i++) {
+            const rotated = s.slice(i) + s.slice(0, i);
+            if (rotated < smallest) {
+              smallest = rotated;
+            }
+          }
+          return smallest;
+        } else {
+          // For k > 1, sort the string
+          return s.split("").sort().join("");
+        }
+      }
+
+      // Example
+      console.log(smallestString("daily", 1)); // "ailyd"
+      console.log(smallestString("daily", 2)); // "adil y" → "adily"
+    </script>
+  </body>
+</html>
