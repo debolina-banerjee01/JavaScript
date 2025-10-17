@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given an array X of floating-point numbers x1, x2, ... xn. These can be rounded up or down to create a corresponding array Y of integers y1, y2, ... yn.
+
+Write an algorithm that finds an appropriate Y array with the following properties:
+
+The rounded sums of both arrays should be equal.
+The absolute pairwise difference between elements is minimized. In other words, |x1- y1| + |x2- y2| + ... + |xn- yn| should be as small as possible.
+    </title>
+  </head>
+  <body>
+    <script>
+      function minimizeRoundingError(X) {
+        const n = X.length;
+        const floors = X.map(Math.floor);
+        const fracs = X.map((x) => x - Math.floor(x));
+
+        const sumX = X.reduce((a, b) => a + b, 0);
+        const sumFloors = floors.reduce((a, b) => a + b, 0);
+        const targetSum = Math.round(sumX);
+
+        const needToRoundUp = targetSum - sumFloors;
+
+        // If we need to round up some elements, pick the largest fractional parts
+        const indices = fracs
+          .map((frac, i) => ({ frac, i }))
+          .sort((a, b) => b.frac - a.frac)
+          .slice(0, needToRoundUp)
+          .map((obj) => obj.i);
+
+        const result = floors.slice();
+        for (const i of indices) {
+          result[i] = Math.ceil(X[i]);
+        }
+
+        return result;
+      }
+
+      // Example:
+      console.log(minimizeRoundingError([1.3, 2.3, 4.4])); // [1, 2, 5]
+    </script>
+  </body>
+</html>
