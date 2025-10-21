@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given a string formed by concatenating several words corresponding
+      to the integers zero through nine and then anagramming. Given this string,
+      return the original integers in sorted order.
+    </title>
+  </head>
+  <body>
+    <script>
+      function decodeAnagramDigits(s) {
+        const count = {};
+        for (let ch of s) count[ch] = (count[ch] || 0) + 1;
+
+        const out = Array(10).fill(0);
+
+        // Identify based on unique letters
+        out[0] = count["z"] || 0;
+        out[2] = count["w"] || 0;
+        out[4] = count["u"] || 0;
+        out[6] = count["x"] || 0;
+        out[8] = count["g"] || 0;
+
+        // Deduce from overlaps
+        out[3] = (count["h"] || 0) - out[8];
+        out[5] = (count["f"] || 0) - out[4];
+        out[7] = (count["s"] || 0) - out[6];
+        out[1] = (count["o"] || 0) - out[0] - out[2] - out[4];
+        out[9] = (count["i"] || 0) - out[5] - out[6] - out[8];
+
+        // Build final sorted number string
+        let result = "";
+        for (let i = 0; i <= 9; i++) {
+          result += i.toString().repeat(out[i]);
+        }
+
+        return result;
+      }
+
+      // Example
+      console.log(decodeAnagramDigits("niesevehrtfeev")); // "357"
+    </script>
+  </body>
+</html>
