@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement a function that merges two arrays into a single array,
+      alternating elements from each array.
+    </title>
+  </head>
+  <body>
+    <script>
+      function mergeAlternating(arr1, arr2) {
+        const result = [];
+        const maxLength = Math.max(arr1.length, arr2.length);
+
+        for (let i = 0; i < maxLength; i++) {
+          if (i < arr1.length) result.push(arr1[i]);
+          if (i < arr2.length) result.push(arr2[i]);
+        }
+
+        return result;
+      }
+
+      // Example usage:
+      console.log(mergeAlternating([1, 2, 3], ["a", "b", "c"]));
+      // Output: [1, 'a', 2, 'b', 3, 'c']
+
+      console.log(mergeAlternating([1, 2, 3, 4], ["x", "y"]));
+      // Output: [1, 'x', 2, 'y', 3, 4]
+    </script>
+  </body>
+</html>
