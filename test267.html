@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement a function that returns the average value of numbers in an
+      array.
+    </title>
+  </head>
+  <body>
+    <script>
+      function average(arr) {
+        if (!Array.isArray(arr) || arr.length === 0) {
+          return 0; // return 0 for invalid or empty arrays
+        }
+
+        const sum = arr.reduce((acc, num) => acc + num, 0);
+        return sum / arr.length;
+      }
+      //example
+      console.log(average([10, 20, 30])); // Output: 20
+    </script>
+  </body>
+</html>
