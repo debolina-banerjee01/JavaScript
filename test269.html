@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string s, rearrange the characters so that any two adjacent
+      characters are not the same. If this is not possible, return null. For
+      example, if s = yyz then return yzy. If s = yyy then return null.
+    </title>
+  </head>
+  <body>
+    <script>
+      function rearrangeString(s) {
+        // Step 1: Count frequency of each character
+        const freq = {};
+        for (const ch of s) {
+          freq[ch] = (freq[ch] || 0) + 1;
+        }
+
+        // Step 2: Build a max heap (using array and sort)
+        const heap = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+
+        let result = "";
+
+        // Step 3: Use greedy approach
+        while (heap.length > 1) {
+          // Take top two most frequent characters
+          let [char1, count1] = heap.shift();
+          let [char2, count2] = heap.shift();
+
+          // Add them to result
+          result += char1 + char2;
+
+          // Decrease counts and push back if still remaining
+          if (--count1 > 0) heap.push([char1, count1]);
+          if (--count2 > 0) heap.push([char2, count2]);
+
+          // Re-sort the heap (simulate priority queue)
+          heap.sort((a, b) => b[1] - a[1]);
+        }
+
+        // If one character left
+        if (heap.length === 1) {
+          let [char, count] = heap[0];
+          if (count > 1) return null; // Not possible
+          result += char;
+        }
+
+        return result;
+      }
+
+      // Examples
+      console.log(rearrangeString("yyz")); // "yzy"
+      console.log(rearrangeString("yyy")); // null
+      console.log(rearrangeString("aabb")); // "abab" or "baba"
+    </script>
+  </body>
+</html>
