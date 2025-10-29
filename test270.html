@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given two sorted iterators, merge it into one iterator. For example, given
+      these two iterators: foo = iter([5, 10, 15]) bar = iter([3, 8, 9]) You
+      should be able to do: for num in merge_iterators(foo, bar): print(num) # 3
+      # 5 # 8 # 9 # 10 # 15 Bonus: Make it work without pulling in the contents
+      of the iterators in memory.
+    </title>
+  </head>
+  <body>
+    <script>
+      function* mergeIterators(iterA, iterB) {
+        let a = iterA.next();
+        let b = iterB.next();
+
+        while (!a.done && !b.done) {
+          if (a.value <= b.value) {
+            yield a.value;
+            a = iterA.next();
+          } else {
+            yield b.value;
+            b = iterB.next();
+          }
+        }
+
+        // yield remaining elements (if any)
+        while (!a.done) {
+          yield a.value;
+          a = iterA.next();
+        }
+
+        while (!b.done) {
+          yield b.value;
+          b = iterB.next();
+        }
+      }
+
+      // Example usage:
+      function* makeIterator(arr) {
+        for (const num of arr) yield num;
+      }
+
+      const foo = makeIterator([5, 10, 15]);
+      const bar = makeIterator([3, 8, 9]);
+
+      for (const num of mergeIterators(foo, bar)) {
+        console.log(num);
+      }
+    </script>
+  </body>
+</html>
