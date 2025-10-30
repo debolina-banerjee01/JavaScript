@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement a key value store, where keys and values are integers, with the
+      following methods: update(key, vl): updates the value at key to val, or
+      sets it if doesn't exist get(key): returns the value with key, or None if
+      no such value exists max_key(val): returns the largest key with value val,
+      or None if no key with that value exists For example, if we ran the
+      following calls: kv.update(1, 1) kv.update(2, 1) And then called
+      kv.max_key(1), it should return 2, since it's the largest key with value
+      1.
+    </title>
+  </head>
+  <body>
+    <script>
+      class KeyValueStore {
+        constructor() {
+          this.map = new Map(); // key → value
+          this.reverseMap = new Map(); // value → Set of keys
+        }
+
+        update(key, val) {
+          // If key already exists, remove from old value's set
+          if (this.map.has(key)) {
+            const oldVal = this.map.get(key);
+            if (this.reverseMap.has(oldVal)) {
+              this.reverseMap.get(oldVal).delete(key);
+              if (this.reverseMap.get(oldVal).size === 0) {
+                this.reverseMap.delete(oldVal);
+              }
+            }
+          }
+
+          // Update the key → value mapping
+          this.map.set(key, val);
+
+          // Update the reverse mapping (value → keys)
+          if (!this.reverseMap.has(val)) {
+            this.reverseMap.set(val, new Set());
+          }
+          this.reverseMap.get(val).add(key);
+        }
+
+        get(key) {
+          return this.map.has(key) ? this.map.get(key) : null;
+        }
+
+        max_key(val) {
+          if (!this.reverseMap.has(val)) return null;
+          return Math.max(...this.reverseMap.get(val));
+        }
+      }
+
+      // Example usage:
+      const kv = new KeyValueStore();
+      kv.update(1, 1);
+      kv.update(2, 1);
+      console.log(kv.max_key(1)); // Output: 2
+    </script>
+  </body>
+</html>
