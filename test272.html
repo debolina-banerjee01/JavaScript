@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The “active time” of a courier is the time between the pickup and dropoff of a delivery. Given a set of data formatted like the following:
+
+(delivery id, timestamp, pickup/dropoff)
+Calculate the total active time in seconds. A courier can pick up multiple orders before dropping them off. The timestamp is in unix epoch seconds.
+    </title>
+  </head>
+  <body>
+    <script>
+      function totalActiveTime(events) {
+        // Sort by timestamp (since they can be unordered)
+        events.sort((a, b) => a[1] - b[1]);
+
+        const activeDeliveries = new Set(); // track active delivery IDs
+        let totalActive = 0;
+        let lastTimestamp = null;
+
+        for (const [id, timestamp, action] of events) {
+          // If there are active deliveries, accumulate time since last event
+          if (lastTimestamp !== null && activeDeliveries.size > 0) {
+            totalActive += timestamp - lastTimestamp;
+          }
+
+          // Update active deliveries set
+          if (action === "pickup") {
+            activeDeliveries.add(id);
+          } else if (action === "dropoff") {
+            activeDeliveries.delete(id);
+          }
+
+          lastTimestamp = timestamp;
+        }
+
+        return totalActive;
+      }
+      const events = [
+        ["A", 100, "pickup"],
+        ["B", 120, "pickup"],
+        ["A", 150, "dropoff"],
+        ["B", 180, "dropoff"],
+        ["C", 200, "pickup"],
+        ["C", 220, "dropoff"],
+      ];
+
+      console.log(totalActiveTime(events)); // Output: 100 seconds
+    </script>
+  </body>
+</html>
