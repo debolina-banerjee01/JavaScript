@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>In JavaScript, how do you turn an Object into an Array []?</title>
+  </head>
+  <body>
+    <script>
+      //Convert object values → array
+      const obj = { x: 2, y: 3, z: 5 };
+      const arr = Object.values(obj);
+      console.log(arr); // [2, 3, 5]
+
+      //Convert object keys → array
+      const objNew = { x: 2, y: 3, z: 5 };
+      const arrNew = Object.keys(obj);
+      console.log(arrNew); // ['x', 'y', 'z']
+    </script>
+  </body>
+</html>
