@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The h-index is a metric used to measure the impact and productivity of a
+      scientist or researcher. A scientist has index h if h of their N papers
+      have at least h citations each, and the other N - h papers have no more
+      than h citations each. If there are multiple possible values for h, the
+      maximum value is used. Given an array of natural numbers, with each value
+      representing the number of citations of a researcher's paper, return the
+      h-index of that researcher.
+    </title>
+  </head>
+  <body>
+    <script>
+      function hIndex(citations) {
+        // Step 1: Sort the citations in descending order
+        citations.sort((a, b) => b - a);
+
+        // Step 2: Find the largest h such that citations[h - 1] >= h
+        let h = 0;
+        for (let i = 0; i < citations.length; i++) {
+          if (citations[i] >= i + 1) {
+            h = i + 1;
+          } else {
+            break;
+          }
+        }
+
+        return h;
+      }
+
+      // Example:
+      console.log(hIndex([4, 0, 0, 2, 3])); // Output: 2
+    </script>
+  </body>
+</html>
