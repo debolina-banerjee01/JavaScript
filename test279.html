@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a list of integers L, find the maximum length of a sequence of consecutive numbers that can be formed using elements from L.
+
+For example, given L = [5, 2, 99, 3, 4, 1, 100], return 5 as we can build a sequence [1, 2, 3, 4, 5] which has length 5.
+
+
+    </title>
+</head>
+<body>
+    <script>
+function closestCoin(position, coins) {
+  const [x, y] = position;
+  
+  // Use reduce to find the coin with the smallest Manhattan distance
+  return coins.reduce((closest, coin) => {
+    const [cx, cy] = coin;
+    const dist = Math.abs(x - cx) + Math.abs(y - cy);
+    
+    if (!closest) return { coin, dist }; // first coin
+    if (dist < closest.dist) return { coin, dist };
+    
+    return closest;
+  }, null).coin;
+}
+// Example usage:
+const position = [2, 3];
+const coins = [
+  [1, 1],
+  [4, 3],
+  [2, 5]
+];
+
+const nearest = closestCoin(position, coins);
+console.log(nearest); // → [4, 3] or [2, 5]
+
+    </script>
+</body>
+</html>
