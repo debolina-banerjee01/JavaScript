@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of numbers arr and a window of size k, print out the median
+      of each window of size k starting from the left and moving right by one
+      position each time.
+    </title>
+  </head>
+  <body>
+    <script>
+      function slidingWindowMedian(arr, k) {
+        // Helper function to calculate median from a sorted array
+        const getMedian = (window) => {
+          const mid = Math.floor(window.length / 2);
+          if (window.length % 2 === 0) {
+            return (window[mid - 1] + window[mid]) / 2;
+          } else {
+            return window[mid];
+          }
+        };
+
+        for (let i = 0; i <= arr.length - k; i++) {
+          // Extract the current window
+          const window = arr.slice(i, i + k);
+
+          // Sort the window to find the median
+          window.sort((a, b) => a - b);
+
+          // Compute and print the median
+          console.log(getMedian(window));
+        }
+      }
+
+      // Example usage
+      const arr = [-1, 5, 13, 8, 2, 3, 3, 1];
+      const k = 3;
+      slidingWindowMedian(arr, k);
+    </script>
+  </body>
+</html>
