@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string, generate all possible subsequences of the string.
+    </title>
+  </head>
+  <body>
+    <script>
+      function getSubsequences(str) {
+        const result = [];
+
+        function backtrack(current, index) {
+          // Base case: if we've processed all characters
+          if (index === str.length) {
+            if (current.length > 0) result.push(current); // skip empty subsequence
+            return;
+          }
+
+          // Include the current character
+          backtrack(current + str[index], index + 1);
+
+          // Exclude the current character
+          backtrack(current, index + 1);
+        }
+
+        backtrack("", 0);
+        return result;
+      }
+
+      // Example:
+      console.log(getSubsequences("xyz"));
+      // Output: [ 'x', 'y', 'xy', 'z', 'xz', 'yz', 'xyz' ]
+    </script>
+  </body>
+</html>
