@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement integer division without using the division operator. Your
+      function should return a tuple of (dividend, remainder) and it should take
+      two numbers, the product and divisor.
+    </title>
+  </head>
+  <body>
+    <script>
+      function divide(product, divisor) {
+        if (divisor === 0) throw new Error("Division by zero is not allowed.");
+
+        let quotient = 0;
+        let remainder = Math.abs(product);
+        const positiveDivisor = Math.abs(divisor);
+
+        // Subtract divisor repeatedly from product
+        while (remainder >= positiveDivisor) {
+          remainder -= positiveDivisor;
+          quotient++;
+        }
+
+        // Handle negative results
+        if ((product < 0 && divisor > 0) || (product > 0 && divisor < 0)) {
+          quotient = -quotient;
+        }
+
+        // Adjust remainder sign to match dividend
+        if (product < 0) remainder = -remainder;
+
+        return [quotient, remainder];
+      }
+
+      // Example:
+      console.log(divide(10, 3)); // [3, 1]
+    </script>
+  </body>
+</html>
