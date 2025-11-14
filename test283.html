@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Write a function to decode a Base64 string back to a hexadecimal string.
+    </title>
+  </head>
+  <body>
+    <script>
+      function base64ToHex(base64Str) {
+        // Decode Base64 into a binary string
+        const binary = atob(base64Str);
+
+        // Convert each character to a 2-digit hex value
+        let hex = "";
+        for (let i = 0; i < binary.length; i++) {
+          const byte = binary.charCodeAt(i).toString(16).padStart(2, "0");
+          hex += byte;
+        }
+
+        return hex;
+      }
+      console.log(base64ToHex("SGVsbG8="));
+      // Output: 48656c6c6f
+    </script>
+  </body>
+</html>
