@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Implement a function that converts a hex string to base64</title>
+  </head>
+  <body>
+    <script>
+      function hexToBase64(hex) {
+        // Remove any spaces or leading "0x"
+        hex = hex.replace(/^0x/, "").replace(/\s+/g, "");
+
+        // Convert hex string to a byte array
+        const bytes = [];
+        for (let i = 0; i < hex.length; i += 2) {
+          bytes.push(parseInt(hex.substr(i, 2), 16));
+        }
+
+        // Convert byte array to binary string
+        const binary = String.fromCharCode(...bytes);
+
+        // Convert binary string to Base64
+        return btoa(binary);
+      }
+      console.log(hexToBase64("48656c6c6f"));
+      // Output: SGVsbG8=
+    </script>
+  </body>
+</html>
