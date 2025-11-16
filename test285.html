@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement the function embolden(s, lst) which takes in a string s and list
+      of substrings lst, and wraps all substrings in s with an HTML bold tag <b>
+      and </b>. If two bold tags overlap or are contiguous, they should be
+      merged.
+    </title>
+  </head>
+  <body>
+    <script>
+      function embolden(s, lst) {
+        const n = s.length;
+        const bold = Array(n).fill(false);
+
+        // Mark all indices that should be bold
+        for (const sub of lst) {
+          let start = s.indexOf(sub);
+          while (start !== -1) {
+            let end = start + sub.length;
+            for (let i = start; i < end; i++) {
+              bold[i] = true;
+            }
+            start = s.indexOf(sub, start + 1);
+          }
+        }
+
+        // Build final string with merged bold tags
+        let result = "";
+        let i = 0;
+
+        while (i < n) {
+          if (!bold[i]) {
+            result += s[i];
+            i++;
+          } else {
+            // Start of bold segment
+            result += "<b>";
+            while (i < n && bold[i]) {
+              result += s[i];
+              i++;
+            }
+            result += "</b>";
+          }
+        }
+
+        return result;
+      }
+      console.log(embolden("abcdefg", ["bc", "ef"]));
+    </script>
+  </body>
+</html>
