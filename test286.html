@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are given an array of integers representing coin denominations and a total amount of money. 
+      Write a function to compute the fewest number of coins needed to make up that amount. If it is not possible to make that amount, return null.
+
+    </title>
+</head>
+<body>
+    <script>
+function coinChange(coins, amount) {
+  // dp[i] will hold the fewest coins needed to make amount i
+  const dp = Array(amount + 1).fill(Infinity);
+  dp[0] = 0;
+
+  for (let coin of coins) {
+    for (let i = coin; i <= amount; i++) {
+      dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+    }
+  }
+
+  return dp[amount] === Infinity ? null : dp[amount];
+}
+
+// Examples:
+console.log(coinChange([1, 5, 10], 56)); // 7
+console.log(coinChange([5, 8], 15));     // 3
+
+    </script>
+</body>
+</html>
