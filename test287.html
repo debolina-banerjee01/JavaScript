@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a string, sort it in decreasing order based on the frequency of characters. If there are multiple possible solutions, return any of them.
+
+
+    </title>
+</head>
+<body>
+    <script>
+function frequencySort(str) {
+    // Count character frequencies
+    const freq = {};
+    for (let char of str) {
+        freq[char] = (freq[char] || 0) + 1;
+    }
+
+    // Sort characters by frequency (descending)
+    const sortedChars = Object.keys(freq).sort((a, b) => freq[b] - freq[a]);
+
+    // Rebuild string
+    let result = "";
+    for (let char of sortedChars) {
+        result += char.repeat(freq[char]);
+    }
+
+    return result;
+}
+
+// Example:
+console.log(frequencySort("tweet"));  
+
+    </script>
+</body>
+</html>
