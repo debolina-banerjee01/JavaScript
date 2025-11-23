@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are given an unsorted list of 999,000 unique integers, each from 1 and 1,000,000. Find the missing 1000 numbers. 
+        What is the computational and space complexity of your solution?
+
+
+    </title>
+</head>
+<body>
+    <script>
+function findMissingNumbers(nums) {
+    const maxVal = 1_000_000;
+    const seen = new Uint8Array(maxVal + 1); // 1 byte per entry
+
+    // Mark present numbers
+    for (const n of nums) {
+        seen[n] = 1;
+    }
+
+    const missing = [];
+    for (let i = 1; i <= maxVal; i++) {
+        if (seen[i] === 0) {
+            missing.push(i);
+        }
+    }
+
+    return missing; // array of 1000 missing numbers
+}
+
+    </script>
+</body>
+</html>
