@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      We have some historical clickstream data gathered from our site
+      anonymously using cookies. The histories contain URLs that users have
+      visited in chronological order. Write a function that takes two users'
+      browsing histories as input and returns the longest contiguous sequence of
+      URLs that appear in both.
+    </title>
+  </head>
+  <body>
+    <script>
+      function longestCommonBrowsing(history1, history2) {
+        const m = history1.length;
+        const n = history2.length;
+
+        // DP table initialized with zeros
+        const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+        let maxLen = 0; // track max contiguous length
+        let endIndex = 0; // where the sequence ends in history1
+
+        for (let i = 1; i <= m; i++) {
+          for (let j = 1; j <= n; j++) {
+            if (history1[i - 1] === history2[j - 1]) {
+              dp[i][j] = dp[i - 1][j - 1] + 1;
+
+              if (dp[i][j] > maxLen) {
+                maxLen = dp[i][j];
+                endIndex = i; // end index in user1
+              }
+            }
+          }
+        }
+
+        // If no common contiguous sequence
+        if (maxLen === 0) return [];
+
+        // Slice out the longest contiguous block
+        return history1.slice(endIndex - maxLen, endIndex);
+      }
+
+      // Example
+      const user1 = ["/home", "/register", "/login", "/user", "/one", "/two"];
+      const user2 = ["/home", "/red", "/login", "/user", "/one", "/pink"];
+
+      console.log(longestCommonBrowsing(user1, user2));
+      // Output: ['/login', '/user', '/one']
+    </script>
+  </body>
+</html>
