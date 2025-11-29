@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a binary tree and an integer k, return whether there exists a
+      root-to-leaf path that sums up to k.
+    </title>
+  </head>
+  <body>
+    <script>
+      function hasPathSum(root, k) {
+        if (!root) return false;
+
+        // Check if it's a leaf node
+        if (!root.left && !root.right) {
+          return k - root.val === 0;
+        }
+
+        // Recur for left and right subtrees
+        return (
+          hasPathSum(root.left, k - root.val) ||
+          hasPathSum(root.right, k - root.val)
+        );
+      }
+      // Tree construction
+      const root = {
+        val: 8,
+        left: {
+          val: 4,
+          left: { val: 2, left: null, right: null },
+          right: { val: 6, left: null, right: null },
+        },
+        right: {
+          val: 13,
+          left: null,
+          right: { val: 19, left: null, right: null },
+        },
+      };
+
+      console.log(hasPathSum(root, 18)); // true (8 → 4 → 6)
+      console.log(hasPathSum(root, 21)); // true (8 → 13)
+      console.log(hasPathSum(root, 30)); // false
+    </script>
+  </body>
+</html>
