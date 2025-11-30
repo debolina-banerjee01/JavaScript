@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of strings, group anagrams together. For example, given the
+      following array: ['eat', 'ate', 'apt', 'pat', 'tea', 'now'] Return:
+      [['eat', 'ate', 'tea'], ['apt', 'pat'], ['now']]
+    </title>
+  </head>
+  <body>
+    <script>
+      function groupAnagrams(words) {
+        const map = new Map();
+
+        for (let word of words) {
+          const sorted = word.split("").sort().join("");
+
+          if (!map.has(sorted)) {
+            map.set(sorted, []);
+          }
+
+          map.get(sorted).push(word);
+        }
+
+        return Array.from(map.values());
+      }
+
+      // Example usage:
+      const arr = ["eat", "ate", "apt", "pat", "tea", "now"];
+      console.log(groupAnagrams(arr));
+    </script>
+  </body>
+</html>
