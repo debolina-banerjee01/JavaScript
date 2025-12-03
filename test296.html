@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given a list of jobs to be done, where each job is represented by
+      a start time and end time. Two jobs are compatible if they don't overlap.
+      Find the largest subset of compatible jobs.
+    </title>
+  </head>
+  <body>
+    <script>
+      function maxCompatibleJobs(jobs) {
+        // Step 1: Sort jobs by their end time
+        jobs.sort((a, b) => a[1] - b[1]);
+
+        const result = [];
+        let lastEnd = -Infinity;
+
+        for (let job of jobs) {
+          if (job[0] >= lastEnd) {
+            result.push(job);
+            lastEnd = job[1];
+          }
+        }
+
+        return result;
+      }
+
+      // Example input
+      const jobs = [
+        [0, 6],
+        [1, 4],
+        [3, 5],
+        [3, 8],
+        [4, 7],
+        [5, 9],
+        [6, 10],
+        [8, 11],
+      ];
+
+      console.log(maxCompatibleJobs(jobs));
+    </script>
+  </body>
+</html>
