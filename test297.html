@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a linked list and an integer k, remove the k-th node from the end of
+      the list and return the head of the list. k is guaranteed to be smaller
+      than the length of the list. Do this in one pass.
+    </title>
+  </head>
+  <body>
+    <script>
+      function removeKthFromEnd(head, k) {
+        let dummy = { next: head }; // Dummy node to handle edge cases
+        let fast = dummy;
+        let slow = dummy;
+
+        // Move fast pointer k+1 steps ahead
+        for (let i = 0; i <= k; i++) {
+          fast = fast.next;
+        }
+
+        // Move both pointers until fast reaches the end
+        while (fast) {
+          fast = fast.next;
+          slow = slow.next;
+        }
+
+        // Remove the target node
+        slow.next = slow.next.next;
+
+        return dummy.next;
+      }
+    </script>
+  </body>
+</html>
