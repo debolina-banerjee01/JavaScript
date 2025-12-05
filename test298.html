@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a list of strictly positive integers, partition the list into 3
+      contiguous partitions which each sum up to the same value. If not
+      possible, return null.
+    </title>
+  </head>
+  <body>
+    <script>
+      function partitionIntoThree(arr) {
+        const total = arr.reduce((a, b) => a + b, 0);
+
+        // If total is not divisible by 3, can't partition
+        if (total % 3 !== 0) return null;
+
+        const target = total / 3;
+        let currentSum = 0;
+        let partitions = [];
+        let currentPart = [];
+
+        for (let i = 0; i < arr.length; i++) {
+          currentSum += arr[i];
+          currentPart.push(arr[i]);
+
+          if (currentSum === target) {
+            partitions.push(currentPart);
+            currentPart = [];
+            currentSum = 0;
+          }
+        }
+
+        // Must get exactly 3 partitions and no leftover elements
+        if (partitions.length === 3 && currentPart.length === 0) {
+          return partitions;
+        }
+
+        return null;
+      }
+      console.log(partitionIntoThree([3, 5, 8, 0, 8]));
+    </script>
+  </body>
+</html>
