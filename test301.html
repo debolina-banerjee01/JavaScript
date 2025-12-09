@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      A permutation can be specified by an array P, where P[i] represents the
+      location of the element at i in the permutation.Given an array and a
+      permutation, apply the permutation to the array.
+    </title>
+  </head>
+  <body>
+    <script>
+      function applyPermutation(arr, perm) {
+        const result = new Array(arr.length);
+
+        for (let i = 0; i < arr.length; i++) {
+          result[i] = arr[perm[i]];
+        }
+
+        return result;
+      }
+
+      // Example usage:
+      const array = ["a", "b", "c"];
+      const permutation = [2, 1, 0];
+
+      console.log(applyPermutation(array, permutation)); // ["c", "b", "a"]
+    </script>
+  </body>
+</html>
