@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an array of numbers representing the stock prices of a company in chronological order and an integer k, return the maximum profit you can make from k buys and sells. You must buy the stock before you can sell it, and you must sell the stock before you can buy it again.
+
+
+    </title>
+</head>
+<body>
+    <script>
+function maxProfit(k, prices) {
+  const n = prices.length;
+  if (n === 0 || k === 0) return 0;
+
+  if (k >= Math.floor(n / 2)) {
+    let profit = 0;
+    for (let i = 1; i < n; i++) {
+      if (prices[i] > prices[i - 1]) {
+        profit += prices[i] - prices[i - 1];
+      }
+    }
+    return profit;
+  }
+
+  let prev = Array(n).fill(0);
+  let curr = Array(n).fill(0);
+
+  for (let t = 1; t <= k; t++) {
+    let maxDiff = -prices[0];
+    for (let i = 1; i < n; i++) {
+      curr[i] = Math.max(prev[i - 1], prices[i] + maxDiff);
+      maxDiff = Math.max(maxDiff, prev[i] - prices[i]);
+    }
+    [prev, curr] = [curr, prev];
+  }
+
+  return prev[n - 1];
+}
+
+    </script>
+</body>
+</html>
