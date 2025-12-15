@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string which we can delete at most k, return whether you can make
+      a palindrome.
+    </title>
+  </head>
+  <body>
+    <script>
+      function canMakePalindrome(s, k) {
+        const memo = new Map();
+
+        function dfs(left, right, remaining) {
+          // If deletions exceeded
+          if (remaining < 0) return false;
+
+          // Palindrome condition
+          if (left >= right) return true;
+
+          const key = `${left},${right},${remaining}`;
+          if (memo.has(key)) return memo.get(key);
+
+          let result;
+          if (s[left] === s[right]) {
+            result = dfs(left + 1, right - 1, remaining);
+          } else {
+            // Try deleting either left or right character
+            result =
+              dfs(left + 1, right, remaining - 1) ||
+              dfs(left, right - 1, remaining - 1);
+          }
+
+          memo.set(key, result);
+          return result;
+        }
+
+        return dfs(0, s.length - 1, k);
+      }
+      console.log(canMakePalindrome("waterrfetawx", 2)); // true
+    </script>
+  </body>
+</html>
