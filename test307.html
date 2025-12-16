@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The "look and say" sequence is defined as follows: beginning with the term 1, 
+      each subsequent term visually describes the digits appearing in the previous term.
+
+
+    </title>
+</head>
+<body>
+    <script>
+function lookAndSay(N) {
+    if (N <= 0) return "";
+
+    let term = "1";
+
+    for (let i = 1; i < N; i++) {
+        let nextTerm = "";
+        let count = 1;
+
+        for (let j = 1; j <= term.length; j++) {
+            if (j < term.length && term[j] === term[j - 1]) {
+                count++;
+            } else {
+                nextTerm += count + term[j - 1];
+                count = 1;
+            }
+        }
+
+        term = nextTerm;
+    }
+
+    return term;
+}
+
+// Example usage:
+console.log(lookAndSay(1)); // 1
+
+console.log(lookAndSay(4)); // 1211
+
+
+
+    </script>
+</body>
+</html>
