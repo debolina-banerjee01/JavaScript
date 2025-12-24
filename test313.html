@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A number is considered perfect if its digits sum up to exactly 10.
+
+Given a positive integer n, return the n-th perfect number.
+    </title>
+</head>
+<body>
+    <script>
+function nthPerfectNumber(n) {
+  let count = 0;
+  let num = 1;
+
+  function digitSum(x) {
+    return x
+      .toString()
+      .split("")
+      .reduce((sum, digit) => sum + Number(digit), 0);
+  }
+
+  while (true) {
+    if (digitSum(num) === 10) {
+      count++;
+      if (count === n) {
+        return num;
+      }
+    }
+    num++;
+  }
+}
+
+// Examples
+console.log(nthPerfectNumber(1)); // 19
+console.log(nthPerfectNumber(2)); // 28
+console.log(nthPerfectNumber(3)); // 37
+
+
+
+
+
+    </script>
+</body>
+</html>
