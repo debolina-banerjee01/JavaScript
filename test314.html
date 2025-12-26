@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a program to merge two binary trees. Each node in the new tree should hold a value equal to the sum of the values of the corresponding nodes of the input trees.
+
+If only one input tree has a node in a given position, the corresponding node in the new tree should match that input node.
+
+
+    </title>
+</head>
+<body>
+    <script>
+function mergeTrees(t1, t2) {
+  if (!t1) return t2;
+  if (!t2) return t1;
+
+  const merged = new TreeNode(t1.val + t2.val);
+  merged.left = mergeTrees(t1.left, t2.left);
+  merged.right = mergeTrees(t1.right, t2.right);
+
+  return merged;
+}
+
+    </script>
+</body>
+</html>
