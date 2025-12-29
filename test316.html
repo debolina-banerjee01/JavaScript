@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an array of integers in which two elements appear exactly once and all other elements appear exactly twice, find the two elements that appear only once.
+    </title>
+</head>
+<body>
+    <script>
+function findTwoUniques(arr) {
+  // Step 1: XOR all elements
+  let xorAll = 0;
+  for (let num of arr) {
+    xorAll ^= num;
+  }
+
+  // Step 2: Get rightmost set bit
+  let rightmostSetBit = xorAll & -xorAll;
+
+  // Step 3: Divide numbers into two groups
+  let x = 0, y = 0;
+  for (let num of arr) {
+    if (num & rightmostSetBit) {
+      x ^= num;
+    } else {
+      y ^= num;
+    }
+  }
+
+  return [x, y];
+}
+
+// Example
+const arr = [2, 4, 6, 8, 10, 2, 6, 10];
+console.log(findTwoUniques(arr)); // [4, 8] (order may vary)
+
+
+    </script>
+</body>
+</html>
