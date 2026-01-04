@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string of parentheses, find the balanced string that can be
+      produced from it using the minimum number of insertions and deletions. If
+      there are multiple solutions, return any of them. For example, given
+      "(()", you could return "(())". Given "))()(", you could return
+      "()()()()".
+    </title>
+  </head>
+  <body>
+    <script>
+      function makeBalanced(s) {
+        let result = [];
+        let balance = 0;
+
+        for (let ch of s) {
+          if (ch === "(") {
+            result.push(ch);
+            balance++;
+          } else if (ch === ")") {
+            if (balance > 0) {
+              result.push(ch);
+              balance--;
+            }
+            // else: delete this ')'
+          }
+        }
+
+        // Insert missing closing parentheses
+        while (balance > 0) {
+          result.push(")");
+          balance--;
+        }
+
+        return result.join("");
+      }
+      console.log(makeBalanced("(()")); // "(())"
+    </script>
+  </body>
+</html>
