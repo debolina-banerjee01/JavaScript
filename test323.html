@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given pre-order and in-order traversals of a binary tree, write a function
+      to reconstruct the tree.
+    </title>
+  </head>
+  <body>
+    <script>
+      class TreeNode {
+        constructor(val) {
+          this.val = val;
+          this.left = null;
+          this.right = null;
+        }
+      }
+
+      function buildTree(preorder, inorder) {
+        if (!preorder.length || !inorder.length) return null;
+
+        // Map value -> index for quick lookup in inorder
+        const indexMap = new Map();
+        inorder.forEach((val, idx) => indexMap.set(val, idx));
+
+        let preIndex = 0;
+
+        function helper(left, right) {
+          if (left > right) return null;
+
+          // Root value from preorder
+          const rootVal = preorder[preIndex++];
+          const root = new TreeNode(rootVal);
+
+          // Split inorder into left & right subtrees
+          const inorderIndex = indexMap.get(rootVal);
+
+          root.left = helper(left, inorderIndex - 1);
+          root.right = helper(inorderIndex + 1, right);
+
+          return root;
+        }
+
+        return helper(0, inorder.length - 1);
+      }
+      const preorder = ["a", "b", "d", "e", "c", "f", "g"];
+      const inorder = ["d", "b", "e", "a", "f", "c", "g"];
+
+      const tree = buildTree(preorder, inorder);
+      console.log(tree);
+    </script>
+  </body>
+</html>
