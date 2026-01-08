@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string and a set of characters, return the shortest substring
+      containing all the characters in the set. For example, given the string
+      "figehaeci" and the set of characters {a, e, i}, you should return "aeci".
+      If there is no substring containing all the characters in the set, return
+      null.
+    </title>
+  </head>
+  <body>
+    <script>
+      function shortestSubstring(s, charSet) {
+        if (!s || charSet.size === 0) return null;
+
+        // Frequency map of required characters
+        const required = new Map();
+        for (let ch of charSet) {
+          required.set(ch, 1);
+        }
+
+        let left = 0;
+        let formed = 0;
+        const requiredCount = required.size;
+
+        const windowCounts = new Map();
+
+        let minLen = Infinity;
+        let minWindow = null;
+
+        for (let right = 0; right < s.length; right++) {
+          const ch = s[right];
+          windowCounts.set(ch, (windowCounts.get(ch) || 0) + 1);
+
+          if (required.has(ch) && windowCounts.get(ch) === required.get(ch)) {
+            formed++;
+          }
+
+          // Try to shrink window
+          while (left <= right && formed === requiredCount) {
+            const windowLen = right - left + 1;
+            if (windowLen < minLen) {
+              minLen = windowLen;
+              minWindow = s.substring(left, right + 1);
+            }
+
+            const leftChar = s[left];
+            windowCounts.set(leftChar, windowCounts.get(leftChar) - 1);
+
+            if (
+              required.has(leftChar) &&
+              windowCounts.get(leftChar) < required.get(leftChar)
+            ) {
+              formed--;
+            }
+            left++;
+          }
+        }
+
+        return minWindow;
+      }
+      const s = "figehaeci";
+      const chars = new Set(["a", "e", "i"]);
+
+      console.log(shortestSubstring(s, chars)); // "aeci"
+    </script>
+  </body>
+</html>
