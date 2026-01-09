@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implement a stack API using only a heap. A stack implements the following methods:
+
+push(item), which adds an element to the stack
+pop(), which removes and returns the most recently added element (or throws an error if there is nothing on the stack)
+Recall that a heap has the following operations:
+
+push(item), which adds a new key to the heap
+pop(), which removes and returns the max value of the heap
+    </title>
+</head>
+<body>
+    <script>
+      class MaxHeap {
+  constructor() {
+    this.data = [];
+  }
+
+  push(item) {
+    this.data.push(item);
+    this._bubbleUp(this.data.length - 1);
+  }
+
+  pop() {
+    if (this.data.length === 0) {
+      throw new Error("Heap is empty");
+    }
+
+    const max = this.data[0];
+    const end = this.data.pop();
+
+    if (this.data.length > 0) {
+      this.data[0] = end;
+      this._bubbleDown(0);
+    }
+
+    return max;
+  }
+
+  _bubbleUp(index) {
+    while (index > 0) {
+      const parent = Math.floor((index - 1) / 2);
+      if (this.data[parent].priority >= this.data[index].priority) break;
+      [this.data[parent], this.data[index]] = [this.data[index], this.data[parent]];
+      index = parent;
+    }
+  }
+
+  _bubbleDown(index) {
+    const length = this.data.length;
+
+    while (true) {
+      let largest = index;
+      const left = 2 * index + 1;
+      const right = 2 * index + 2;
+
+      if (left < length && this.data[left].priority > this.data[largest].priority) {
+        largest = left;
+      }
+      if (right < length && this.data[right].priority > this.data[largest].priority) {
+        largest = right;
+      }
+      if (largest === index) break;
+
+      [this.data[index], this.data[largest]] = [this.data[largest], this.data[index]];
+      index = largest;
+    }
+  }
+}
+
+class StackUsingHeap {
+  constructor() {
+    this.heap = new MaxHeap();
+    this.counter = 0;
+  }
+
+  push(item) {
+    this.heap.push({
+      priority: this.counter++,
+      value: item
+    });
+  }
+
+  pop() {
+    if (this.counter === 0) {
+      throw new Error("Stack is empty");
+    }
+    return this.heap.pop().value;
+  }
+}
+const stack = new StackUsingHeap();
+
+stack.push(10);
+stack.push(20);
+stack.push(30);
+
+console.log(stack.pop()); // 30
+console.log(stack.pop()); // 20
+console.log(stack.pop()); // 10
+
+    </script>
+</body>
+</html>
