@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an unordered list of flights taken by someone, each represented as (origin, destination) pairs, and a starting airport, compute the person's 
+      itinerary. If no such itinerary exists, return null. If there are multiple possible itineraries, return the lexicographically smallest one. All flights 
+      must be used in the itinerary.
+    </title>
+</head>
+<body>
+    <script>
+    function findItinerary(flights, start) {
+  const graph = new Map();
+
+  // Build adjacency list
+  for (const [from, to] of flights) {
+    if (!graph.has(from)) graph.set(from, []);
+    graph.get(from).push(to);
+  }
+
+  // Sort destinations in reverse lexicographical order
+  for (const [key, list] of graph) {
+    list.sort().reverse();
+  }
+
+  const itinerary = [];
+
+  function dfs(airport) {
+    const destinations = graph.get(airport) || [];
+    while (destinations.length > 0) {
+      const next = destinations.pop(); // smallest lexicographically
+      dfs(next);
+    }
+    itinerary.push(airport);
+  }
+
+  dfs(start);
+
+  // Must use all flights: result length should be flights + 1
+  if (itinerary.length !== flights.length + 1) {
+    return null;
+  }
+
+  return itinerary.reverse();
+}
+console.log(
+  findItinerary(
+    [['SFO','HKO'], ['YYZ','SFO'], ['YUL','YYZ'], ['HKO','ORD']],
+    'YUL'
+  )
+);
+// ['YUL', 'YYZ', 'SFO', 'HKO', 'ORD']
+
+console.log(
+  findItinerary(
+    [['SFO','COM'], ['COM','YYZ']],
+    'COM'
+  )
+);
+// null
+    </script>
+</body>
+</html>
