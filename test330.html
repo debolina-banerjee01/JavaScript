@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a pivot x, and a list lst, partition the list into three parts. 
+      The first part contains all elements in lst that are less than x 
+      The second part contains all elements in lst that are equal to x 
+      The third part contains all elements in lst that are larger than x. Ordering within a part
+      can be arbitrary.
+    </title>
+  </head>
+  <body>
+    <script>
+      function partitionList(lst, x) {
+        const less = [];
+        const equal = [];
+        const greater = [];
+
+        for (const num of lst) {
+          if (num < x) {
+            less.push(num);
+          } else if (num === x) {
+            equal.push(num);
+          } else {
+            greater.push(num);
+          }
+        }
+
+        return [...less, ...equal, ...greater];
+      }
+
+      // Example usage
+      const x = 10;
+      const lst = [9, 12, 3, 5, 14, 10, 10];
+
+      console.log(partitionList(lst, x));
+      // Possible output: [9, 3, 5, 10, 10, 12, 14]
+    </script>
+  </body>
+</html>
