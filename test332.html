@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a 32-bit positive integer N, determine whether it is a power of four
+      in faster than O(log N) time.
+    </title>
+  </head>
+  <body>
+    <script>
+      function isPowerOfFour(n) {
+        if (n <= 0) return false;
+
+        // Check power of 2 AND bit in even position
+        return (n & (n - 1)) === 0 && (n & 0x55555555) !== 0;
+      }
+      console.log(isPowerOfFour(1)); // true  (4^0)
+    </script>
+  </body>
+</html>
