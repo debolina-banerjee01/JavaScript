@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement integer exponentiation. That is, implement the pow(x, y)
+      function, where x and y are integers and returns x^y. Do this faster than
+      the naive method of repeated multiplication.
+    </title>
+  </head>
+  <body>
+    <script>
+      function pow(x, y) {
+        if (y === 0) return 1;
+
+        let result = 1;
+        let base = x;
+        let exp = y;
+
+        while (exp > 0) {
+          // If exponent is odd, multiply result by base
+          if (exp & 1) {
+            result *= base;
+          }
+          // Square the base
+          base *= base;
+          // Divide exponent by 2
+          exp >>= 1;
+        }
+
+        return result;
+      }
+
+      // Example
+      console.log(pow(2, 10)); // 1024
+    </script>
+  </body>
+</html>
