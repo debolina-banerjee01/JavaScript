@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of strictly the characters 'R', 'G', and 'B', segregate the
+      values of the array so that all the Rs come first, the Gs come second, and
+      the Bs come last. You can only swap elements of the array. Do this in
+      linear time and in-place. For example, given the array ['G', 'B', 'R',
+      'R', 'B', 'R', 'G'], it should become ['R', 'R', 'R', 'G', 'G', 'B', 'B'].
+    </title>
+  </head>
+  <body>
+    <script>
+      function segregateRGB(arr) {
+        let low = 0;
+        let mid = 0;
+        let high = arr.length - 1;
+
+        while (mid <= high) {
+          if (arr[mid] === "R") {
+            // Swap arr[low] and arr[mid]
+            [arr[low], arr[mid]] = [arr[mid], arr[low]];
+            low++;
+            mid++;
+          } else if (arr[mid] === "G") {
+            mid++;
+          } else {
+            // arr[mid] === 'B'
+            // Swap arr[mid] and arr[high]
+            [arr[mid], arr[high]] = [arr[high], arr[mid]];
+            high--;
+          }
+        }
+
+        return arr;
+      }
+
+      // Example
+      const arr = ["G", "B", "R", "R", "B", "R", "G"];
+      console.log(segregateRGB(arr));
+      // Output: ['R', 'R', 'R', 'G', 'G', 'B', 'B']
+    </script>
+  </body>
+</html>
