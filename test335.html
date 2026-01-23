@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an even number (greater than 2), return two prime numbers whose sum
+      will be equal to the given number.
+    </title>
+  </head>
+  <body>
+    <script>
+      function isPrime(num) {
+        if (num < 2) return false;
+        for (let i = 2; i * i <= num; i++) {
+          if (num % i === 0) return false;
+        }
+        return true;
+      }
+
+      function goldbachPair(n) {
+        if (n <= 2 || n % 2 !== 0) {
+          return null; // invalid input
+        }
+
+        for (let i = 2; i <= n / 2; i++) {
+          if (isPrime(i) && isPrime(n - i)) {
+            return [i, n - i];
+          }
+        }
+        return null;
+      }
+      console.log(goldbachPair(26)); // [3, 23]
+    </script>
+  </body>
+</html>
