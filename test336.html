@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You're given a string consisting solely of (, ), and *. * can represent
+      either a (, ), or an empty string. Determine whether the parentheses are
+      balanced.
+    </title>
+  </head>
+  <body>
+    <script>
+      function isBalanced(s) {
+        let minOpen = 0;
+        let maxOpen = 0;
+
+        for (let ch of s) {
+          if (ch === "(") {
+            minOpen++;
+            maxOpen++;
+          } else if (ch === ")") {
+            minOpen--;
+            maxOpen--;
+          } else if (ch === "*") {
+            // * can be (, ), or empty
+            minOpen--; // if * is )
+            maxOpen++; // if * is (
+          }
+
+          // Too many closing brackets
+          if (maxOpen < 0) return false;
+
+          // minOpen should never be negative
+          if (minOpen < 0) minOpen = 0;
+        }
+
+        return minOpen === 0;
+      }
+      console.log(isBalanced("(*)")); // true
+      console.log(isBalanced(")*(")); // false
+    </script>
+  </body>
+</html>
