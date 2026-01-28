@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given the root of a binary search tree, and a target K, return two nodes
+      in the tree whose sum equals K.
+    </title>
+  </head>
+  <body>
+    <script>
+      // Definition of a tree node
+      class TreeNode {
+        constructor(val, left = null, right = null) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+        }
+      }
+
+      function findTwoSumBST(root, K) {
+        const nodes = [];
+
+        // In-order traversal to get sorted values
+        function inorder(node) {
+          if (!node) return;
+          inorder(node.left);
+          nodes.push(node);
+          inorder(node.right);
+        }
+
+        inorder(root);
+
+        // Two-pointer approach
+        let left = 0;
+        let right = nodes.length - 1;
+
+        while (left < right) {
+          const sum = nodes[left].val + nodes[right].val;
+
+          if (sum === K) {
+            return [nodes[left], nodes[right]];
+          } else if (sum < K) {
+            left++;
+          } else {
+            right--;
+          }
+        }
+
+        return null; // no such pair
+      }
+      // Constructing the BST
+      const root = new TreeNode(
+        10,
+        new TreeNode(5),
+        new TreeNode(15, new TreeNode(11), new TreeNode(15)),
+      );
+
+      const result = findTwoSumBST(root, 20);
+
+      if (result) {
+        console.log("Nodes found:", result[0].val, result[1].val);
+      } else {
+        console.log("No pair found");
+      }
+    </script>
+  </body>
+</html>
