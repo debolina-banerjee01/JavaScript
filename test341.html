@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given a list of data entries that represent entries and exits of
+      groups of people into a building. An entry looks like this: {"timestamp":
+      1526579928, count: 3, "type": "enter"} This means 3 people entered the
+      building. An exit looks like this: {"timestamp": 1526580382, count: 2,
+      "type": "exit"} This means that 2 people exited the building. timestamp is
+      in Unix time. Find the busiest period in the building, that is, the time
+      with the most people in the building. Return it as a pair of (start, end)
+      timestamps. You can assume the building always starts off and ends up
+      empty, i.e. with 0 people inside.
+    </title>
+  </head>
+  <body>
+    <script>
+      function busiestPeriod(entries) {
+        // Sort by timestamp
+        entries.sort((a, b) => a.timestamp - b.timestamp);
+
+        let currentCount = 0;
+        let maxCount = 0;
+        let busiestStart = null;
+        let busiestEnd = null;
+
+        for (let i = 0; i < entries.length; i++) {
+          const { timestamp, count, type } = entries[i];
+
+          // Update current count
+          if (type === "enter") {
+            currentCount += count;
+          } else {
+            currentCount -= count;
+          }
+
+          // If new maximum reached, mark start
+          if (currentCount > maxCount) {
+            maxCount = currentCount;
+            busiestStart = timestamp;
+
+            // End will be at the next timestamp (or same if last)
+            busiestEnd =
+              i + 1 < entries.length ? entries[i + 1].timestamp : timestamp;
+          }
+        }
+
+        return [busiestStart, busiestEnd];
+      }
+      const data = [
+        { timestamp: 1526579928, count: 3, type: "enter" },
+        { timestamp: 1526580382, count: 2, type: "exit" },
+        { timestamp: 1526580383, count: 5, type: "enter" },
+        { timestamp: 1526580400, count: 1, type: "exit" },
+      ];
+
+      console.log(busiestPeriod(data));
+    </script>
+  </body>
+</html>
