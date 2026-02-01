@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a word W and a string S, find all starting indices in S which are anagrams of W.
+
+For example, given that W is "ab", and S is "abxaba", return 0, 3, and 4.
+    </title>
+</head>
+<body>
+    <script>
+    function findAnagrams(W, S) {
+  const result = [];
+  const wLen = W.length;
+  const sLen = S.length;
+
+  if (wLen > sLen) return result;
+
+  const wCount = {};
+  const windowCount = {};
+
+  // Build frequency map for W
+  for (let char of W) {
+    wCount[char] = (wCount[char] || 0) + 1;
+  }
+
+  // Sliding window
+  for (let i = 0; i < sLen; i++) {
+    const char = S[i];
+    windowCount[char] = (windowCount[char] || 0) + 1;
+
+    // Remove character left out of the window
+    if (i >= wLen) {
+      const leftChar = S[i - wLen];
+      windowCount[leftChar]--;
+      if (windowCount[leftChar] === 0) {
+        delete windowCount[leftChar];
+      }
+    }
+
+    // Compare maps when window size matches
+    if (i >= wLen - 1 && isEqual(wCount, windowCount)) {
+      result.push(i - wLen + 1);
+    }
+  }
+
+  return result;
+}
+
+function isEqual(a, b) {
+  const keysA = Object.keys(a);
+  const keysB = Object.keys(b);
+
+  if (keysA.length !== keysB.length) return false;
+
+  for (let key of keysA) {
+    if (a[key] !== b[key]) return false;
+  }
+  return true;
+}
+
+// Example
+console.log(findAnagrams("ab", "abxaba")); // [0, 3, 4]
+
+    </script>
+</body>
+</html>
