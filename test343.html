@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a program that determines the smallest number of perfect squares that sum up to N.
+
+Here are a few examples:
+
+Given N = 4, return 1 (4)
+Given N = 17, return 2 (16 + 1)
+Given N = 18, return 2 (9 + 9)
+    </title>
+</head>
+<body>
+    <script>
+    function minPerfectSquares(N) {
+  // dp[i] = minimum number of perfect squares that sum to i
+  const dp = new Array(N + 1).fill(Infinity);
+  dp[0] = 0;
+
+  for (let i = 1; i <= N; i++) {
+    for (let j = 1; j * j <= i; j++) {
+      dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
+    }
+  }
+
+  return dp[N];
+}
+
+// Examples
+console.log(minPerfectSquares(4));   // 1  -> 4
+console.log(minPerfectSquares(17));  // 2  -> 16 + 1
+console.log(minPerfectSquares(18));  // 2  -> 9 + 9
+
+    </script>
+</body>
+</html>
