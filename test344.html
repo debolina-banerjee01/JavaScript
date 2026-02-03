@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are given a string consisting of the letters x and y, such as xyxxxyxyy. In addition, you have an operation called flip, which changes a single x to y or vice versa.
+
+Determine how many times you would need to apply this operation to ensure that all x's come before all y's. In the preceding example, it suffices to flip the second and sixth characters, so you should return 2.
+    </title>
+</head>
+<body>
+    <script>
+   function minFlipsXY(s) {
+  let yCount = 0;
+  let flips = 0;
+
+  for (const ch of s) {
+    if (ch === 'y') {
+      yCount++;
+    } else { // ch === 'x'
+      // Either flip this x to y (flips + 1)
+      // or flip all previous y's to x (yCount)
+      flips = Math.min(flips + 1, yCount);
+    }
+  }
+
+  return flips;
+}
+
+// Example
+console.log(minFlipsXY("xyxxxyxyy")); // 2
+
+    </script>
+</body>
+</html>
