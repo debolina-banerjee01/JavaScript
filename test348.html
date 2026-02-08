@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a set of distinct positive integers, find the largest subset such
+      that every pair of elements in the subset (i, j) satisfies either i % j =
+      0 or j % i = 0.
+    </title>
+  </head>
+  <body>
+    <script>
+      function largestDivisibleSubset(nums) {
+        if (nums.length === 0) return [];
+
+        // Step 1: Sort
+        nums.sort((a, b) => a - b);
+
+        const n = nums.length;
+        const dp = new Array(n).fill(1);
+        const prev = new Array(n).fill(-1);
+
+        let maxLen = 1;
+        let maxIndex = 0;
+
+        // Step 2: DP computation
+        for (let i = 1; i < n; i++) {
+          for (let j = 0; j < i; j++) {
+            if (nums[i] % nums[j] === 0 && dp[j] + 1 > dp[i]) {
+              dp[i] = dp[j] + 1;
+              prev[i] = j;
+            }
+          }
+
+          if (dp[i] > maxLen) {
+            maxLen = dp[i];
+            maxIndex = i;
+          }
+        }
+
+        // Step 3: Reconstruct subset
+        const result = [];
+        let k = maxIndex;
+        while (k !== -1) {
+          result.push(nums[k]);
+          k = prev[k];
+        }
+
+        return result.reverse();
+      }
+      console.log(largestDivisibleSubset([3, 5, 10, 20, 21]));
+      // Output: [5, 10, 20]
+    </script>
+  </body>
+</html>
