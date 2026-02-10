@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Given the head of a singly linked list, reverse it in-place.</title>
+  </head>
+  <body>
+    <script>
+      class ListNode {
+        constructor(val) {
+          this.val = val;
+          this.next = null;
+        }
+      }
+
+      function reverseLinkedList(head) {
+        let prev = null;
+        let curr = head;
+
+        while (curr !== null) {
+          let next = curr.next; // store next node
+          curr.next = prev; // reverse pointer
+          prev = curr; // move prev forward
+          curr = next; // move curr forward
+        }
+
+        return prev; // new head
+      }
+      // Create list: 1 -> 2 -> 3 -> 4
+      let head = new ListNode(1);
+      head.next = new ListNode(2);
+      head.next.next = new ListNode(3);
+      head.next.next.next = new ListNode(4);
+
+      // Reverse the list
+      head = reverseLinkedList(head);
+
+      // Print reversed list
+      let temp = head;
+      while (temp) {
+        console.log(temp.val);
+        temp = temp.next;
+      }
+    </script>
+  </body>
+</html>
