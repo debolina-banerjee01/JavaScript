@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      A tree is symmetric if its data and shape remain unchanged when it is
+      reflected about the root node. Given a k-ary tree, determine whether it is
+      symmetric.
+    </title>
+  </head>
+  <body>
+    <script>
+      function isSymmetric(root) {
+        if (!root) return true;
+        return isMirror(root.children);
+      }
+
+      function isMirror(children) {
+        let left = 0;
+        let right = children.length - 1;
+
+        while (left <= right) {
+          if (!areMirrors(children[left], children[right])) {
+            return false;
+          }
+          left++;
+          right--;
+        }
+        return true;
+      }
+
+      function areMirrors(a, b) {
+        if (!a && !b) return true;
+        if (!a || !b) return false;
+        if (a.val !== b.val) return false;
+
+        if (a.children.length !== b.children.length) return false;
+
+        for (let i = 0; i < a.children.length; i++) {
+          if (
+            !areMirrors(a.children[i], b.children[b.children.length - 1 - i])
+          ) {
+            return false;
+          }
+        }
+        return true;
+      }
+    </script>
+  </body>
+</html>
