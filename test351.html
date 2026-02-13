@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a real number n, find the square root of n. For example, given n =
+      9, return 3
+    </title>
+  </head>
+  <body>
+    <script>
+      function squareRoot(n) {
+        if (n < 0) return NaN; // square root of negative number is not real
+        return Math.sqrt(n);
+      }
+
+      // Example
+      console.log(squareRoot(9)); // 3
+      console.log(squareRoot(2)); // 1.4142135623730951
+    </script>
+  </body>
+</html>
