@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of numbers and an index i, return the index of the nearest larger number of the number at index i, where distance is measured in array indices.
+
+For example, given [4, 1, 3, 5, 6] and index 0, you should return 3.
+
+If two distances to larger numbers are the equal, then return any one of them. If the array at i doesn't have a nearest larger integer, then return null.
+    </title>
+  </head>
+  <body>
+    <script>
+      function nearestLarger(arr, i) {
+        const n = arr.length;
+        const left = new Array(n).fill(null);
+        const right = new Array(n).fill(null);
+        let stack = [];
+
+        // Find nearest larger to the LEFT
+        for (let j = 0; j < n; j++) {
+          while (stack.length && arr[stack[stack.length - 1]] <= arr[j]) {
+            stack.pop();
+          }
+          if (stack.length) {
+            left[j] = stack[stack.length - 1];
+          }
+          stack.push(j);
+        }
+
+        stack = [];
+
+        // Find nearest larger to the RIGHT
+        for (let j = n - 1; j >= 0; j--) {
+          while (stack.length && arr[stack[stack.length - 1]] <= arr[j]) {
+            stack.pop();
+          }
+          if (stack.length) {
+            right[j] = stack[stack.length - 1];
+          }
+          stack.push(j);
+        }
+
+        const leftIndex = left[i];
+        const rightIndex = right[i];
+
+        if (leftIndex === null && rightIndex === null) {
+          return null;
+        }
+
+        if (leftIndex === null) return rightIndex;
+        if (rightIndex === null) return leftIndex;
+
+        const leftDist = Math.abs(i - leftIndex);
+        const rightDist = Math.abs(rightIndex - i);
+
+        return leftDist <= rightDist ? leftIndex : rightIndex;
+      }
+      console.log(nearestLarger([4, 1, 3, 5, 6], 0));
+    </script>
+  </body>
+</html>
