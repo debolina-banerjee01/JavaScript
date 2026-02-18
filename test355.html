@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Write an algorithm that computes the reversal of a directed graph. For
+      example, if a graph consists of A -> B -> C, it should become A <- B <- C.
+    </title>
+  </head>
+  <body>
+    <script>
+      function reverseGraph(graph) {
+        const reversed = {};
+
+        // Step 1: Initialize all vertices
+        for (let node in graph) {
+          reversed[node] = [];
+        }
+
+        // Step 2: Reverse all edges
+        for (let node in graph) {
+          for (let neighbor of graph[node]) {
+            reversed[neighbor].push(node);
+          }
+        }
+
+        return reversed;
+      }
+      const graph = {
+        A: ["B"],
+        B: ["C"],
+        C: [],
+      };
+
+      const reversedGraph = reverseGraph(graph);
+      console.log(reversedGraph);
+    </script>
+  </body>
+</html>
