@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a dictionary of words and a string made up of those words (no spaces), return the original sentence in a list. If there is more than one possible reconstruction, return any of them. If there is no possible reconstruction, then return null.
+
+For example, given the set of words 'quick', 'brown', 'the', 'fox', and the string "thequickbrownfox", you should return ['the', 'quick', 'brown', 'fox'].
+
+Given the set of words 'bed', 'bath', 'bedbath', 'and', 'beyond', and the string "bedbathandbeyond", return either ['bed', 'bath', 'and', 'beyond] or ['bedbath', 'and', 'beyond'].
+    </title>
+</head>
+<body>
+    <script>
+   function reconstructSentence(words, s) {
+  const wordSet = new Set(words);
+  const memo = new Map(); // memo[startIndex] = null or array result
+
+  function dfs(start) {
+    if (start === s.length) return [];
+    if (memo.has(start)) return memo.get(start);
+
+    for (let end = start + 1; end <= s.length; end++) {
+      const prefix = s.slice(start, end);
+
+      if (wordSet.has(prefix)) {
+        const rest = dfs(end);
+        if (rest !== null) {
+          const result = [prefix, ...rest];
+          memo.set(start, result);
+          return result;
+        }
+      }
+    }
+
+    memo.set(start, null);
+    return null;
+  }
+
+  return dfs(0);
+}
+console.log(
+  reconstructSentence(
+    ['quick', 'brown', 'the', 'fox'],
+    'thequickbrownfox'
+  )
+);
+// Output: ['the', 'quick', 'brown', 'fox']
+
+console.log(
+  reconstructSentence(
+    ['bed', 'bath', 'bedbath', 'and', 'beyond'],
+    'bedbathandbeyond'
+  )
+);
+// Output: ['bed', 'bath', 'and', 'beyond']
+// or ['bedbath', 'and', 'beyond']
+    </script>
+</body>
+</html>
