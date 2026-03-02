@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given the root to a binary search tree, find the second largest node in the tree.
+    </title>
+</head>
+<body>
+    <script>
+  function findSecondLargest(root) {
+    if (!root || (!root.left && !root.right)) {
+        throw new Error("Tree must have at least 2 nodes");
+    }
+
+    let current = root;
+
+    while (current) {
+        // Case 1:
+        // Current is parent of largest,
+        // and largest has no children
+        if (current.right &&
+            !current.right.left &&
+            !current.right.right) {
+            return current.val;
+        }
+
+        // Case 2:
+        // Current is largest and has left subtree
+        if (!current.right) {
+            return findLargest(current.left);
+        }
+
+        current = current.right;
+    }
+}
+
+function findLargest(node) {
+    while (node.right) {
+        node = node.right;
+    }
+    return node.val;
+}
+       
+
+    </script>
+</body>
+</html>
