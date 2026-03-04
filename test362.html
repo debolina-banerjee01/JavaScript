@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an integer k and a string s, find the length of the longest substring that contains at most k distinct characters.
+
+For example, given s = "abcba" and k = 2, the longest substring with k distinct characters is "bcb".
+    </title>
+</head>
+<body>
+    <script>
+  function longestSubstringWithKDistinct(s, k) {
+    if (k === 0 || s.length === 0) return 0;
+
+    let left = 0;
+    let maxLength = 0;
+    const charCount = new Map();
+
+    for (let right = 0; right < s.length; right++) {
+        // Add current character to the map
+        charCount.set(s[right], (charCount.get(s[right]) || 0) + 1);
+
+        // If more than k distinct characters, shrink window from left
+        while (charCount.size > k) {
+            charCount.set(s[left], charCount.get(s[left]) - 1);
+
+            if (charCount.get(s[left]) === 0) {
+                charCount.delete(s[left]);
+            }
+
+            left++;
+        }
+
+        // Update max length
+        maxLength = Math.max(maxLength, right - left + 1);
+    }
+
+    return maxLength;
+}
+console.log(longestSubstringWithKDistinct("abcba", 2)); 
+// Output: 3  ("bcb")    
+
+    </script>
+</body>
+</html>
