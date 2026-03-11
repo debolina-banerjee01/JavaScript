@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given n numbers as well as n probabilities that sum up to 1. Write a function to generate one of the numbers with its corresponding probability.
+    </title>
+  </head>
+  <body>
+    <script>
+      function pickNumber(numbers, probabilities) {
+    const r = Math.random(); // random number between 0 and 1
+    let cumulative = 0;
+
+    for (let i = 0; i < numbers.length; i++) {
+        cumulative += probabilities[i];
+        if (r < cumulative) {
+            return numbers[i];
+        }
+    }
+
+    return numbers[numbers.length - 1]; // fallback
+}
+
+// Example
+const numbers = [1, 2, 3, 4];
+const probabilities = [0.1, 0.5, 0.2, 0.2];
+
+console.log(pickNumber(numbers, probabilities));
+    </script>
+  </body>
+</html>
