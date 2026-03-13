@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a stream of elements too large to store in memory, pick a random element from the stream with uniform probability.
+    </title>
+</head>
+<body>
+    <script>
+function pickRandomFromStream(stream) {
+  let result = null;
+  let count = 0;
+
+  for (const item of stream) {
+    count++;
+
+    if (Math.random() < 1 / count) {
+      result = item;
+    }
+  }
+
+  return result;
+}
+function* generateStream() {
+  for (let i = 1; i <= 1000000; i++) {
+    yield i;
+  }
+}
+
+const stream = generateStream();
+const randomElement = pickRandomFromStream(stream);
+
+console.log(randomElement);
+    </script>
+</body>
+</html>
