@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Recall that a full binary tree is one in which each node is either a leaf
+      node, or has two children. Given a binary tree, convert it to a full one
+      by removing nodes with only one child.
+    </title>
+  </head>
+  <body>
+    <script>
+      class Node {
+        constructor(val, left = null, right = null) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+        }
+      }
+
+      function convertToFullTree(root) {
+        if (!root) return null;
+
+        // Recursively process children
+        root.left = convertToFullTree(root.left);
+        root.right = convertToFullTree(root.right);
+
+        // If leaf node
+        if (!root.left && !root.right) {
+          return root;
+        }
+
+        // If only right child exists
+        if (!root.left) {
+          return root.right;
+        }
+
+        // If only left child exists
+        if (!root.right) {
+          return root.left;
+        }
+
+        // If both children exist
+        return root;
+      }
+      let root = new Node(0);
+      root.left = new Node(1);
+      root.right = new Node(2);
+
+      root.left.left = new Node(3);
+      root.left.left.right = new Node(5);
+
+      root.right.right = new Node(4);
+      root.right.right.left = new Node(6);
+      root.right.right.right = new Node(7);
+
+      root = convertToFullTree(root);
+      console.log(root);
+    </script>
+  </body>
+</html>
