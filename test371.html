@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of integers out of order, determine the bounds of the
+      smallest window that must be sorted in order for the entire array to be
+      sorted. For example, given [3, 7, 5, 6, 9], you should return (1, 3).
+    </title>
+  </head>
+  <body>
+    <script>
+      function smallestWindowToSort(arr) {
+        let n = arr.length;
+
+        let start = 0;
+        while (start < n - 1 && arr[start] <= arr[start + 1]) {
+          start++;
+        }
+
+        // Already sorted
+        if (start === n - 1) return null;
+
+        let end = n - 1;
+        while (end > 0 && arr[end] >= arr[end - 1]) {
+          end--;
+        }
+
+        // Find min and max in the window
+        let subMin = Infinity;
+        let subMax = -Infinity;
+
+        for (let i = start; i <= end; i++) {
+          subMin = Math.min(subMin, arr[i]);
+          subMax = Math.max(subMax, arr[i]);
+        }
+
+        // Expand start
+        while (start > 0 && arr[start - 1] > subMin) {
+          start--;
+        }
+
+        // Expand end
+        while (end < n - 1 && arr[end + 1] < subMax) {
+          end++;
+        }
+
+        return [start, end];
+      }
+
+      // Example
+      console.log(smallestWindowToSort([3, 7, 5, 6, 9])); // [1, 3]
+    </script>
+  </body>
+</html>
