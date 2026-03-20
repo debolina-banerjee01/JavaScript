@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You run an e-commerce website and want to record the last N order ids in a log. Implement a data structure to accomplish this, with the following API:
+
+record(order_id): adds the order_id to the log
+get_last(i): gets the ith last element from the log. i is guaranteed to be smaller than or equal to N.
+You should be as efficient with time and space as possible.
+    </title>
+  </head>
+  <body>
+    <script>
+      class OrderLog {
+  constructor(N) {
+    this.size = N;
+    this.buffer = new Array(N);
+    this.current = 0; // points to next insertion index
+  }
+
+  record(order_id) {
+    this.buffer[this.current] = order_id;
+    this.current = (this.current + 1) % this.size;
+  }
+
+  get_last(i) {
+    if (i <= 0 || i > this.size) {
+      throw new Error("Invalid value of i");
+    }
+
+    // Calculate index of ith last element
+    const index = (this.current - i + this.size) % this.size;
+    return this.buffer[index];
+  }
+}
+    </script>
+  </body>
+</html>
