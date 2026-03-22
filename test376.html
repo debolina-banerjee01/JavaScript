@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a linked list, sort it in O(n log n) time and constant space. For
+      example, the linked list 4 -> 1 -> -3 -> 99 should become -3 -> 1 -> 4 ->
+      99.
+    </title>
+  </head>
+  <body>
+    <script>
+      class ListNode {
+        constructor(val) {
+          this.val = val;
+          this.next = null;
+        }
+      }
+
+      // Main function
+      function sortList(head) {
+        if (!head || !head.next) return head;
+
+        // Step 1: Split list into halves
+        let mid = getMiddle(head);
+        let rightHead = mid.next;
+        mid.next = null; // break list
+
+        // Step 2: Recursively sort both halves
+        let left = sortList(head);
+        let right = sortList(rightHead);
+
+        // Step 3: Merge sorted halves
+        return merge(left, right);
+      }
+
+      // Helper: Find middle node
+      function getMiddle(head) {
+        let slow = head,
+          fast = head;
+
+        while (fast.next && fast.next.next) {
+          slow = slow.next;
+          fast = fast.next.next;
+        }
+
+        return slow;
+      }
+
+      // Helper: Merge two sorted lists
+      function merge(l1, l2) {
+        let dummy = new ListNode(0);
+        let tail = dummy;
+
+        while (l1 && l2) {
+          if (l1.val < l2.val) {
+            tail.next = l1;
+            l1 = l1.next;
+          } else {
+            tail.next = l2;
+            l2 = l2.next;
+          }
+          tail = tail.next;
+        }
+
+        // Attach remaining
+        tail.next = l1 || l2;
+
+        return dummy.next;
+      }
+    </script>
+  </body>
+</html>
