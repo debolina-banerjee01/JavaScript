@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Given a string, find the palindrome that can be made by inserting the fewest number of characters as possible anywhere in the word. If there is more than one palindrome of minimum length that can be made, return the lexicographically earliest one (the first one alphabetically).
+
+For example, given the string "race", you should return "ecarace", since we can add three letters to it (which is the smallest amount to make a palindrome). There are seven other palindromes that can be made from "race" by adding three letters, but "ecarace" comes first alphabetically.
+
+As another example, given the string "google", you should return "elgoogle".</title>
+  </head>
+  <body>
+    <script>
+      function shortestPalindrome(s) {
+        const n = s.length;
+
+        // dp[i][j] will store the best palindrome for substring i..j
+        const dp = Array.from({ length: n }, () => Array(n).fill(""));
+
+        // Base case: single character
+        for (let i = 0; i < n; i++) {
+          dp[i][i] = s[i];
+        }
+
+        // Fill DP table
+        for (let len = 2; len <= n; len++) {
+          for (let i = 0; i <= n - len; i++) {
+            let j = i + len - 1;
+
+            if (s[i] === s[j]) {
+              dp[i][j] = s[i] + (len === 2 ? "" : dp[i + 1][j - 1]) + s[j];
+            } else {
+              let option1 = s[i] + dp[i + 1][j] + s[i];
+              let option2 = s[j] + dp[i][j - 1] + s[j];
+
+              if (option1.length < option2.length) {
+                dp[i][j] = option1;
+              } else if (option2.length < option1.length) {
+                dp[i][j] = option2;
+              } else {
+                // same length → pick lexicographically smaller
+                dp[i][j] = option1 < option2 ? option1 : option2;
+              }
+            }
+          }
+        }
+
+        return dp[0][n - 1];
+      }
+      console.log(shortestPalindrome("race"));
+      // "ecarace"
+    </script>
+  </body>
+</html>
