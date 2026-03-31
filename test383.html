@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a list of integers and a number K, return which contiguous elements
+      of the list sum to K. For example, if the list is [1, 2, 3, 4, 5] and K is
+      9, then it should return [2, 3, 4], since 2 + 3 + 4 = 9.
+    </title>
+  </head>
+  <body>
+    <script>
+      function findSubarray(nums, K) {
+        const map = new Map(); // prefixSum -> index
+        let currentSum = 0;
+
+        for (let i = 0; i < nums.length; i++) {
+          currentSum += nums[i];
+
+          // Case 1: subarray from index 0
+          if (currentSum === K) {
+            return nums.slice(0, i + 1);
+          }
+
+          // Case 2: subarray exists
+          if (map.has(currentSum - K)) {
+            let startIndex = map.get(currentSum - K) + 1;
+            return nums.slice(startIndex, i + 1);
+          }
+
+          // Store current sum
+          map.set(currentSum, i);
+        }
+
+        return null; // no subarray found
+      }
+      console.log(findSubarray([1, 2, 3, 4, 5], 9));
+      // Output: [2, 3, 4]
+    </script>
+  </body>
+</html>
