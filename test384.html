@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Let's define a "sevenish" number to be one which is either a power of 7,
+      or the sum of unique powers of 7. The first few sevenish numbers are 1, 7,
+      8, 49, and so on. Create an algorithm to find the nth sevenish number.
+    </title>
+  </head>
+  <body>
+    <script>
+      function nthSevenish(n) {
+        let result = 0;
+        let power = 1; // 7^0
+
+        while (n > 0) {
+          if (n & 1) {
+            result += power;
+          }
+          power *= 7;
+          n >>= 1;
+        }
+
+        return result;
+      }
+      nthSevenish(6); // 56
+    </script>
+  </body>
+</html>
