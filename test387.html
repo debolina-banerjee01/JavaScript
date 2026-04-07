@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of numbers and a number k, determine if there are three
+      entries in the array which add up to the specified number k
+    </title>
+  </head>
+  <body>
+    <script>
+      function zigzagConvert(s, k) {
+        if (k === 1 || s.length <= k) return s;
+
+        let rows = new Array(k).fill("").map(() => "");
+        let currentRow = 0;
+        let goingDown = false;
+
+        for (let char of s) {
+          rows[currentRow] += char;
+
+          // Change direction at top or bottom
+          if (currentRow === 0 || currentRow === k - 1) {
+            goingDown = !goingDown;
+          }
+
+          currentRow += goingDown ? 1 : -1;
+        }
+
+        return rows.join("");
+      }
+      console.log(zigzagConvert("PAYPALISHIRING", 3));
+      // Output: "PAHNAPLSIIGYIR"
+    </script>
+  </body>
+</html>
