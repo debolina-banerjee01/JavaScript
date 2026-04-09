@@ -4,28 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Given a string and a pattern, find the starting indices of all occurrences
-      of the pattern in the string
+      Given integers M and N, write a program that counts how many positive
+      integer pairs (a, b) satisfy the following conditions: a + b = M a XOR b =
+      N
     </title>
   </head>
   <body>
     <script>
-      function findPatternIndices(str, pattern) {
-        const result = [];
-        const n = str.length;
-        const m = pattern.length;
+      function countPairs(M, N) {
+        // Step 1: Check validity
+        if (M < N || (M - N) % 2 !== 0) return 0;
 
-        for (let i = 0; i <= n - m; i++) {
-          if (str.substring(i, i + m) === pattern) {
-            result.push(i);
-          }
+        let x = (M - N) / 2;
+
+        // Step 2: Check conflict
+        if ((x & N) !== 0) return 0;
+
+        // Step 3: Count set bits in N
+        let countBits = 0;
+        let temp = N;
+
+        while (temp > 0) {
+          countBits += temp & 1;
+          temp >>= 1;
         }
 
-        return result;
-      }
+        let total = Math.pow(2, countBits);
 
-      // Example
-      console.log(findPatternIndices("abracadabra", "abr")); // [0, 7]
+        // Step 4: Remove invalid cases where a or b = 0
+        // Only happens when x == 0
+        if (x === 0) {
+          // remove 2 cases: (0, N) and (N, 0)
+          total -= 2;
+        }
+
+        return total;
+      }
+      console.log(countPairs(10, 6));
     </script>
   </body>
 </html>
