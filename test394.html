@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using a read7() method that returns 7 characters from a file, implement readN(n) which reads n characters. For example, given a file with the content “Hello world”, three read7() returns “Hello w”, “orld” and then “”.
+    </title>
+</head>
+<body>
+    <script>
+// Mock read7() for demonstration
+// In real problems, this is provided
+let fileContent = "Hello world";
+let pointer = 0;
+
+function read7() {
+  if (pointer >= fileContent.length) return "";
+  const result = fileContent.slice(pointer, pointer + 7);
+  pointer += 7;
+  return result;
+}
+
+// readN implementation
+function createReader() {
+  let buffer = ""; // stores leftover characters
+
+  return function readN(n) {
+    let result = "";
+
+    while (result.length < n) {
+      // If buffer is empty, refill using read7()
+      if (buffer.length === 0) {
+        buffer = read7();
+        if (buffer.length === 0) break; // EOF
+      }
+
+      // Take only what we need
+      let needed = n - result.length;
+      result += buffer.slice(0, needed);
+
+      // Remove used characters from buffer
+      buffer = buffer.slice(needed);
+    }
+
+    return result;
+  };
+}
+const readN = createReader();
+
+console.log(readN(5)); // "Hello"
+console.log(readN(3)); // " wo"
+console.log(readN(4)); // "rld"
+console.log(readN(2)); // ""
+    </script>
+</body>
+</html>
