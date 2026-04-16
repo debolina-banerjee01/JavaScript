@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On our special chessboard, two bishops attack each other if they share the same diagonal. This includes bishops that have another bishop located between them, i.e. bishops can attack through pieces.
+
+You are given N bishops, represented as (row, column) tuples on a M by M chessboard. Write a function to count the number of pairs of bishops that attack each other. The ordering of the pair doesn't matter: (1, 2) is considered the same as (2, 1).
+    </title>
+</head>
+<body>
+    <script>
+function countAttackingBishops(bishops) {
+    const diag1 = new Map(); // r - c
+    const diag2 = new Map(); // r + c
+
+    // Count bishops on each diagonal
+    for (const [r, c] of bishops) {
+        const d1 = r - c;
+        const d2 = r + c;
+
+        diag1.set(d1, (diag1.get(d1) || 0) + 1);
+        diag2.set(d2, (diag2.get(d2) || 0) + 1);
+    }
+
+    let count = 0;
+
+    // Count pairs from main diagonals
+    for (const k of diag1.values()) {
+        if (k > 1) {
+            count += (k * (k - 1)) / 2;
+        }
+    }
+
+    // Count pairs from anti-diagonals
+    for (const k of diag2.values()) {
+        if (k > 1) {
+            count += (k * (k - 1)) / 2;
+        }
+    }
+
+    return count;
+}
+const bishops = [
+    [0, 0],
+    [1, 2],
+    [2, 2],
+    [4, 0]
+];
+
+console.log(countAttackingBishops(bishops)); // 2
+    </script>
+</body>
+</html>
