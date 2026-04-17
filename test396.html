@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a string, determine whether any permutation of it is a palindrome.
+      For example, carrace should return true, since it can be rearranged to
+      form racecar, which is a palindrome. daily should return false, since
+      there's no rearrangement that can form a palindrome
+    </title>
+  </head>
+  <body>
+    <script>
+      function canFormPalindrome(str) {
+        const freq = {};
+
+        // Count frequency of each character
+        for (let char of str) {
+          freq[char] = (freq[char] || 0) + 1;
+        }
+
+        let oddCount = 0;
+
+        // Count how many characters have odd frequency
+        for (let key in freq) {
+          if (freq[key] % 2 !== 0) {
+            oddCount++;
+          }
+        }
+
+        // At most one odd frequency allowed
+        return oddCount <= 1;
+      }
+      console.log(canFormPalindrome("carrace")); // true (racecar)
+      console.log(canFormPalindrome("daily")); // false
+    </script>
+  </body>
+</html>
