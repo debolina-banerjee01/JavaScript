@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given the sequence of keys visited by a postorder traversal of a binary search tree, reconstruct the tree.
+
+For example, given the sequence 2, 4, 3, 8, 7, 5, you should construct the following tree:
+
+    5
+   / \
+  3   7
+ / \   \
+2   4   8
+    </title>
+</head>
+<body>
+    <script>
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function buildBSTFromPostorder(postorder) {
+  let index = postorder.length - 1;
+
+  function helper(lower, upper) {
+    if (index < 0) return null;
+
+    let val = postorder[index];
+
+    // If value is out of valid BST range, skip
+    if (val < lower || val > upper) return null;
+
+    // Consume this value
+    index--;
+
+    let root = new TreeNode(val);
+
+    // Build right subtree first
+    root.right = helper(val, upper);
+    root.left = helper(lower, val);
+
+    return root;
+  }
+
+  return helper(-Infinity, Infinity);
+}
+
+    </script>
+</body>
+</html>
