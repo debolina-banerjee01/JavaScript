@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      A Collatz sequence in mathematics can be defined as follows. Starting with
+      any positive integer: if n is even, the next number in the sequence is n /
+      2 if n is odd, the next number in the sequence is 3n + 1 It is conjectured
+      that every such sequence eventually reaches the number 1. Test this
+      conjecture. Bonus: What input n <= 1000000 gives the longest sequence?
+    </title>
+  </head>
+  <body>
+    <script>
+      function longestCollatz(limit) {
+        const memo = new Map();
+        memo.set(1, 1);
+
+        let maxLength = 0;
+        let result = 1;
+
+        function getLength(n) {
+          if (memo.has(n)) return memo.get(n);
+
+          let next;
+          if (n % 2 === 0) {
+            next = n / 2;
+          } else {
+            next = 3 * n + 1;
+          }
+
+          const length = 1 + getLength(next);
+          memo.set(n, length);
+          return length;
+        }
+
+        for (let i = 1; i <= limit; i++) {
+          const length = getLength(i);
+
+          if (length > maxLength) {
+            maxLength = length;
+            result = i;
+          }
+        }
+
+        return { number: result, length: maxLength };
+      }
+
+      // Run it
+      const answer = longestCollatz(1000000);
+      console.log(answer);
+    </script>
+  </body>
+</html>
