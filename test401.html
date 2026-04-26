@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an undirected graph, determine if it contains a cycle.
+    </title>
+</head>
+<body>
+    <script>
+function hasCycle(graph, n) {
+    const visited = new Array(n).fill(false);
+
+    function dfs(node, parent) {
+        visited[node] = true;
+
+        for (let neighbor of graph[node]) {
+            if (!visited[neighbor]) {
+                if (dfs(neighbor, node)) return true;
+            } else if (neighbor !== parent) {
+                // Found a back edge → cycle exists
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Check all components (in case graph is disconnected)
+    for (let i = 0; i < n; i++) {
+        if (!visited[i]) {
+            if (dfs(i, -1)) return true;
+        }
+    }
+
+    return false;
+}
+// Graph as adjacency list
+const graph = [
+    [1, 2],    // 0
+    [0, 2],    // 1
+    [0, 1],    // 2 → forms a cycle
+    [4],       // 3
+    [3]        // 4 → no cycle here
+];
+
+console.log(hasCycle(graph, 5)); // true
+    </script>
+</body>
+</html>
