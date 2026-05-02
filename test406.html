@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a list of integers S and a target number k, write a function that returns a subset of S that adds up to k. If such a subset cannot be made, then return null.
+
+Integers can appear more than once in the list. You may assume all numbers in the list are positive.
+
+
+    </title>
+</head>
+<body>
+    <script>
+function subsetSum(S, k) {
+  function dfs(index, remaining, path) {
+    // If we hit the target, return the current subset
+    if (remaining === 0) {
+      return path;
+    }
+
+    // If we go out of bounds or exceed the sum, stop
+    if (remaining < 0 || index >= S.length) {
+      return null;
+    }
+
+    // Include current element
+    let include = dfs(index + 1, remaining - S[index], [...path, S[index]]);
+    if (include) return include;
+
+    // Exclude current element
+    return dfs(index + 1, remaining, path);
+  }
+
+  return dfs(0, k, []);
+}
+
+// Example usage
+const S = [12, 1, 61, 5, 9, 2];
+const k = 24;
+
+console.log(subsetSum(S, k)); 
+// Output: [12, 9, 2, 1] (order may vary)
+    </script>
+</body>
+</html>
