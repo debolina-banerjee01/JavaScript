@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree. Assume that each node in the tree also has a pointer to its parent.
+
+
+    </title>
+</head>
+<body>
+    <script>
+function lowestCommonAncestor(p, q) {
+    const visited = new Set();
+
+    while (p) {
+        visited.add(p);
+        p = p.parent;
+    }
+
+    while (q) {
+        if (visited.has(q)) return q;
+        q = q.parent;
+    }
+
+    return null;
+}
+    </script>
+</body>
+</html>
