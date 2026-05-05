@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a clock time in hh:mm format, determine, to the nearest degree, the angle between the hour and the minute hands.
+
+    </title>
+</head>
+<body>
+    <script>
+function clockAngle(time) {
+  const [hh, mm] = time.split(':').map(Number);
+
+  // Minute hand angle
+  const minuteAngle = mm * 6;
+
+  // Hour hand angle
+  const hourAngle = (hh % 12) * 30 + mm * 0.5;
+
+  // Absolute difference
+  let angle = Math.abs(hourAngle - minuteAngle);
+
+  // Smaller angle
+  angle = Math.min(angle, 360 - angle);
+
+  // Round to nearest degree
+  return Math.round(angle);
+}
+
+// Example usage
+console.log(clockAngle("03:00")); // 90
+console.log(clockAngle("03:15")); // 8
+console.log(clockAngle("12:30")); // 165
+    </script>
+</body>
+</html>
