@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Suppose you are given a table of currency exchange rates, represented as a
+      2D array. Determine whether there is a possible arbitrage: that is,
+      whether there is some sequence of trades you can make, starting with some
+      amount A of any currency, so that you can end up with some amount greater
+      than A of that currency. There are no transaction costs and you can trade
+      fractional quantities.
+    </title>
+  </head>
+  <body>
+    <script>
+      function detectArbitrage(rates) {
+        const n = rates.length;
+
+        // Convert rates using negative logarithm
+        const graph = [];
+
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j < n; j++) {
+            graph.push([i, j, -Math.log(rates[i][j])]);
+          }
+        }
+
+        // Bellman-Ford
+        const dist = new Array(n).fill(Infinity);
+        dist[0] = 0;
+
+        // Relax edges n - 1 times
+        for (let i = 0; i < n - 1; i++) {
+          for (const [u, v, w] of graph) {
+            if (dist[u] + w < dist[v]) {
+              dist[v] = dist[u] + w;
+            }
+          }
+        }
+
+        // Check for negative cycle
+        for (const [u, v, w] of graph) {
+          if (dist[u] + w < dist[v]) {
+            return true; // Arbitrage exists
+          }
+        }
+
+        return false;
+      }
+      const rates = [
+        [1, 0.5, 0.25],
+        [2, 1, 0.5],
+        [4.2, 2, 1],
+      ];
+
+      console.log(detectArbitrage(rates));
+    </script>
+  </body>
+</html>
