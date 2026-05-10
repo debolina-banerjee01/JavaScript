@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The ancient Egyptians used to express fractions as a sum of several terms
+      where each numerator is one. For example, 4 / 13 can be represented as 1 /
+      4 + 1 / 18 + 1 / 468. Create an algorithm to turn an ordinary fraction a /
+      b, where a < b, into an Egyptian fraction
+    </title>
+  </head>
+  <body>
+    <script>
+      function egyptianFraction(a, b) {
+        const result = [];
+
+        while (a !== 0) {
+          // Find the ceiling of b/a
+          const unitDenominator = Math.ceil(b / a);
+
+          result.push(`1/${unitDenominator}`);
+
+          // Update fraction:
+          // a/b - 1/unitDenominator
+          a = a * unitDenominator - b;
+          b = b * unitDenominator;
+
+          // Reduce the fraction
+          const gcdValue = gcd(a, b);
+          a /= gcdValue;
+          b /= gcdValue;
+        }
+
+        return result.join(" + ");
+      }
+
+      // Helper function to find GCD
+      function gcd(x, y) {
+        while (y !== 0) {
+          [x, y] = [y, x % y];
+        }
+        return x;
+      }
+
+      // Example
+      console.log(egyptianFraction(4, 13));
+    </script>
+  </body>
+</html>
