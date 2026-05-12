@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given an array of integers, write a function to determine whether the array could become non-decreasing by modifying at most 1 element.
+
+For example, given the array [10, 5, 7], you should return true, since we can modify the 10 into a 1 to make the array non-decreasing.
+
+Given the array [10, 5, 1], you should return false, since we can't modify any one element to get a non-decreasing array.
+
+
+    </title>
+</head>
+<body>
+    <script>
+function canBeNonDecreasing(nums) {
+    let modifications = 0;
+
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] < nums[i - 1]) {
+            modifications++;
+
+            // More than 1 modification needed
+            if (modifications > 1) {
+                return false;
+            }
+
+            // Decide whether to modify nums[i - 1] or nums[i]
+            if (i < 2 || nums[i] >= nums[i - 2]) {
+                nums[i - 1] = nums[i];
+            } else {
+                nums[i] = nums[i - 1];
+            }
+        }
+    }
+
+    return true;
+}
+
+// Examples
+console.log(canBeNonDecreasing([10, 5, 7])); // true
+console.log(canBeNonDecreasing([10, 5, 1])); // false
+console.log(canBeNonDecreasing([4, 2, 3]));  // true
+console.log(canBeNonDecreasing([3, 4, 2, 3])); // false
+
+    </script>
+</body>
+</html>
