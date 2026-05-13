@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Suppose you have a multiplication table that is N by N. That is, a 2D
+      array where the value at the i-th row and j-th column is (i + 1) * (j + 1)
+      (if 0-indexed) or i * j (if 1-indexed). Given integers N and X, write a
+      function that returns the number of times X appears as a value in an N by
+      N multiplication table.
+    </title>
+  </head>
+  <body>
+    <script>
+      function countOccurrences(N, X) {
+        let count = 0;
+
+        // Check every possible divisor pair
+        for (let i = 1; i <= N; i++) {
+          // If i divides X and the paired value is within range
+          if (X % i === 0 && X / i <= N) {
+            count++;
+          }
+        }
+
+        return count;
+      }
+
+      // Examples
+      console.log(countOccurrences(6, 12)); // 4
+      console.log(countOccurrences(5, 6)); // 2
+      console.log(countOccurrences(10, 25)); // 1
+    </script>
+  </body>
+</html>
