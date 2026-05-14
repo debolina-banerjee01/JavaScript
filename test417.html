@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The area of a circle is defined as πr^2. Estimate π to 3 decimal places
+      using a Monte Carlo method. Hint: The basic equation of a circle is x2 +
+      y2 = r2.
+    </title>
+  </head>
+  <body>
+    <script>
+      function estimatePi(samples = 1000000) {
+        let insideCircle = 0;
+
+        for (let i = 0; i < samples; i++) {
+          // Random point between 0 and 1
+          const x = Math.random();
+          const y = Math.random();
+
+          // Check if point lies inside quarter circle
+          if (x * x + y * y <= 1) {
+            insideCircle++;
+          }
+        }
+
+        const piEstimate = 4 * (insideCircle / samples);
+
+        return piEstimate.toFixed(3);
+      }
+
+      // Example
+      console.log(estimatePi());
+    </script>
+  </body>
+</html>
