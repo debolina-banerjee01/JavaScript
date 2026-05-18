@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a sorted array, convert it into a height-balanced binary search tree.
+
+
+    </title>
+</head>
+<body>
+    <script>
+// Definition for a binary tree node
+class TreeNode {
+    constructor(val, left = null, right = null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+function sortedArrayToBST(nums) {
+
+    function build(left, right) {
+        // Base case
+        if (left > right) return null;
+
+        // Middle element
+        const mid = Math.floor((left + right) / 2);
+
+        // Create root node
+        const root = new TreeNode(nums[mid]);
+
+        // Build left and right subtrees
+        root.left = build(left, mid - 1);
+        root.right = build(mid + 1, right);
+
+        return root;
+    }
+
+    return build(0, nums.length - 1);
+}
+const nums = [-10, -3, 0, 5, 9];
+
+const bst = sortedArrayToBST(nums);
+
+console.log(bst);
+
+    </script>
+</body>
+</html>
