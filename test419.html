@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of integers, return a new array such that each element at
+      index i of the new array is the product of all the numbers in the original
+      array except the one at i. For example, if our input was [1, 2, 3, 4, 5],
+      the expected output would be [120, 60, 40, 30, 24]. If our input was [3,
+      2, 1], the expected output would be [2, 3, 6].
+    </title>
+  </head>
+  <body>
+    <script>
+      function productExceptSelf(nums) {
+        const n = nums.length;
+        const result = new Array(n).fill(1);
+
+        // Store prefix products
+        let prefix = 1;
+        for (let i = 0; i < n; i++) {
+          result[i] = prefix;
+          prefix *= nums[i];
+        }
+
+        // Multiply with suffix products
+        let suffix = 1;
+        for (let i = n - 1; i >= 0; i--) {
+          result[i] *= suffix;
+          suffix *= nums[i];
+        }
+
+        return result;
+      }
+
+      // Example usage
+      console.log(productExceptSelf([1, 2, 3, 4, 5]));
+      // Output: [120, 60, 40, 30, 24]
+
+      console.log(productExceptSelf([3, 2, 1]));
+      // Output: [2, 3, 6]
+    </script>
+  </body>
+</html>
