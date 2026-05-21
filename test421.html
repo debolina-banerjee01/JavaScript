@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a list of integers, write a function that returns the largest sum of
+      non-adjacent numbers. Numbers can be 0 or negative. For example, [2, 4, 6,
+      2, 5] should return 13, since we pick 2, 6, and 5. [5, 1, 1, 5] should
+      return 10, since we pick 5 and 5.
+    </title>
+  </head>
+  <body>
+    <script>
+      function largestNonAdjacentSum(nums) {
+        if (nums.length === 0) return 0;
+
+        let include = 0; // Max sum including current element
+        let exclude = 0; // Max sum excluding current element
+
+        for (let num of nums) {
+          let newInclude = exclude + num;
+          let newExclude = Math.max(include, exclude);
+
+          include = newInclude;
+          exclude = newExclude;
+        }
+
+        return Math.max(include, exclude);
+      }
+
+      // Examples
+      console.log(largestNonAdjacentSum([2, 4, 6, 2, 5])); // 13
+      console.log(largestNonAdjacentSum([5, 1, 1, 5])); // 10
+      console.log(largestNonAdjacentSum([-1, -2, -3])); // 0
+    </script>
+  </body>
+</html>
