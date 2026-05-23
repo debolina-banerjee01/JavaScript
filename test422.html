@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      graph is minimally-connected if it is connected and there is no edge that
+      can be removed while still leaving the graph connected. For example, any
+      binary tree is minimally-connected. Given an undirected graph, check if
+      the graph is minimally-connected. You can choose to represent the graph as
+      either an adjacency matrix or adjacency list.
+    </title>
+  </head>
+  <body>
+    <script>
+      function isMinimallyConnected(graph) {
+        const visited = new Set();
+        const nodes = Object.keys(graph);
+
+        // Count edges
+        let edgeCount = 0;
+
+        for (let node of nodes) {
+          edgeCount += graph[node].length;
+        }
+
+        // Since undirected graph counts edges twice
+        edgeCount = edgeCount / 2;
+
+        // DFS to check connectivity
+        function dfs(node) {
+          visited.add(node);
+
+          for (let neighbor of graph[node]) {
+            if (!visited.has(neighbor)) {
+              dfs(neighbor);
+            }
+          }
+        }
+
+        // Start DFS from first node
+        dfs(nodes[0]);
+
+        // Check connected + edges = vertices - 1
+        return visited.size === nodes.length && edgeCount === nodes.length - 1;
+      }
+      const graph1 = {
+        A: ["B", "C"],
+        B: ["A", "D"],
+        C: ["A"],
+        D: ["B"],
+      };
+
+      console.log(isMinimallyConnected(graph1));
+    </script>
+  </body>
+</html>
