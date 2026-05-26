@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a sorted list of integers, square the elements and give the output in sorted order.
+
+For example, given [-9, -2, 0, 2, 3], return [0, 4, 4, 9, 81].
+
+
+    </title>
+</head>
+<body>
+    <script>
+function sortedSquares(arr) {
+    let left = 0;
+    let right = arr.length - 1;
+    let result = new Array(arr.length);
+    let pos = arr.length - 1;
+
+    while (left <= right) {
+        let leftSquare = arr[left] * arr[left];
+        let rightSquare = arr[right] * arr[right];
+
+        if (leftSquare > rightSquare) {
+            result[pos] = leftSquare;
+            left++;
+        } else {
+            result[pos] = rightSquare;
+            right--;
+        }
+
+        pos--;
+    }
+
+    return result;
+}
+
+// Example usage
+console.log(sortedSquares([-9, -2, 0, 2, 3]));
+// Output: [0, 4, 4, 9, 81]
+
+    </script>
+</body>
+</html>
