@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implement a bit array.
+
+A bit array is a space efficient array that holds a value of 1 or 0 at each index.
+
+init(size): initialize the array with size
+set(i, val): updates index at i with val where val is either 1 or 0.
+get(i): gets the value at index i.
+    </title>
+</head>
+<body>
+    <script>
+class BitArray {
+  constructor(size) {
+    this.size = size;
+    this.words = new Uint32Array(Math.ceil(size / 32));
+  }
+
+  set(i, val) {
+    if (i < 0 || i >= this.size) {
+      throw new RangeError("Index out of bounds");
+    }
+
+    const wordIndex = Math.floor(i / 32);
+    const bitIndex = i % 32;
+
+    if (val === 1) {
+      this.words[wordIndex] |= (1 << bitIndex);
+    } else if (val === 0) {
+      this.words[wordIndex] &= ~(1 << bitIndex);
+    } else {
+      throw new Error("Value must be 0 or 1");
+    }
+  }
+
+  get(i) {
+    if (i < 0 || i >= this.size) {
+      throw new RangeError("Index out of bounds");
+    }
+
+    const wordIndex = Math.floor(i / 32);
+    const bitIndex = i % 32;
+
+    return (this.words[wordIndex] >>> bitIndex) & 1;
+  }
+}
+const bits = new BitArray(100);
+
+bits.set(5, 1);
+bits.set(10, 1);
+bits.set(5, 0);
+
+console.log(bits.get(5));   // 0
+console.log(bits.get(10));  // 1
+console.log(bits.get(99));  // 0
+  
+    </script>
+</body>
+</html>
