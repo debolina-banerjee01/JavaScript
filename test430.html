@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implement a bit array.
+
+A bit array is a space efficient array that holds a value of 1 or 0 at each index.
+
+init(size): initialize the array with size
+set(i, val): updates index at i with val where val is either 1 or 0.
+get(i): gets the value at index i.
+    </title>
+</head>
+<body>
+    <script>
+class TwoDIterator {
+  constructor(arrays) {
+    this.arrays = arrays;
+    this.row = 0;
+    this.col = 0;
+    this._advance();
+  }
+
+  _advance() {
+    while (
+      this.row < this.arrays.length &&
+      this.col >= this.arrays[this.row].length
+    ) {
+      this.row++;
+      this.col = 0;
+    }
+  }
+
+  has_next() {
+    return this.row < this.arrays.length;
+  }
+
+  next() {
+    if (!this.has_next()) {
+      throw new Error("No more elements");
+    }
+
+    const value = this.arrays[this.row][this.col];
+    this.col++;
+    this._advance();
+
+    return value;
+  }
+}
+const it = new TwoDIterator([[1, 2], [3], [], [4, 5, 6]]);
+
+while (it.has_next()) {
+  console.log(it.next());
+}
+  
+    </script>
+</body>
+</html>
