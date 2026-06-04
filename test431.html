@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Write a function, throw_dice(N, faces, total), that determines how many
+      ways it is possible to throw N dice with some number of faces each to get
+      a specific total. For example, throw_dice(3, 6, 7) should equal 15.
+    </title>
+  </head>
+  <body>
+    <script>
+      function throw_dice(N, faces, total) {
+        const dp = Array.from({ length: N + 1 }, () =>
+          Array(total + 1).fill(0),
+        );
+
+        dp[0][0] = 1;
+
+        for (let dice = 1; dice <= N; dice++) {
+          for (let sum = 1; sum <= total; sum++) {
+            for (let face = 1; face <= faces; face++) {
+              if (sum >= face) {
+                dp[dice][sum] += dp[dice - 1][sum - face];
+              }
+            }
+          }
+        }
+
+        return dp[N][total];
+      }
+      console.log(throw_dice(3, 6, 7));
+    </script>
+  </body>
+</html>
