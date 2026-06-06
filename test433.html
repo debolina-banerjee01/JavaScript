@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Starting from 0 on a number line, you would like to make a series of jumps
+      that lead to the integer N. On the ith jump, you may move exactly i places
+      to the left or right. Find a path with the fewest number of jumps required
+      to get from 0 to N.
+    </title>
+  </head>
+  <body>
+    <script>
+      function findPath(N) {
+        const target = Math.abs(N);
+
+        let k = 0;
+        let sum = 0;
+
+        // Find minimum number of jumps
+        while (sum < target || (sum - target) % 2 !== 0) {
+          k++;
+          sum += k;
+        }
+
+        let diff = (sum - target) / 2;
+
+        // Assume all jumps are positive initially
+        const path = [];
+
+        for (let i = k; i >= 1; i--) {
+          if (diff >= i) {
+            path[i] = -i; // flip this jump
+            diff -= i;
+          } else {
+            path[i] = i;
+          }
+        }
+
+        // If target is negative, reverse all directions
+        if (N < 0) {
+          for (let i = 1; i <= k; i++) {
+            path[i] *= -1;
+          }
+        }
+
+        // Build positions
+        const positions = [0];
+        let current = 0;
+
+        for (let i = 1; i <= k; i++) {
+          current += path[i];
+          positions.push(current);
+        }
+
+        return {
+          jumps: k,
+          directions: path.slice(1),
+          path: positions,
+        };
+      }
+      console.log(findPath(3));
+    </script>
+  </body>
+</html>
