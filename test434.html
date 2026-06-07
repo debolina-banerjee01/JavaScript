@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a binary tree, find a minimum path sum from root to a leaf.
+    </title>
+</head>
+<body>
+    <script>
+class TreeNode {
+    constructor(val, left = null, right = null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+function minPathSum(root) {
+    if (!root) return 0;
+
+    // Leaf node
+    if (!root.left && !root.right) {
+        return root.val;
+    }
+
+    // If one child is missing, use the other child
+    if (!root.left) {
+        return root.val + minPathSum(root.right);
+    }
+
+    if (!root.right) {
+        return root.val + minPathSum(root.left);
+    }
+
+    // Both children exist
+    return root.val + Math.min(
+        minPathSum(root.left),
+        minPathSum(root.right)
+    );
+}
+const root = new TreeNode(
+    10,
+    new TreeNode(
+        5,
+        new TreeNode(2),
+        new TreeNode(
+            1,
+            new TreeNode(-1)
+        )
+    ),
+    new TreeNode(
+        5,
+        null,
+        new TreeNode(-1)
+    )
+);
+
+console.log(minPathSum(root)); // 15
+    </script>
+</body>
+</html>
