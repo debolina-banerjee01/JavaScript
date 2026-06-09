@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let X be a set of n intervals on the real line. We say that a set of points P "stabs" X if every interval in X contains at least one point in P. Compute the smallest set of points that stabs X.
+
+For example, given the intervals [(1, 4), (4, 5), (7, 9), (9, 12)], you should return [4, 9].
+    </title>
+</head>
+<body>
+    <script>
+function minimumStabbingPoints(intervals) {
+    if (intervals.length === 0) return [];
+
+    // Sort by right endpoint
+    intervals.sort((a, b) => a[1] - b[1]);
+
+    const points = [];
+    let lastPoint = -Infinity;
+
+    for (const [start, end] of intervals) {
+        // If current interval is not stabbed
+        if (lastPoint < start || lastPoint > end) {
+            lastPoint = end;
+            points.push(lastPoint);
+        }
+    }
+
+    return points;
+}
+
+// Example
+const intervals = [
+    [1, 4],
+    [4, 5],
+    [7, 9],
+    [9, 12]
+];
+
+console.log(minimumStabbingPoints(intervals)); // [4, 9]
+    </script>
+</body>
+</html>
