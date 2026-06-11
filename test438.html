@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a binary tree, return all paths from the root to leaves.
+    </title>
+  </head>
+  <body>
+    <script>
+      class TreeNode {
+        constructor(val, left = null, right = null) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+        }
+      }
+
+      function rootToLeafPaths(root) {
+        const result = [];
+
+        function dfs(node, path) {
+          if (!node) return;
+
+          path.push(node.val);
+
+          // Leaf node
+          if (!node.left && !node.right) {
+            result.push([...path]);
+          } else {
+            dfs(node.left, path);
+            dfs(node.right, path);
+          }
+
+          // Backtrack
+          path.pop();
+        }
+
+        dfs(root, []);
+        return result;
+      }
+
+      // Example:
+      const root = new TreeNode(
+        1,
+        new TreeNode(2),
+        new TreeNode(3, new TreeNode(4), new TreeNode(5)),
+      );
+
+      console.log(rootToLeafPaths(root));
+    </script>
+  </body>
+</html>
