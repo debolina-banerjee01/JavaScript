@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Alice wants to join her school's Probability Student Club. Membership dues
+      are computed via one of two simple probabilistic games. The first game:
+      roll a die repeatedly. Stop rolling once you get a five followed by a six.
+      Your number of rolls is the amount you pay, in dollars. The second game:
+      same, except that the stopping condition is a five followed by a five.
+      Which of the two games should Alice elect to play? Does it even matter?
+      Write a program to simulate the two games and calculate their expected
+      value.
+    </title>
+  </head>
+  <body>
+    <script>
+      function playGame(target1, target2) {
+        let rolls = 0;
+        let prev = null;
+
+        while (true) {
+          const roll = Math.floor(Math.random() * 6) + 1;
+          rolls++;
+
+          if (prev === target1 && roll === target2) {
+            return rolls;
+          }
+
+          prev = roll;
+        }
+      }
+
+      function simulate(trials) {
+        let total56 = 0;
+        let total55 = 0;
+
+        for (let i = 0; i < trials; i++) {
+          total56 += playGame(5, 6);
+          total55 += playGame(5, 5);
+        }
+
+        console.log(`Trials: ${trials}`);
+        console.log(`Average rolls for 5,6: ${(total56 / trials).toFixed(4)}`);
+        console.log(`Average rolls for 5,5: ${(total55 / trials).toFixed(4)}`);
+      }
+
+      simulate(1000000);
+    </script>
+  </body>
+</html>
