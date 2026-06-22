@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given an array of integers, determine whether it contains a Pythagorean triplet. Recall that a Pythogorean triplet (a, b, c) is defined by the equation a2+ b2= c2
+    </title>
+  </head>
+  <body>
+    <script>
+      function hasPythagoreanTriplet(arr) {
+        if (arr.length < 3) return false;
+
+        // Square every element
+        const squares = arr.map((num) => num * num);
+
+        // Sort in ascending order
+        squares.sort((a, b) => a - b);
+
+        // Assume each element is c²
+        for (let c = squares.length - 1; c >= 2; c--) {
+          let left = 0;
+          let right = c - 1;
+
+          while (left < right) {
+            const sum = squares[left] + squares[right];
+
+            if (sum === squares[c]) {
+              return true;
+            } else if (sum < squares[c]) {
+              left++;
+            } else {
+              right--;
+            }
+          }
+        }
+
+        return false;
+      }
+      console.log(hasPythagoreanTriplet([3, 1, 4, 6, 5])); // true (3,4,5)
+    </script>
+  </body>
+</html>
