@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You have n fair coins and you flip them all at the same time. Any that
+      come up tails you set aside. The ones that come up heads you flip again.
+      How many rounds do you expect to play before only one coin remains? Write
+      a function that, given n, returns the number of rounds you'd expect to
+      play until one coin remains.
+    </title>
+  </head>
+  <body>
+    <script>
+      function simulateOnce(n) {
+        let coins = n;
+        let rounds = 0;
+
+        while (coins > 1) {
+          let survivors = 0;
+
+          for (let i = 0; i < coins; i++) {
+            if (Math.random() < 0.5) {
+              survivors++;
+            }
+          }
+
+          coins = survivors;
+          rounds++;
+        }
+
+        return rounds;
+      }
+
+      function expectedRoundsSimulation(n, trials = 100000) {
+        let total = 0;
+
+        for (let i = 0; i < trials; i++) {
+          total += simulateOnce(n);
+        }
+
+        return total / trials;
+      }
+
+      console.log(expectedRoundsSimulation(16));
+    </script>
+  </body>
+</html>
