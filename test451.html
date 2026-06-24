@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Ghost is a two-person word game where players alternate appending letters
+      to a word. The first person who spells out a word, or creates a prefix for
+      which there is no possible continuation, loses. Here is a sample game:
+      Player 1: g Player 2: h Player 1: o Player 2: s Player 1: t [loses] Given
+      a dictionary of words, determine the letters the first player should start
+      with, such that with optimal play they cannot lose. For example, if the
+      dictionary is ["cat", "calf", "dog", "bear"], the only winning start
+      letter would be b
+    </title>
+  </head>
+  <body>
+    <script>
+      class TrieNode {
+        constructor() {
+          this.children = {};
+          this.isWord = false;
+        }
+      }
+
+      function buildTrie(words) {
+        const root = new TrieNode();
+
+        for (const word of words) {
+          let node = root;
+
+          for (const ch of word) {
+            if (!node.children[ch]) {
+              node.children[ch] = new TrieNode();
+            }
+            node = node.children[ch];
+          }
+
+          node.isWord = true;
+        }
+
+        return root;
+      }
+
+      function isWinning(node) {
+        // If a complete word is formed, current player loses
+        if (node.isWord) {
+          return false;
+        }
+
+        const letters = Object.keys(node.children);
+
+        // No continuation possible
+        if (letters.length === 0) {
+          return false;
+        }
+
+        // If any move makes the opponent lose,
+        // current player wins.
+        for (const letter of letters) {
+          if (!isWinning(node.children[letter])) {
+            return true;
+          }
+        }
+
+        return false;
+      }
+
+      function winningStarts(dictionary) {
+        const trie = buildTrie(dictionary);
+        const result = [];
+
+        for (const letter in trie.children) {
+          // Opponent plays after the first letter.
+          if (!isWinning(trie.children[letter])) {
+            result.push(letter);
+          }
+        }
+
+        return result;
+      }
+      const dictionary = ["cat", "calf", "dog", "bear"];
+
+      console.log(winningStarts(dictionary));
+    </script>
+  </body>
+</html>
