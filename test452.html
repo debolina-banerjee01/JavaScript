@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a set of points (x, y) on a 2D cartesian plane, find the two closest
+      points. For example, given the points [(1, 1), (-1, -1), (3, 4), (6, 1),
+      (-1, -6), (-4, -3)], return [(-1, -1), (1, 1)]
+    </title>
+  </head>
+  <body>
+    <script>
+      function closestPair(points) {
+        if (points.length < 2) return null;
+
+        let minDist = Infinity;
+        let result = [];
+
+        for (let i = 0; i < points.length; i++) {
+          for (let j = i + 1; j < points.length; j++) {
+            const dx = points[i][0] - points[j][0];
+            const dy = points[i][1] - points[j][1];
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < minDist) {
+              minDist = dist;
+              result = [points[i], points[j]];
+            }
+          }
+        }
+
+        return result;
+      }
+
+      const points = [
+        [1, 1],
+        [-1, -1],
+        [3, 4],
+        [6, 1],
+        [-1, -6],
+        [-4, -3],
+      ];
+
+      console.log(closestPair(points));
+    </script>
+  </body>
+</html>
