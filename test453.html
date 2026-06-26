@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a set of points (x, y) on a 2D cartesian plane, find the two closest
+      points. For example, given the points [(1, 1), (-1, -1), (3, 4), (6, 1),
+      (-1, -6), (-4, -3)], return [(-1, -1), (1, 1)]
+    </title>
+  </head>
+  <body>
+    <script>
+      function reconstruct(clues) {
+        const n = clues.length;
+        const result = new Array(n);
+
+        let low = 0;
+        let high = n - 1;
+
+        // Fill from right to left
+        for (let i = n - 1; i > 0; i--) {
+          if (clues[i] === "+") {
+            result[i] = high--;
+          } else if (clues[i] === "-") {
+            result[i] = low++;
+          } else {
+            throw new Error("Invalid clue");
+          }
+        }
+
+        // Only one number remains
+        result[0] = low;
+
+        return result;
+      }
+      const clues = [null, "+", "+", "-", "+"];
+
+      const result = reconstruct(clues);
+
+      console.log(result);
+    </script>
+  </body>
+</html>
