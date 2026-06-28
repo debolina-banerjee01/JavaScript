@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Suppose you are given two lists of n points, one list p1, p2, ..., pn on
+      the line y = 0 and the other list q1, q2, ..., qn on the line y = 1.
+      Imagine a set of n line segments connecting each point pi to qi. Write an
+      algorithm to determine how many pairs of the line segments intersect.
+    </title>
+  </head>
+  <body>
+    <script>
+      function countIntersections(p, q) {
+        const n = p.length;
+
+        // Pair p and q together
+        const segments = [];
+        for (let i = 0; i < n; i++) {
+          segments.push({ p: p[i], q: q[i] });
+        }
+
+        // Sort by bottom endpoints
+        segments.sort((a, b) => a.p - b.p);
+
+        // Extract top endpoints
+        const top = segments.map((segment) => segment.q);
+
+        return countInversions(top);
+      }
+
+      function countInversions(arr) {
+        const temp = new Array(arr.length);
+
+        function mergeSort(left, right) {
+          if (left >= right) return 0;
+
+          const mid = Math.floor((left + right) / 2);
+
+          let inversions = 0;
+
+          inversions += mergeSort(left, mid);
+          inversions += mergeSort(mid + 1, right);
+          inversions += merge(left, mid, right);
+
+          return inversions;
+        }
+
+        function merge(left, mid, right) {
+          let i = left;
+          let j = mid + 1;
+          let k = left;
+          let inversions = 0;
+
+          while (i <= mid && j <= right) {
+            if (arr[i] <= arr[j]) {
+              temp[k++] = arr[i++];
+            } else {
+              temp[k++] = arr[j++];
+              inversions += mid - i + 1;
+            }
+          }
+
+          while (i <= mid) {
+            temp[k++] = arr[i++];
+          }
+
+          while (j <= right) {
+            temp[k++] = arr[j++];
+          }
+
+          for (let x = left; x <= right; x++) {
+            arr[x] = temp[x];
+          }
+
+          return inversions;
+        }
+
+        return mergeSort(0, arr.length - 1);
+      }
+
+      // Example
+      const p = [1, 2, 3, 4];
+      const q = [4, 3, 2, 1];
+
+      console.log(countIntersections(p, q)); // 6
+    </script>
+  </body>
+</html>
