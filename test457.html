@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let X be a set of n intervals on the real line. We say that a set of points P "stabs" X if every interval in X contains at least one point in P. Compute the smallest set of points that stabs X.
+
+For example, given the intervals [(1, 4), (4, 5), (7, 9), (9, 12)], you should return [4, 9].
+    </title>
+</head>
+<body>
+    <script>
+function countKnightTours(n) {
+    const moves = [
+        [2, 1], [1, 2],
+        [-1, 2], [-2, 1],
+        [-2, -1], [-1, -2],
+        [1, -2], [2, -1]
+    ];
+
+    const board = Array.from({ length: n }, () =>
+        Array(n).fill(false)
+    );
+
+    function isValid(x, y) {
+        return (
+            x >= 0 &&
+            x < n &&
+            y >= 0 &&
+            y < n &&
+            !board[x][y]
+        );
+    }
+
+    function dfs(x, y, visited) {
+        if (visited === n * n) {
+            return 1;
+        }
+
+        let count = 0;
+
+        for (const [dx, dy] of moves) {
+            const nx = x + dx;
+            const ny = y + dy;
+
+            if (isValid(nx, ny)) {
+                board[nx][ny] = true;
+                count += dfs(nx, ny, visited + 1);
+                board[nx][ny] = false;
+            }
+        }
+
+        return count;
+    }
+
+    let totalTours = 0;
+
+    // Count tours starting from every square
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            board[i][j] = true;
+            totalTours += dfs(i, j, 1);
+            board[i][j] = false;
+        }
+    }
+
+    return totalTours;
+}
+
+// Example
+console.log(countKnightTours(1)); // 1
+console.log(countKnightTours(2)); // 0
+console.log(countKnightTours(3)); // 0
+    </script>
+</body>
+</html>
