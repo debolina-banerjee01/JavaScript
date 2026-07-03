@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>There are M people sitting in a row of N seats, where M < N. Your task is to redistribute people such that there are no gaps between any of them, while keeping overall movement to a minimum.
+
+For example, suppose you are faced with an input of [0, 1, 1, 0, 1, 0, 0, 0, 1], where 0 represents an empty seat and 1 represents a person. In this case, one solution would be to place the person on the right in the fourth seat. We can consider the cost of a solution to be the sum of the absolute distance each person must move, so that the cost here would be five.
+
+Given an input such as the one above, return the lowest possible cost of moving people to remove all gaps.
+    </title>
+</head>
+<body>
+    <script>
+function minMovement(seats) {
+    const positions = [];
+
+    // Collect occupied seat positions
+    for (let i = 0; i < seats.length; i++) {
+        if (seats[i] === 1) {
+            positions.push(i);
+        }
+    }
+
+    const people = positions.length;
+    if (people <= 1) return 0;
+
+    let minCost = Infinity;
+
+    // Try every possible consecutive block
+    for (let start = 0; start <= seats.length - people; start++) {
+        let cost = 0;
+
+        for (let i = 0; i < people; i++) {
+            cost += Math.abs(positions[i] - (start + i));
+        }
+
+        minCost = Math.min(minCost, cost);
+    }
+
+    return minCost;
+}
+
+// Example
+const seats = [0, 1, 1, 0, 1, 0, 0, 0, 1];
+console.log(minMovement(seats)); // 5
+    </script>
+</body>
+</html>
