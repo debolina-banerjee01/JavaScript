@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a node in a binary search tree, return the next bigger element, also known as the inorder successor.
+
+For example, the inorder successor of 22 is 30.
+
+   10
+  /  \
+ 5    30
+     /  \
+   22    35
+You can assume each node has a parent pointer.
+
+
+    </title>
+</head>
+<body>
+    <script>
+class TreeNode {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+    this.parent = null;
+  }
+}
+
+function inorderSuccessor(node) {
+  if (!node) return null;
+
+  // Case 1: Node has a right subtree
+  if (node.right) {
+    let current = node.right;
+    while (current.left) {
+      current = current.left;
+    }
+    return current;
+  }
+
+  // Case 2: No right subtree
+  let current = node;
+  let parent = current.parent;
+
+  while (parent && parent.right === current) {
+    current = parent;
+    parent = parent.parent;
+  }
+
+  return parent;
+}
+    </script>
+</body>
+</html>
