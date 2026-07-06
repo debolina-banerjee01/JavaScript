@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement division of two positive integers without using the division, multiplication, or modulus operators. Return the quotient as an integer, ignoring the remainder.
+    </title>
+  </head>
+  <body>
+    <script>
+      function divide(dividend, divisor) {
+    if (divisor === 0) {
+        throw new Error("Division by zero");
+    }
+
+    let quotient = 0;
+
+    while (dividend >= divisor) {
+        let temp = divisor;
+        let multiple = 1;
+
+        // Find the largest double of divisor that fits
+        while ((temp << 1) > 0 && (temp << 1) <= dividend) {
+            temp <<= 1;
+            multiple <<= 1;
+        }
+
+        dividend -= temp;
+        quotient += multiple;
+    }
+
+    return quotient;
+}
+
+// Example Usage
+console.log(divide(10, 3)); // 3
+console.log(divide(20, 5)); // 4
+console.log(divide(25, 4)); // 6
+console.log(divide(100, 7)); // 14
+console.log(divide(7, 8)); // 0
+    </script>
+  </body>
+</html>
