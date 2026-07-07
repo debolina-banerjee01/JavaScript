@@ -1,0 +1,46 @@
+,=o<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given a collection of intervals, find the minimum number of intervals you
+      need to remove to make the rest of the intervals non-overlapping.
+      Intervals can "touch", such as [0, 1] and [1, 2], but they won't be
+      considered overlapping. For example, given the intervals (7, 9), (2, 4),
+      (5, 8), return 1 as the last interval can be removed and the first two
+      won't overlap. The intervals are not necessarily sorted in any order.
+    </title>
+  </head>
+  <body>
+    <script>
+      function minIntervalsToRemove(intervals) {
+        if (intervals.length <= 1) return 0;
+
+        // Sort by ending time
+        intervals.sort((a, b) => a[1] - b[1]);
+
+        let kept = 1;
+        let lastEnd = intervals[0][1];
+
+        for (let i = 1; i < intervals.length; i++) {
+          const [start, end] = intervals[i];
+
+          if (start >= lastEnd) {
+            kept++;
+            lastEnd = end;
+          }
+        }
+
+        return intervals.length - kept;
+      }
+      const intervals = [
+        [7, 9],
+        [2, 4],
+        [5, 8],
+      ];
+
+      console.log(minIntervalsToRemove(intervals));
+    </script>
+  </body>
+</html>
