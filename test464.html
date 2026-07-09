@@ -1,0 +1,91 @@
+,=o<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+     A cryptarithmetic puzzle is a mathematical game where the digits of some numbers are represented by letters. Each letter represents a unique digit.
+
+For example, a puzzle of the form:
+
+  SEND
++ MORE
+--------
+ MONEY
+may have the solution:
+
+{'S': 9, 'E': 5, 'N': 6, 'D': 7, 'M': 1, 'O', 0, 'R': 8, 'Y': 2}
+Given a three-word puzzle like the one above, create an algorithm that finds a solution.
+    </title>
+  </head>
+  <body>
+    <script>
+      function solveCryptarithmetic(word1, word2, word3) {
+        const words = [word1, word2, word3];
+
+        // Collect unique letters
+        const uniqueLetters = [...new Set(words.join("").split(""))];
+
+        if (uniqueLetters.length > 10) {
+          return null;
+        }
+
+        // Leading letters cannot be zero
+        const leadingLetters = new Set(
+          words.filter((w) => w.length > 1).map((w) => w[0]),
+        );
+
+        const letterToDigit = {};
+        const usedDigits = new Array(10).fill(false);
+
+        function wordToNumber(word) {
+          let num = "";
+
+          for (const ch of word) {
+            num += letterToDigit[ch];
+          }
+
+          return Number(num);
+        }
+
+        function backtrack(index) {
+          if (index === uniqueLetters.length) {
+            const n1 = wordToNumber(word1);
+            const n2 = wordToNumber(word2);
+            const n3 = wordToNumber(word3);
+
+            if (n1 + n2 === n3) {
+              return true;
+            }
+            return false;
+          }
+
+          const letter = uniqueLetters[index];
+
+          for (let digit = 0; digit <= 9; digit++) {
+            if (usedDigits[digit]) continue;
+
+            if (digit === 0 && leadingLetters.has(letter)) continue;
+
+            letterToDigit[letter] = digit;
+            usedDigits[digit] = true;
+
+            if (backtrack(index + 1)) return true;
+
+            delete letterToDigit[letter];
+            usedDigits[digit] = false;
+          }
+
+          return false;
+        }
+
+        if (backtrack(0)) return letterToDigit;
+
+        return null;
+      }
+      const solution = solveCryptarithmetic("SEND", "MORE", "MONEY");
+
+      console.log(solution);
+    </script>
+  </body>
+</html>
