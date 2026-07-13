@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Given a list, sort it using this method: reverse(lst, i, j), which reverses lst from i to j.
+
+
+
+    </title>
+</head>
+<body>
+    <script>
+// Reverse elements from index i to j (inclusive)
+function reverse(arr, i, j) {
+    while (i < j) {
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+        i++;
+        j--;
+    }
+}
+
+// Sort using only reverse operations
+function sortWithReverse(arr) {
+    const n = arr.length;
+
+    for (let i = 0; i < n - 1; i++) {
+        // Find the minimum element
+        let minIndex = i;
+        for (let j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        // Move the minimum element to position i
+        if (minIndex !== i) {
+            reverse(arr, i, minIndex);
+            reverse(arr, i + 1, minIndex);
+        }
+    }
+
+    return arr;
+}
+
+// Example
+let arr = [4, 2, 5, 1, 3];
+console.log(sortWithReverse(arr)); // [1, 2, 3, 4, 5]
+    </script>
+</body>
+</html>
