@@ -1,0 +1,53 @@
+,=o<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Given the root of a binary tree, return a deepest node. For example, in
+      the following tree, return d. a / \ b c / d
+    </title>
+  </head>
+  <body>
+    <script>
+      class TreeNode {
+        constructor(val, left = null, right = null) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+        }
+      }
+
+      function findDeepestNode(root) {
+        if (!root) return null;
+
+        let deepestNode = null;
+        let maxDepth = -1;
+
+        function dfs(node, depth) {
+          if (!node) return;
+
+          if (depth > maxDepth) {
+            maxDepth = depth;
+            deepestNode = node;
+          }
+
+          dfs(node.left, depth + 1);
+          dfs(node.right, depth + 1);
+        }
+
+        dfs(root, 0);
+
+        return deepestNode;
+      }
+      const d = new TreeNode("d");
+      const b = new TreeNode("b", d);
+      const c = new TreeNode("c");
+      const a = new TreeNode("a", b, c);
+
+      const deepest = findDeepestNode(a);
+
+      console.log(deepest.val); // d
+    </script>
+  </body>
+</html>
