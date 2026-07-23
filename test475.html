@@ -1,0 +1,26 @@
+,=o<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Implement a job scheduler which takes in a function f and an integer n,
+      and calls f after n milliseconds.
+    </title>
+  </head>
+  <body>
+    <script>
+      function jobScheduler(f, n, ...args) {
+        setTimeout(() => {
+          f(...args);
+        }, n);
+      }
+      function greet(name) {
+        console.log(`Hello, ${name}!`);
+      }
+
+      jobScheduler(greet, 1000, "Debolina");
+      // Prints "Hello, Debolina!" after 1 second.
+    </script>
+  </body>
+</html>
