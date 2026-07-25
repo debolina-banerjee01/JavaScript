@@ -1,0 +1,51 @@
+,=o<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      You are given a histogram consisting of rectangles of different heights.
+      These heights are represented in an input list, such that [1, 3, 2, 5]
+      corresponds to the following diagram: x x x x x x x x x x x Determine the
+      area of the largest rectangle that can be formed only from the bars of the
+      histogram. For the diagram above, for example, this would be six,
+      representing the 2 x 3 area at the bottom right.
+    </title>
+  </head>
+  <body>
+    <script>
+      function largestRectangleArea(heights) {
+        const stack = [];
+        let maxArea = 0;
+
+        // Add a sentinel bar.
+        heights.push(0);
+
+        for (let i = 0; i < heights.length; i++) {
+          while (
+            stack.length &&
+            heights[i] < heights[stack[stack.length - 1]]
+          ) {
+            const height = heights[stack.pop()];
+
+            const width =
+              stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
+
+            maxArea = Math.max(maxArea, height * width);
+          }
+
+          stack.push(i);
+        }
+
+        // Restore the original array if desired.
+        heights.pop();
+
+        return maxArea;
+      }
+
+      // Example
+      console.log(largestRectangleArea([1, 3, 2, 5])); // 6
+      // [2, 3, 4]
+    </script>
+  </body>
+</html>
