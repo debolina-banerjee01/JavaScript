@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+       Given a list of integers, return the largest product that can be made by multiplying any three integers.
+
+For example, if the list is [-10, -10, 5, 2], we should return 500, since that's -10 * -10 * 5.
+
+You can assume the list has at least three integers.
+
+    </title>
+</head>
+<body>
+    <script>
+       function isMatch(text, pattern) {
+    const memo = new Map();
+
+    function dp(i, j) {
+        const key = `${i},${j}`;
+        if (memo.has(key)) return memo.get(key);
+
+        // If we've reached the end of the pattern,
+        // the text must also be fully consumed.
+        if (j === pattern.length) {
+            return i === text.length;
+        }
+
+        const firstMatch =
+            i < text.length &&
+            (pattern[j] === text[i] || pattern[j] === ".");
+
+        let result;
+
+        // If the next character is '*'
+        if (j + 1 < pattern.length && pattern[j + 1] === "*") {
+            result =
+                dp(i, j + 2) ||                 // Skip x*
+                (firstMatch && dp(i + 1, j));  // Use one occurrence
+        } else {
+            result = firstMatch && dp(i + 1, j + 1);
+        }
+
+        memo.set(key, result);
+        return result;
+    }
+
+    return dp(0, 0);
+}
+
+// Examples
+console.log(isMatch("ray", "ra."));      // true
+console.log(isMatch("raymond", "ra."));  // false
+
+
+
+    </script>
+</body>
+</html>
